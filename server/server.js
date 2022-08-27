@@ -1,11 +1,30 @@
+"use strict";
+
 const express = require('express');
-const app = express();
-const port = 8000;
+const morgan = require("morgan");
 
-app.get('/hi', (req, res) => {
-  res.status(200).json({status: 200, message: "Hello bb"})
-})
+const PORT = 8000;
 
-app.listen(port, () => {
-  console.log(`🪴 Listening on port ${port}🪴`)
-})
+express()
+
+    .use(morgan("tiny"))
+    .use(express.json())
+    .use(express.static("public"))
+
+    // INITAL TEST ENDPOINT
+    .get('/hi', (req, res) => {
+    res.status(200).json({status: 200, message: "Hello bb"})
+    })
+
+    // CATCH ALL
+    .get("*", (req, res) => {
+        res.status(404).json({
+        status: 404,
+        message: "This is obviously not what you are looking for.",
+        });
+    })
+
+    // SPIN UP SERVER AND LISTEN ON DESIGNATED PORT
+    .listen(PORT, () => {
+    console.log(`🪴 Listening on port ${PORT}🪴`)
+    })
