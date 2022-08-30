@@ -34,7 +34,7 @@ const App = () => {
 				<MainContainer>
 					<Routes>
 						<Route exact path="/" element={ <Discover /> } />
-						<Route exact path="/:plantId" element={ <PlantDetails /> } />
+						<Route exact path="/plants/:plantId" element={ <PlantDetails /> } />
 						<Route exact path="/profile" element={ <Profile /> } />
 						<Route exact path="/my-home" element={ <MyHome /> } />
 						<Route exact path="/thirsty-bb" element={ <ThirstyBB /> } />
@@ -64,9 +64,7 @@ const NavContainer = styled.div`
 `
 const MainContainer = styled.div`
     border: 1px solid green;
-    display: flex;
     width: 80%;
-    justify-content: center;
     flex-grow: 15;
     flex-shrink: 1;
     margin-left: 20px;
