@@ -1,5 +1,18 @@
 # plant-bb 🪴🌿
 
+## Plant Endpoints
+
+| Endpoint | Method | Description            |
+| -------- | ------ | ---------------------- |
+| `/get-plants`  | `GET`  | This endpoint returns an array of all plants. |
+| `/get-plant/:plantId`  | `GET`  | This endpoint returns the plant object based on the provided `plantId`. |
+
+## User Endpoints
+
+| Endpoint | Method | Description            |
+| -------- | ------ | ---------------------- |
+| `/get-user/:userId`  | `GET`  | This endpoint returns the user object based on the provided `userId`. |
+
 ## plants.json
 ```json
 [

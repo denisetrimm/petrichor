@@ -5,16 +5,31 @@ const morgan = require("morgan");
 
 const PORT = 8000;
 
+const {
+    getPlants,
+    getSinglePlant,
+} = require("./handlers/plantHandlers");
+
+const {
+    getUser
+} = require("./handlers/userHandlers");
+
 express()
 
     .use(morgan("tiny"))
     .use(express.json())
     .use(express.static("public"))
 
-    // INITAL TEST ENDPOINT
-    .get('/hi', (req, res) => {
-    res.status(200).json({status: 200, message: "Hello bb"})
-    })
+
+    // GET ALL PLANTS
+    .get("/api/get-plants", getPlants)
+    // RETURNS A SINGLE PLANT
+    .get("/api/get-plant/:plantId", getSinglePlant)
+
+
+    // RETURNS A SINGLE USER
+    .get("/api/get-user/:userId", getUser)
+
 
     // CATCH ALL
     .get("*", (req, res) => {
