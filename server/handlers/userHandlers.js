@@ -9,8 +9,10 @@ const options = {
     useUnifiedTopology: true,
 };
 
-// IMPORT UUID
-const { v4: uuidv4 } = require('uuid');
+// IMPORT ADDITIONAL UTILITIES
+const { v4: uuidv4 } = require("uuid");
+const moment = require("moment");
+
 
 // RETURNS A SINGLE USER
 // .get("/api/get-user/:userId", getUser)
@@ -45,7 +47,8 @@ const loginUser = async (req, res) => {
     const { given_name, family_name, email } = req.body;
     const id = uuidv4(); 
     const newUser = {
-        _id: id, 
+        _id: id,
+        dateJoined: moment(),
         given_name: given_name,
         family_name: family_name,
         email: email,
