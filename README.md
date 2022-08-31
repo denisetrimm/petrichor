@@ -48,7 +48,8 @@
                 "lastWatered": "",
                 "wateringFrequency": "",
                 "nextWatering": "",
-                "room": ""
+                "room": "",
+                "dateAdded": ""
             },
             {
                 "_id": "",
@@ -57,32 +58,36 @@
                 "lastWatered": "",
                 "wateringFrequency": "",
                 "nextWatering": "",
-                "room": ""
+                "room": "",
+                "dateAdded": ""
             }, 
         ],
-        "home": [
-            {
-                "livingRoom": [0000, 0000, 0000],
-            },
-            {
-                "tvRoom": [0000, 0000, 0000],
-            },
-            {
-                "bedroom": [0000, 0000, 0000],
-            },
-            {
-                "kitchen": [0000, 0000, 0000],
-            },
-            {
-                "office": [0000, 0000, 0000],
-            },
-            {
-                "basement": [0000, 0000, 0000],
-            },
-            {
-                "bathroom": [0000, 0000, 0000],
-            },
+        "home": [ "livingRoom", "tvRoom", "bedroom", "kitchen", "office", "basement", "bathroom", "other"
+            // {
+            //     "livingRoom": [0000, 0000, 0000],
+            // },
+            // {
+            //     "tvRoom": [0000, 0000, 0000],
+            // },
+            // {
+            //     "bedroom": [0000, 0000, 0000],
+            // },
+            // {
+            //     "kitchen": [0000, 0000, 0000],
+            // },
+            // {
+            //     "office": [0000, 0000, 0000],
+            // },
+            // {
+            //     "basement": [0000, 0000, 0000],
+            // },
+            // {
+            //     "bathroom": [0000, 0000, 0000],
+            // },
         ],
     },
 ]
 ```
+## Attribution
+
+<a href="https://www.flaticon.com/free-icons/leaf" title="leaf icons">Leaf icons created by Freepik - Flaticon</a>
