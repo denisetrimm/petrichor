@@ -38,6 +38,80 @@ const getUser = async (req, res) => {
     console.log("disconnected");
 };
 
+// IF USER EXISTS, RETURNS USER DATA - IF USER DOESN'T EXIST, CREATES USER AND RETURNS DATA
+// .post("/api/login-user", loginUser)
+const loginUser = async (req, res) => {
+
+    const { given_name, family_name, email } = req.body;
+    const id = uuidv4(); 
+    const newUser = {
+        _id: id, 
+        given_name: given_name,
+        family_name: family_name,
+        email: email,
+        housePlants: [],
+        home: [],
+    }
+
+    const client = new MongoClient(MONGO_URI, options);
+
+    try {
+        await client.connect();
+        const db = client.db();
+
+        // CHECK IF USER ALREADY EXISTS
+        const checkUser = await db.collection("users").findOne({ email: email })
+        if (checkUser) {
+            // IF USER EXISTS, RETURN USER DATA
+            return res.status(200).json({ status: 200, success: true, data: checkUser, message: `Returned existing user data for user: ${checkUser._id}` })
+        }
+        else {
+            // IF USER DOES NOT EXIST, ADD USER DATA TO USERS COLLECTION AND RETURN NEW USER
+            await db.collection("users").insertOne(newUser);
+            res.status(201).json({ status: 201, success: true, data: newUser, message: `Created new user ${newUser._id}` })
+        }
+    }
+    catch (err) {
+        res.status(500).json({ status: 500, message: err.message })
+    }
+    client.close();
+    console.log("disconnected!");
+};
+
+
+// DELETES A SPECIFIED USER
+// .delete("/api/delete-user/:userId", deleteUser)
+const deleteUser = async (req, res) => {
+
+    const userId = req.params.userId;
+
+    const client = new MongoClient(MONGO_URI, options);
+
+    try {
+        await client.connect();
+        const db = client.db();
+
+        // CHECK IF USER ALREADY EXISTS
+        const checkUser = await db.collection("users").findOne({ _id: userId })
+        if (!checkUser) {
+            // IF USER DOES NOT EXIST, RETURN 404
+            return res.status(404).json({ status: 404, success: false, data: userId, message: `User does not exist` })
+        }
+        else {
+            // IF USER EXISTS, DELETE USER
+            await db.collection("users").deleteOne({ _id: userId});
+            res.status(200).json({ status: 200, success: true, message: `Deleted user ${userId}` })
+        }
+    }
+    catch (err) {
+        res.status(500).json({ status: 500, message: err.message })
+    }
+    client.close();
+    console.log("disconnected!");
+};
+
 module.exports = {
-    getUser
+    getUser,
+    loginUser,
+    deleteUser
 }

@@ -12,6 +12,8 @@
 | Endpoint | Method | Description            |
 | -------- | ------ | ---------------------- |
 | `/get-user/:userId`  | `GET`  | This endpoint returns the user object based on the provided `userId`. |
+| `/login-user`  | `POST`  | This endpoint accepts data in the body and checks whether the user is new. If the user exists, it returns the user data. If the user is new, it creates a new user and returns the created user data. |
+| `/delete-user/:userId`  | `DELETE`  | This endpoint deletes an existing user based on the provided `userId`. |
 
 ## plants.json
 ```json
@@ -43,6 +45,7 @@
         "housePlants": [ 
             {
                 "_id": "",
+                "plantId": "",//May need to add plantID vs unique user plant ID to add more than one
                 "commonName": "",
                 "nickname": "",
                 "lastWatered": "",
