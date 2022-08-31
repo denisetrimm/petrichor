@@ -55,20 +55,21 @@ export default App;
 
 const Wrapper = styled.div`
   /* border: 1px solid red; */
-	max-width: 1200px;
+	/* max-width: 1200px; */
+	/* width: 100%; */
 	height: 100vh;
 	display: flex;
 `
 const NavContainer = styled.div`
     /* border: 1px solid purple; */
-    min-width: 21%;
+    min-width: 20%;
     max-width: 200px;
     flex-grow: 2;
     flex-shrink: 5;
 `
 const MainContainer = styled.div`
     /* border: 1px solid green; */
-    width: 78%;
+    width: 80%;
     flex-grow: 15;
     flex-shrink: 1;
     height: 100vh;
