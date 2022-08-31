@@ -11,38 +11,52 @@ import { FaRegUserCircle } from "react-icons/fa"; // PROFILE
 import { Link } from "react-router-dom"
 import { NavLink } from "react-router-dom";
 
+// AUTHENTICATION
+import LoginButton from "./Login"
+import LogoutButton from "./Logout"
+import { useAuth0 } from "@auth0/auth0-react";
+
 const Sidebar = () => {
+    const { user, isAuthenticated, isLoading } = useAuth0();
+
     return (
         <>
         <NavDiv>
-            <LogoLink exact to="/">
-                <Logo />
-            </LogoLink>
-            <NavigationLink exact to="/my-home">
-                <IconSpan>
-                    <BiHome size={40} />
-                </IconSpan>
-                <NameSpan>My Home</NameSpan>
-            </NavigationLink>
-            <NavigationLink exact to="/thirsty-bb">
-                <IconSpan>
-                    <MdOutlineWaterDrop size={40} />
-                </IconSpan>
-                <NameSpan>Thirsty.bb</NameSpan>
-            </NavigationLink>
-            <NavigationLink exact to="/">
-                <IconSpan>
-                    <GoSearch size={40} />
-                </IconSpan> 
-                <NameSpan>Discover</NameSpan>
-            </NavigationLink>
-            <NavigationLink exact to="/profile">
-                <IconSpan>
-                    <FaRegUserCircle size={40} />
-                </IconSpan> 
-                <NameSpan>Profile</NameSpan>
-            </NavigationLink>
-            
+                <LogoLink exact to="/">
+                    <Logo />
+                </LogoLink>
+            {isAuthenticated &&
+                <>
+                <NavigationLink exact to="/my-home">
+                    <IconSpan>
+                        <BiHome size={40} />
+                    </IconSpan>
+                    <NameSpan>My Home</NameSpan>
+                </NavigationLink>
+                <NavigationLink exact to="/thirsty-bb">
+                    <IconSpan>
+                        <MdOutlineWaterDrop size={40} />
+                    </IconSpan>
+                    <NameSpan>Thirsty.bb</NameSpan>
+                </NavigationLink>
+                <NavigationLink exact to="/">
+                    <IconSpan>
+                        <GoSearch size={40} />
+                    </IconSpan> 
+                    <NameSpan>Discover</NameSpan>
+                </NavigationLink>
+                <NavigationLink exact to="/profile">
+                    <IconSpan>
+                        <FaRegUserCircle size={40} />
+                    </IconSpan> 
+                    <NameSpan>Profile</NameSpan>
+                </NavigationLink>
+                <LogoutButton/>
+                </>
+            }
+            {!isAuthenticated &&
+                <LoginButton/>
+            }
         </NavDiv>
         </>
     );
@@ -87,7 +101,7 @@ const NavigationLink = styled(NavLink)`
         color: var(--color-creamAccent);
     }
     &.active {
-        color: var(--color-creamAccent);
+        background-color: var(--color-primaryHighlight);
     }
 `;
 

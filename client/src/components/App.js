@@ -34,6 +34,7 @@ const App = () => {
 				</NavContainer>
 				<MainContainer>
 					<Banner/>
+					<Petrichor>Petrichor <Definition>/ˈpeˌtrīkôr/  The scent produced when rain falls on dry soil</Definition></Petrichor>
 					<PageContainer>
 						<Routes>
 							<Route exact path="/" element={ <Discover /> } />
@@ -73,10 +74,20 @@ const MainContainer = styled.div`
     flex-grow: 15;
     flex-shrink: 1;
     height: 100vh;
-	display: flex;
-	flex-direction: column;
+	display: relative;
 	background-color: var(--color-cream);
     
+`
+const Petrichor = styled.h1`
+	color: var(--color-cream);
+	font-weight: bold;
+	position: absolute;
+	top: 150px;
+`
+const Definition = styled.span`
+	margin-left: 10px;
+	font-weight: lighter;
+	font-size: 14px;
 `
 const PageContainer = styled.div`
     /* border: 1px solid green; */
