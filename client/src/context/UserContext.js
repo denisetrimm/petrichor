@@ -8,7 +8,7 @@ export const UserProvider = ({ children }) => {
     const [plantUser, setPlantUser] = useState(null);
     const { user, isAuthenticated, isLoading, loginWithRedirect, logout } = useAuth0();
 
-    // USE AUTHENTICATED USER DETAILS TO RETREIVE/CREATE USER DATA
+    // USE AUTHENTICATED USER DETAILS TO RETRIEVE/CREATE USER DATA
     useEffect(() => {
         if (!isAuthenticated){
             console.log("logged out")
@@ -26,7 +26,7 @@ export const UserProvider = ({ children }) => {
             })
             .then((res)=>res.json())
             .then((data)=>{
-                console.log(data)
+                // console.log(data)
                 setPlantUser(data.data)
             })
         }
