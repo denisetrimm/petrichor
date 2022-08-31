@@ -1,4 +1,5 @@
 import { Auth0Provider } from "@auth0/auth0-react";
+import { UserProvider } from "./context/UserContext";
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/App';
@@ -11,7 +12,9 @@ root.render(
       clientId="3UexjoTrv5e072MDLPJbCBRZ8mmNFi0B"
       redirectUri={window.location.origin}
     >
-      <App />
+      <UserProvider>
+        <App />
+      </UserProvider>
     </Auth0Provider>
   </React.StrictMode>
 );
