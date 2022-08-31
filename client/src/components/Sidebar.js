@@ -37,7 +37,7 @@ const Sidebar = () => {
                     <IconSpan>
                         <MdOutlineWaterDrop size={40} />
                     </IconSpan>
-                    <NameSpan>Thirsty.bb</NameSpan>
+                    <NameSpan>Thirsty</NameSpan>
                 </NavigationLink>
                 <NavigationLink exact to="/">
                     <IconSpan>

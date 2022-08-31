@@ -62,8 +62,8 @@ const Wrapper = styled.div`
 	display: flex;
 `
 const NavContainer = styled.div`
-    /* border: 1px solid purple; */
-    min-width: 20%;
+    border: 1px solid purple;
+    min-width: 15%;
     max-width: 200px;
     flex-grow: 2;
     flex-shrink: 5;

@@ -44,11 +44,7 @@ const GlobalStyles = createGlobalStyle`
     }
 
     html, body {
-    }
-
-    body {
-        height: 100vh;
-        background-color: var(--color-primaryUltraDarkHover);
+        width: 100%;
     }
 
     html, body, div, span, applet, object, iframe,
@@ -89,7 +85,9 @@ const GlobalStyles = createGlobalStyle`
 
     body {
         line-height: 1.25;
-        margin: 0 15%;
+        /* margin: 0 15%; */
+        height: 100vh;
+        background-color: var(--color-primaryUltraDarkHover);
     }
 
     button {
@@ -100,6 +98,7 @@ const GlobalStyles = createGlobalStyle`
         border: none;
         margin: 20px 0;
         padding: 10px 20px;
+        width: fit-content;
         border-radius: 40px;
         transition: background-color ease-out 300ms;
 
