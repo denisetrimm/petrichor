@@ -2,14 +2,31 @@ import { createGlobalStyle } from "styled-components";
 
 const GlobalStyles = createGlobalStyle`
 
-    /* :root {
-        --color-primary: purple;
-        --color-secondary: hsl(282, 80%, 63%);
-        --color-light: lavender;
-        --font-heading: 'Permanent Marker', Arial, Helvetica, sans-serif;
+    :root {
+        --color-primaryDark: hsl(179, 30% , 29%);
+        --color-primaryMedium: hsl(182, 22% , 47%);
+        --color-primaryHighlight: hsla(182, 22% , 47%, 0.3);
+        --color-primaryLight:hsl(180, 33% , 84%);
+        --color-mint: hsl(153, 18% , 81%);
+        --color-green: hsl(108, 23% , 79%);
+        --color-water: hsl(210, 46% , 58%);
+        --color-waterHighlight: hsla(210, 46% , 58%, 0.3);
+        --color-lightBlue: hsl(192, 38% , 82%);
+        --color-sunshine: hsl(42, 69% , 72%);
+        --color-sunshineHighlight: hsla(42, 69% , 72%, 0.3);
+        --color-soil: hsl(27, 100% , 87%);
+        --color-soilHighlight: hsla(27, 65% , 87%, 0.3);
+        --color-pink: hsl(346, 39% , 79%);
+        --color-pinkHighlight: hsl(356, 32% , 91%);
+        --color-cream: hsl(0, 0% , 95%);
+        --color-creamAccent: hsl(0, 0% , 91%);
+        --color-grey: hsl(200, 12% , 95%);
+        --color-purpleGrey: hsl(230, 14% , 65%);
+        --color-greyAccent: hsl(220, 10% , 59%);
+        /* --font-heading: 'Permanent Marker', Arial, Helvetica, sans-serif;
         --font-body: 'Kosugi', Arial, Helvetica, sans-serif;
-        --padding-page: 24px;
-    } */
+        --padding-page: 24px; */
+    }
 
     *,
     *:before,
@@ -27,6 +44,7 @@ const GlobalStyles = createGlobalStyle`
     html, body {
     max-width: 100vw;
     height: 100vh;
+    background-color: var(--color-primaryLight);
     }
 
     html, body, div, span, applet, object, iframe,
