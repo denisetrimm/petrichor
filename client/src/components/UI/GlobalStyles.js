@@ -3,6 +3,8 @@ import { createGlobalStyle } from "styled-components";
 const GlobalStyles = createGlobalStyle`
 
     :root {
+        --color-primaryUltraDark: hsl(180, 73%, 4%);
+        --color-primaryUltraDarkHover: hsla(180, 73%, 4%, 0.5);
         --color-primaryDark: hsl(179, 30% , 29%);
         --color-primaryMedium: hsl(182, 22% , 47%);
         --color-primaryHighlight: hsla(182, 22% , 47%, 0.3);
@@ -42,9 +44,12 @@ const GlobalStyles = createGlobalStyle`
     }
 
     html, body {
-    max-width: 100vw;
-    height: 100vh;
-    background-color: var(--color-primaryLight);
+    }
+
+    body {
+        max-width: 100vw;
+        height: 100vh;
+        background-color: var(--color-primaryUltraDarkHover);
     }
 
     html, body, div, span, applet, object, iframe,

@@ -56,7 +56,8 @@ const NavDiv = styled.nav`
     border-top-left-radius: 5px;
     height: 100vh;
     padding: 20px;
-    background-color: var(--color-primaryDark);
+    background: rgb(30,12,12);
+    background: linear-gradient(0deg, rgba(30,12,12,1) 0%, rgba(3,19,19,1) 100%);
 `;
 const LogoLink = styled(Link)`
     border-radius: 50%;

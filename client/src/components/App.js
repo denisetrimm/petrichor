@@ -55,9 +55,9 @@ export default App;
 
 const Wrapper = styled.div`
   /* border: 1px solid red; */
-  max-width: 1200px;
-  height: 100vh;
-  display: flex;
+	max-width: 1200px;
+	height: 100vh;
+	display: flex;
 `
 const NavContainer = styled.div`
     /* border: 1px solid purple; */
@@ -68,7 +68,7 @@ const NavContainer = styled.div`
 `
 const MainContainer = styled.div`
     /* border: 1px solid green; */
-    width: 75%;
+    width: 78%;
     flex-grow: 15;
     flex-shrink: 1;
     height: 100vh;
