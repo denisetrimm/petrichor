@@ -1,6 +1,6 @@
 
 import styled from 'styled-components';
-import { GoSearch } from "react-icons/go"; // DISCOVER
+import { GoSearch } from "react-icons/go";
 
 import {useState, useContext} from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -14,9 +14,16 @@ const TypeAhead = () => {
     const [inputValue, setInputValue] = useState("");
 
     // Return results that match what the user types
-    const filteredPlants = allPlants.filter(plant => {
+    const filteredPlantsCommon = allPlants.filter(plant => {
                 return plant.commonName.toLowerCase().includes(inputValue.toLowerCase())
             })
+    const filteredPlantsBotanical = allPlants.filter(plant => {
+                return plant.botanicalName.toLowerCase().includes(inputValue.toLowerCase())
+            })
+    // const filteredPlantsAdditional = allPlants.filter(plant => {
+    //             return plant.additionalName.toLowerCase().includes(inputValue.toLowerCase())
+    //         })
+    
     // When a user clicks on a suggestion, navigate to the item details page and clear the input field
     const handleSuggestionClick = (plant) => {
         navigate(`/plants/${plant._id}`)
@@ -42,11 +49,12 @@ const TypeAhead = () => {
 
         {
             // Render matches
-            filteredPlants.length > 0 && inputValue.length >= 2 
+            // (filteredPlantsCommon.length > 0 || filteredPlantsBotanical.length > 0 || filteredPlantsAdditional.length > 0) && inputValue.length >= 2 
+            (filteredPlantsCommon.length > 0 || filteredPlantsBotanical.length > 0 ) && inputValue.length >= 2
             &&
             <PlantList>
                 {
-                    filteredPlants.map(plant => {
+                    filteredPlantsCommon.map(plant => {
                         // Find index of word and split for styling
                         let indexOfsecondHalf = plant.commonName.toLowerCase().indexOf(inputValue.toLowerCase())
                         let firstHalf = plant.commonName.slice(0, indexOfsecondHalf + inputValue.length)
@@ -56,10 +64,39 @@ const TypeAhead = () => {
                                     key={plant._id} 
                                     onClick={()=> {handleSuggestionClick(plant)}}
                                 >
-                                    {firstHalf}<Prediction>{secondHalf}</Prediction> <Category>in <CategorySpan>{plant.category}</CategorySpan></Category>
+                                    {firstHalf}<Prediction>{secondHalf}</Prediction> <Family> &#8226; <FamilySpan>{plant.botanicalName}</FamilySpan></Family>
+                                </PlantListItem>
+                    })}
+                    {
+                    filteredPlantsBotanical.map(plant => {
+                        // Find index of word and split for styling
+                        let indexOfsecondHalf = plant.botanicalName.toLowerCase().indexOf(inputValue.toLowerCase())
+                        let firstHalf = plant.botanicalName.slice(0, indexOfsecondHalf + inputValue.length)
+                        let secondHalf = plant.botanicalName.slice(indexOfsecondHalf + inputValue.length)
+                        // Clicking a suggestion navigates to the plant details page
+                        return <PlantListItem 
+                                    key={plant._id} 
+                                    onClick={()=> {handleSuggestionClick(plant)}}
+                                >
+                                    {firstHalf}<Prediction>{secondHalf}</Prediction> <Family> &#8226; <FamilySpan>{plant.commonName}</FamilySpan></Family>
                                 </PlantListItem>
                     })
                 }
+                    {/* {
+                    filteredPlantsAdditional.map(plant => {
+                        // Find index of word and split for styling
+                        let indexOfsecondHalf = plant.additionalName.toLowerCase().indexOf(inputValue.toLowerCase())
+                        let firstHalf = plant.additionalName.slice(0, indexOfsecondHalf + inputValue.length)
+                        let secondHalf = plant.additionalName.slice(indexOfsecondHalf + inputValue.length)
+                        // Clicking a suggestion navigates to the plant details page
+                        return <PlantListItem 
+                                    key={plant._id} 
+                                    onClick={()=> {handleSuggestionClick(plant)}}
+                                >
+                                    {firstHalf}<Prediction>{secondHalf}</Prediction> <Family> &#8226; <FamilySpan>{plant.commonName}</FamilySpan></Family>
+                                </PlantListItem>
+                    })
+                } */}
             </PlantList> 
         }
         </SearchDiv>
@@ -73,11 +110,11 @@ export default TypeAhead;
 const SearchDiv = styled.div`
     display: relative;
 `;
-const Category = styled.span`
+const Family = styled.span`
     font-style: italic;
     font-size: 12px;
 `;
-const CategorySpan = styled.span`
+const FamilySpan = styled.span`
     color: var(--color-gold);
 `;
 const SearchBar = styled.input`

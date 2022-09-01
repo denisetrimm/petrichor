@@ -36,6 +36,7 @@ const HoverLink = styled.button`
     padding: 5px;
     padding-bottom: 1px;
     &:hover {
-        border-radius: 50%;
+        /* border-radius: 50%; */
+        background-color: var(--color-primaryDark);
     }
 `
