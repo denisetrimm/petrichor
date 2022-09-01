@@ -1,5 +1,10 @@
 //STYLING
 import styled from "styled-components";
+// ICONS
+import { TbAdjustmentsHorizontal } from "react-icons/tb";
+import { TbAdjustments } from "react-icons/tb";
+import { TbAdjustmentsOff } from "react-icons/tb";
+
 //HOOKS & CONTEXT
 import { useAuth0 } from "@auth0/auth0-react";
 import { useState, useEffect, useContext } from "react";
@@ -11,6 +16,8 @@ import Card from "../../UI/Card";
 import PlantCard from "./PlantCard";
 import TypeAhead from "./TypeAhead";
 import BackArrow from "../../UI/BackArrow";
+
+
 
 
 const Discover = () => {
@@ -53,6 +60,6 @@ const PlantGrid = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 15px 1%
+    gap: 15px 1%;
 `
 export default Discover;
