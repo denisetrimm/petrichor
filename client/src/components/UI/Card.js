@@ -27,7 +27,8 @@ const Wrapper = styled.div`
     transition: ease-in-out 200ms;
 
     &:hover {
-        background-color: var(--color-primaryHighlightThin);
+        /* background-color: var(--color-primaryHighlightThin); */
+        background-color: #ededed;
         transform: scale(1.01);
         cursor: pointer;
     }

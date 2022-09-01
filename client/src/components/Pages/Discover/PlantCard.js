@@ -5,8 +5,8 @@ const PlantCard = ({plant}) => {
     return (
         <>
             <PlantImg src={plant.imgSrc}/>
-            <p>{plant.commonName}</p>
-            <p>{plant.botanicalName}</p>
+            <CommonName>{plant.commonName}</CommonName>
+            <BotanicalName>{plant.botanicalName}</BotanicalName>
         </>
     );
 }
@@ -15,5 +15,13 @@ const PlantImg = styled.img`
     border-radius: 8px;
     max-width: 80%;
     max-height: 80%;
+`
+const CommonName = styled.p`
+    font-weight: bold;
+    padding: 10px 0;
+`
+const BotanicalName = styled.p`
+    font-style: italic;
+    font-size: 14px;
 `
 export default PlantCard;
