@@ -113,7 +113,7 @@ const IconSpan = styled.span`
 `;
 
 const NameSpan = styled.span`
-    font-size: 24px;
+    font-size: 20px;
     @media (max-width: 1650px) {
     font-size: 18px;
     }

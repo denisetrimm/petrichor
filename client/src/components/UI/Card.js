@@ -13,8 +13,11 @@ export default Card;
 const Wrapper = styled.div`
     background-color: whitesmoke;
     border: 2px solid var(--color-creamAccent);
+    border-radius: 10px;
+    /* margin-top: 1%; */
     padding: 20px;
-    border-radius: 5px;
+    width: 30%;
+    max-height: 400px;
     display: flex;
     flex-direction: column;
     align-items: center;

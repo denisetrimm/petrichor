@@ -59,9 +59,9 @@ const Wrapper = styled.div`
 `
 const NavContainer = styled.div`
     /* border: 1px solid purple; */
-    min-width: 15%;
-    max-width: 200px;
-	height: 100vh;
+    min-width: 13%;
+    /* max-width: 180px; */
+	/* height: 100vh; */
     /* flex-grow: 2;
     flex-shrink: 5; */
 `
@@ -93,6 +93,7 @@ const PageContainer = styled.div`
     height: 100vh;
 	display: flex;
 	flex-direction: column;
-	margin-left: 20px;
+	align-items: center;
+	/* margin: 20px; */
     
 `

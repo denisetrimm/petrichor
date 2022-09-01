@@ -24,17 +24,25 @@ const Discover = () => {
 
         <h2>Discover</h2>
         {allPlants && 
-            filteredPlants.map(plant => {
-                console.log(plant)
-                return (
-                    <Card key={plant._id} id={plant._id} handleFunction={()=> {handleClick()}}>
-                        <PlantCard plant={plant}/>
-                    </Card>
-                )
-            })
+            <PlantGrid>
+                {filteredPlants.map(plant => {
+                    console.log(plant)
+                    return (
+                        <Card key={plant._id} id={plant._id} handleFunction={()=> {handleClick()}}>
+                            <PlantCard plant={plant}/>
+                        </Card>
+                    )
+                })}
+            </PlantGrid>
         }
         </>
     );
 }
 
+const PlantGrid = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px 2%
+`
 export default Discover;
