@@ -105,7 +105,8 @@ const GlobalStyles = createGlobalStyle`
         transition: background-color ease-out 300ms;
 
     &:hover{
-        background-color: var(--color-primaryHighlight);
+        /* background-color: var(--color-primaryHighlight); */
+        background-color: var(--color-primaryDark);
         transform: scale(.98);
     }
     &:active{

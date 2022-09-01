@@ -1,16 +1,31 @@
+import { useContext } from "react";
 import styled from "styled-components";
+import { UserContext } from "../../../context/UserContext";
+import AddPlantBtn from "./AddPlantBtn";
+
 
 const PlantCard = ({plant}) => {
+    const { plantUser } = useContext(UserContext);
 
     return (
         <>
+        {/* <Wrapper> */}
             <PlantImg src={plant.imgSrc}/>
             <CommonName>{plant.commonName}</CommonName>
             <BotanicalName>{plant.botanicalName}</BotanicalName>
+            {plantUser && 
+                <AddPlantBtn plant={plant}/>
+            }
+        {/* </Wrapper> */}
         </>
     );
 }
-
+const Wrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+`
 const PlantImg = styled.img`
     border-radius: 8px;
     max-width: 80%;

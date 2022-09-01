@@ -22,7 +22,7 @@ useEffect(()=> {
 
 // FIRES WHEN USER SELECTS A NEW FILTER
 useEffect(() => {
-    fetch(`/api/get-plants/${filterQueries}`)
+    fetch(`/api/get-plants/:${filterQueries}`)
     .then((res)=>res.json())
     .then((data)=>{
         console.log(data)

@@ -67,6 +67,8 @@ export default Sidebar;
 const NavDiv = styled.nav`
     display: flex;
     flex-direction: column;
+    position: sticky;
+    top: 0;
     height: 100vh;
     background: rgb(30,12,12);
     background: linear-gradient(0deg, rgba(30,12,12,1) 0%, rgba(3,19,19,1) 100%);

@@ -35,7 +35,9 @@ const Discover = () => {
         <>
 
         <h2>Discover</h2>
-        <BackArrow/>
+        {plantUser &&
+            <BackArrow/>
+        }
         {allPlants && 
         <>  
             <TypeAhead/>
@@ -57,9 +59,12 @@ const Discover = () => {
 }
 
 const PlantGrid = styled.div`
+    /* border: 1px solid blue; */
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    /* position: relative; */
     gap: 15px 1%;
+    margin-top: 40px;
 `
 export default Discover;

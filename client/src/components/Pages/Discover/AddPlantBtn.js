@@ -25,9 +25,12 @@ const AddPlantBtn = ({plant}) => {
 
 const AddBtn = styled.button`
     padding: 10px 10px 6px;
-    /* position: absolute;
-    top: -65px;
-    left: -30px;
-    z-index: 3; */
+    /* position: relative; */
+    /* left: 40px */
+    position: absolute;
+    top: -15px;
+    /* left: -0px; */
+    z-index: 100;
+
 `
 export default AddPlantBtn;
