@@ -32,7 +32,7 @@ const App = () => {
 				</NavContainer>
 				<MainContainer>
 					<Banner/>
-					<Petrichor>Petrichor <Definition>/ˈpeˌtrīkôr/  The scent produced when rain falls on dry soil</Definition></Petrichor>
+					<Petrichor>Petrichor <Phonetic>/ˈpeˌtrīkôr/</Phonetic>  <Definition>The scent produced when rain falls on dry soil</Definition></Petrichor>
 					<PageContainer>
 						<Routes>
 							<Route exact path="/" element={ <Discover /> } />
@@ -80,12 +80,18 @@ const Petrichor = styled.h1`
 	font-size: 40px;
 	font-weight: bold;
 	position: absolute;
-	top: 145px;
+	top: 143px;
 `
 const Definition = styled.span`
-	margin-left: 10px;
+	margin-left: 5px;
 	font-weight: lighter;
 	font-size: 14px;
+`
+const Phonetic = styled.span`
+	font-weight: normal;
+	margin-left: 10px;
+	font-size: 18px;
+	font-family: var(--font-secondary);
 `
 const PageContainer = styled.div`
     /* border: 1px solid green; */

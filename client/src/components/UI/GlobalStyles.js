@@ -27,6 +27,8 @@ const GlobalStyles = createGlobalStyle`
         --color-grey: hsl(200, 12% , 95%);
         --color-purpleGrey: hsl(230, 14% , 65%);
         --color-greyAccent: hsl(220, 10% , 59%);
+        --font-primary: 'Raleway', Arial, sans-serif;
+        --font-secondary: 'Mate', serif;
         /* --font-heading: 'Permanent Marker', Arial, Helvetica, sans-serif;
         --font-body: 'Kosugi', Arial, Helvetica, sans-serif;
         --padding-page: 24px; */
@@ -108,10 +110,12 @@ const GlobalStyles = createGlobalStyle`
         /* background-color: var(--color-primaryHighlight); */
         background-color: var(--color-primaryDark);
         transform: scale(.98);
+        cursor: pointer;
     }
     &:active{
         background-color: var(--color-primaryDark);
         transform: scale(.95);
+        cursor: pointer;
     }
     }
 

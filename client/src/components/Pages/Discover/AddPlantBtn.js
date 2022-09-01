@@ -24,12 +24,13 @@ const AddPlantBtn = ({plant}) => {
 }
 
 const AddBtn = styled.button`
+    background-color: var(--color-primaryHighlightThick);
     padding: 10px 10px 6px;
     /* position: relative; */
     /* left: 40px */
     position: absolute;
     top: -15px;
-    /* left: -0px; */
+    left: 15px;
     z-index: 100;
 
 `
