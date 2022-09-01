@@ -20,7 +20,7 @@ useEffect(()=> {
     })
 }, [])
 
-// // FIRES WHEN USER SELECTS A NEW FILTER
+// FIRES WHEN USER SELECTS A NEW FILTER
 useEffect(() => {
     fetch(`/api/get-plants/${filterQueries}`)
     .then((res)=>res.json())

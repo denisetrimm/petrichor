@@ -61,15 +61,16 @@ const NavContainer = styled.div`
     /* border: 1px solid purple; */
     min-width: 15%;
     max-width: 200px;
-    flex-grow: 2;
-    flex-shrink: 5;
+	height: 100vh;
+    /* flex-grow: 2;
+    flex-shrink: 5; */
 `
 const MainContainer = styled.div`
-    /* border: 1px solid green; */
+    /* border: 1px solid blue; */
     width: 80%;
     flex-grow: 15;
     flex-shrink: 1;
-    height: 100vh;
+    height: 100%;
 	display: relative;
 	background-color: var(--color-cream);
     

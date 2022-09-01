@@ -7,13 +7,14 @@ const GlobalStyles = createGlobalStyle`
         --color-primaryUltraDarkHover: hsla(180, 73%, 4%, 0.5);
         --color-primaryDark: hsl(179, 30% , 29%);
         --color-primaryMedium: hsl(182, 22% , 47%);
+        --color-primaryHighlightThin: hsla(182, 22% , 47%, 0.1);
         --color-primaryHighlight: hsla(182, 22% , 47%, 0.3);
         --color-primaryHighlightThick: hsla(182, 22% , 47%, 0.5);
         --color-primaryLight:hsl(180, 33% , 84%);
         --color-mint: hsl(153, 18% , 81%);
         --color-green: hsl(108, 23% , 79%);
         --color-water: hsl(210, 46% , 58%);
-        --color-waterHighlight: hsla(210, 46% , 58%, 0.3);
+        --color-waterHighlight: hsla(210, 46% , 58%, 0.1);
         --color-lightBlue: hsl(192, 38% , 82%);
         --color-sunshine: hsl(42, 69% , 72%);
         --color-sunshineHighlight: hsla(42, 69% , 72%, 0.3);
@@ -88,7 +89,7 @@ const GlobalStyles = createGlobalStyle`
     body {
         line-height: 1.25;
         /* height: 100vh; */
-        background-color: var(--color-primaryUltraDarkHover);
+        background-color: var(--color-cream);
     }
 
     button {

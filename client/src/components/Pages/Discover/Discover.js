@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useState, useEffect, useContext } from "react";
-import { PlantContext } from "../../context/PlantContext";
-import { UserContext } from "../../context/UserContext";
-import Card from "../UI/Card";
+import { PlantContext } from "../../../context/PlantContext";
+import { UserContext } from "../../../context/UserContext";
+import Card from "../../UI/Card";
 import PlantCard from "./PlantCard";
 import { useNavigate } from "react-router-dom";
 
@@ -18,11 +18,11 @@ const Discover = () => {
             console.log("clicked!");
             navigate(`/plants/${plantId}`);
         }
-    
 
     return (
         <>
-        <h1>Discover</h1>
+
+        <h2>Discover</h2>
         {allPlants && 
             filteredPlants.map(plant => {
                 console.log(plant)

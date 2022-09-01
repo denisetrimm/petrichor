@@ -15,7 +15,7 @@ const BannerImg = styled.div`
     background-size: cover;
     background-repeat: no-repeat;
     position: relative;
-    height: 20%;
+    height: 185px;
     margin-bottom: 40px;
     border-bottom-right-radius: 5px;
 `

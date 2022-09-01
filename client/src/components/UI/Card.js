@@ -11,15 +11,21 @@ const Card = ({children, handleFunction, id}) => {
 export default Card;
 
 const Wrapper = styled.div`
-    border-bottom: 1px solid black;
-    border-left: 1px solid black;
-    border-right: 1px solid black;
-    padding: 10px 10px;
-    transition-property: background-color, box-shadow;
-    transition-duration: 0.2s;
+    background-color: whitesmoke;
+    border: 2px solid var(--color-creamAccent);
+    padding: 20px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    transition-property: background-color, scale;
+    transition: ease-in-out 200ms;
 
     &:hover {
-        background-color: whitesmoke;
+        background-color: var(--color-primaryHighlightThin);
+        transform: scale(1.01);
         cursor: pointer;
     }
 `
