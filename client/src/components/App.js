@@ -3,7 +3,6 @@ import styled from "styled-components";
 import GlobalStyles from "./UI/GlobalStyles";
 
 // ROUTER
-import { render } from "react-dom";
 import {
   BrowserRouter,
   Routes,
@@ -12,7 +11,7 @@ import {
 
 // PAGE COMPONENTS
 import MyHome from "./Pages/MyHome";
-import Discover from "./Pages/Discover";
+import Discover from "./Pages/Discover/Discover";
 import PlantDetails from "./Pages/PlantDetails";
 import ThirstyBB from "./Pages/ThirstyBB";
 import Profile from "./Pages/Profile";
@@ -22,7 +21,6 @@ import Banner from "./UI/Banner"
 
 
 const App = () => {
-
 
 	return (
 		<>
@@ -56,8 +54,6 @@ export default App;
 
 const Wrapper = styled.div`
   /* border: 1px solid red; */
-	/* max-width: 1200px; */
-	/* width: 100%; */
 	height: 100vh;
 	display: flex;
 `

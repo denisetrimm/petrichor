@@ -1,3 +1,4 @@
+import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const LogoutButton = () => {
@@ -5,10 +6,15 @@ const LogoutButton = () => {
     const { logout } = useAuth0();
 
     return (
-        <button onClick={() => logout({ returnTo: window.location.origin })}>
+        <LogoutBtn onClick={() => logout({ returnTo: window.location.origin })}>
             Log Out
-        </button>
+        </LogoutBtn>
     );
 };
 
+const LogoutBtn = styled.button`
+    align-self: center;
+    padding: 10px 20px;
+    width: 70%;
+`
 export default LogoutButton;

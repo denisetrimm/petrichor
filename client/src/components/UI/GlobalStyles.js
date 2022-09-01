@@ -8,6 +8,7 @@ const GlobalStyles = createGlobalStyle`
         --color-primaryDark: hsl(179, 30% , 29%);
         --color-primaryMedium: hsl(182, 22% , 47%);
         --color-primaryHighlight: hsla(182, 22% , 47%, 0.3);
+        --color-primaryHighlightThick: hsla(182, 22% , 47%, 0.5);
         --color-primaryLight:hsl(180, 33% , 84%);
         --color-mint: hsl(153, 18% , 81%);
         --color-green: hsl(108, 23% , 79%);
@@ -44,7 +45,8 @@ const GlobalStyles = createGlobalStyle`
     }
 
     html, body {
-        width: 100%;
+        /* width: 100%; */
+        /* height: 100vh; */
     }
 
     html, body, div, span, applet, object, iframe,
@@ -85,14 +87,13 @@ const GlobalStyles = createGlobalStyle`
 
     body {
         line-height: 1.25;
-        /* margin: 0 15%; */
-        height: 100vh;
+        /* height: 100vh; */
         background-color: var(--color-primaryUltraDarkHover);
     }
 
     button {
         color: #FFF;
-        background-color: green;
+        background-color: var(--color-primaryMedium);
         font-size: 1rem;
         font-weight: bold;
         border: none;
@@ -103,8 +104,12 @@ const GlobalStyles = createGlobalStyle`
         transition: background-color ease-out 300ms;
 
     &:hover{
-        background-color: whitesmoke;
+        background-color: var(--color-primaryHighlight);
         transform: scale(.98);
+    }
+    &:active{
+        background-color: var(--color-primaryDark);
+        transform: scale(.95);
     }
     }
 

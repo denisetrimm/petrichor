@@ -69,7 +69,7 @@ const NavDiv = styled.nav`
     flex-direction: column;
     border-top-left-radius: 5px;
     height: 100vh;
-    padding: 20px;
+    /* padding: 20px; */
     background: rgb(30,12,12);
     background: linear-gradient(0deg, rgba(30,12,12,1) 0%, rgba(3,19,19,1) 100%);
 `;
@@ -86,29 +86,40 @@ const NavigationLink = styled(NavLink)`
     color: var(--color-creamAccent);
     text-decoration: none;
     font-weight: bold;
-    margin-top: 10px;
-    padding: 10px 20px 10px 15px;
-    border-radius: 40px;
-    width: fit-content;
+    padding: 20px;
     display: flex;
     align-items: center;
+    transition: background-color 400ms ease-out;
 
     &:nth-of-type(2) {
         margin-top: 140px;
     }
     &:hover {
-        background-color: var(--color-primaryHighlight);
-        color: var(--color-creamAccent);
+        background-color: var(--color-primaryHighlightThick);
     }
     &.active {
         background-color: var(--color-primaryHighlight);
+    }
+    @media (max-width: 1450px) {
+        align-self: center;
+        border-radius: 40px;
+        width: fit-content;
     }
 `;
 
 const IconSpan = styled.span`
     margin-right: 20px;
+    @media (max-width: 1450px) {
+        margin: 0;
+    }
 `;
 
 const NameSpan = styled.span`
     font-size: 24px;
+    @media (max-width: 1650px) {
+    font-size: 18px;
+    }
+    @media (max-width: 1450px) {
+    display: none;
+    }
 `
