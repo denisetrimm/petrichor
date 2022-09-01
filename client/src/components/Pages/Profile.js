@@ -3,6 +3,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useContext } from "react";
 import { UserContext } from "../../context/UserContext";
 import moment from 'moment';
+import BackArrow from "../UI/BackArrow";
 
 const Profile = () => {
     const { user, isAuthenticated, isLoading, logout} = useAuth0();
@@ -11,6 +12,7 @@ const Profile = () => {
     
     return (
         <>
+        <BackArrow/>
             { isLoading &&
                 <p>Loading...</p>
             }

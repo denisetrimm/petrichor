@@ -12,7 +12,7 @@ import {
 // PAGE COMPONENTS
 import MyHome from "./Pages/MyHome";
 import Discover from "./Pages/Discover/Discover";
-import PlantDetails from "./Pages/PlantDetails";
+import PlantDetails from "./Pages/PlantDetails/PlantDetails";
 import ThirstyBB from "./Pages/ThirstyBB";
 import Profile from "./Pages/Profile";
 import Sidebar from "./Sidebar";
@@ -77,9 +77,10 @@ const MainContainer = styled.div`
 `
 const Petrichor = styled.h1`
 	color: var(--color-cream);
+	font-size: 40px;
 	font-weight: bold;
 	position: absolute;
-	top: 150px;
+	top: 145px;
 `
 const Definition = styled.span`
 	margin-left: 10px;

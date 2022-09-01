@@ -74,6 +74,7 @@ const NavDiv = styled.nav`
 const LogoLink = styled(Link)`
     border-radius: 50%;
     align-self: center;
+    margin-top: 40px;
     padding: 5px;
     width: fit-content;
     &:hover {

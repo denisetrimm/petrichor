@@ -16,7 +16,7 @@ const Wrapper = styled.div`
     border-radius: 10px;
     /* margin-top: 1%; */
     padding: 20px;
-    width: 30%;
+    width: 20%;
     max-height: 400px;
     display: flex;
     flex-direction: column;
