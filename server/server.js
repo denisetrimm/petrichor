@@ -21,7 +21,8 @@ const {
 
 const {
     addPlantToHome,
-    removePlantFromHome
+    removePlantFromHome,
+    removeAllPlantsFromHome
 } = require("./handlers/houseplantHandlers");
 
 // ________________________________________________
@@ -64,6 +65,8 @@ express()
     // DELETES A SPECIFIED HOUSEPLANT
     .delete("/api/delete-user-plant/:houseplant_Id", removePlantFromHome)
 
+    // DELETES ALL HOUSEPLANTS
+    .delete("/api/delete-user-plants/:userId", removeAllPlantsFromHome)
     
     // CATCH ALL
     // ________________________________________________

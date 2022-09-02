@@ -67,9 +67,7 @@ const addPlantToHome = async (req, res) => {
 const removePlantFromHome = async (req, res) => {
 
     const houseplantId = req.params.houseplant_Id;
-    console.log(`houseplantId: ${houseplantId}`)
     const userId = req.query._id
-    console.log(`userId: ${userId}`)
     const client = new MongoClient(MONGO_URI, options);
 
     try {
@@ -92,18 +90,53 @@ const removePlantFromHome = async (req, res) => {
             )
             if(!checkPlant){
                 // IF PLANT DOES NOT EXIST, RETURN 404
-                return res.status(404).json({ status: 404, success: false, data: houseplantId, message: `This plant is not in your house.` })
+                return res.status(404).json({ status: 404, success: false, data: houseplantId, message: `This plant is not in your home.` })
             }
             else {
-                // IF HOUSEPLANT EXISTS, DELETE HOUSEPLANT
+                // IF HOUSEPLANT EXISTS, DELETE HOUSEPLANT AND RETURN UPDATED USER
                 await db.collection("users").findOneAndUpdate({ 
                         _id: userId,
                         housePlants: { $elemMatch: {  _id: houseplantId}}
                     },
                     {$pull: {housePlants: { _id: houseplantId}}}
                 );
-                res.status(200).json({ status: 200, success: true, message: `Deleted plant ${houseplantId}` })
+                const updatedUser = await db.collection("users").findOne({ _id: userId })
+                res.status(200).json({ status: 200, success: true, data: updatedUser, message: `Deleted plant ${houseplantId}` })
             }
+        }
+    }
+    catch (err) {
+        res.status(500).json({ status: 500, message: err.message })
+    }
+    client.close();
+    console.log("disconnected!");
+};
+
+// DELETES ALL HOUSEPLANTS
+// .delete("/api/delete-user-plants/:userId", removeAllPlantsFromHome)
+const removeAllPlantsFromHome = async (req, res) => {
+
+    const userId = req.params.userId
+    const client = new MongoClient(MONGO_URI, options);
+
+    try {
+        await client.connect();
+        const db = client.db();
+
+        // CHECK IF USER EXISTS
+        const checkUser = await db.collection("users").findOne({ _id: userId })
+        if (!checkUser) {
+            // IF USER DOES NOT EXIST, RETURN 404
+            return res.status(404).json({ status: 404, success: false, data: userId, message: `User does not exist` })
+        }
+        else {
+            // IF USER EXISTS, RESET HOUSEPLANT ARRAY AND RETURN UPDATED USER 
+            await db.collection("users").findOneAndUpdate(
+                {_id: userId},
+                {$set: {housePlants: []}}, 
+            );
+            const updatedUser = await db.collection("users").findOne({ _id: userId })
+            res.status(200).json({ status: 200, success: true, data: updatedUser, message: `Deleted all plants from your home` })
         }
     }
     catch (err) {
@@ -115,5 +148,6 @@ const removePlantFromHome = async (req, res) => {
 
 module.exports = {
     addPlantToHome,
-    removePlantFromHome
+    removePlantFromHome,
+    removeAllPlantsFromHome
 }
