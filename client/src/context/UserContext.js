@@ -61,12 +61,32 @@ export const UserProvider = ({ children }) => {
         }
     }
 
+    const addPlantToHome = (plant) => {
+        fetch('/api/add-user-plant', {
+            method: "POST",
+            body: JSON.stringify({_id: plantUser._id, plant: plant}),
+            headers: {
+                Accept: "application/json",
+                "Content-Type" : "application/json"
+            }
+        })
+        .then((res)=>res.json())
+        .then((data)=>{
+            console.log(data.data)
+            if(data.success){
+                setPlantUser(data.data)
+                alert(`Added plant ${plant.commonName} to My Home`)
+            }
+        })
+    }
+
 return (
         <UserContext.Provider
             value={{
                 plantUser,
                 setPlantUser, 
-                deleteUserProfile
+                deleteUserProfile,
+                addPlantToHome,
             }}
         >
             {children}

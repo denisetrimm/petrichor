@@ -2,9 +2,11 @@ import { useContext } from "react";
 import styled from "styled-components";
 import { UserContext } from "../../../context/UserContext";
 import AddPlantBtn from "./AddPlantBtn";
+import { useAuth0 } from "@auth0/auth0-react";
 
 
 const PlantCard = ({plant}) => {
+    const { user, isAuthenticated, isLoading, logout} = useAuth0();
     const { plantUser } = useContext(UserContext);
 
     return (

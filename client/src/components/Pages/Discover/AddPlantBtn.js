@@ -8,10 +8,11 @@ import { UserContext } from '../../../context/UserContext';
 
 const AddPlantBtn = ({plant}) => {
 
+    const {addPlantToHome} = useContext(UserContext);
+
     const handleClick = (e, plant) => {
         e.stopPropagation();
-        alert(`Added plant ${plant.commonName} to My Home`)
-        // Create user context patch function that adds plant
+        addPlantToHome(plant);
     }
 
     return (

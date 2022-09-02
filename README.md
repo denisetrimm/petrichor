@@ -15,6 +15,13 @@
 | `/login-user`  | `POST`  | This endpoint accepts data in the body and checks whether the user is new. If the user exists, it returns the user data. If the user is new, it creates a new user and returns the created user data. |
 | `/delete-user/:userId`  | `DELETE`  | This endpoint deletes an existing user based on the provided `userId`. |
 
+## Houseplant Endpoints
+
+| Endpoint | Method | Description            |
+| -------- | ------ | ---------------------- |
+| `/add-user-plant`  | `POST`  | This endpoint accepts plant and user data in the body and checks if the user exists. If the user exists, it adds a new houseplant to the user and returns the updated user data. |
+| `/delete-user-plant/:houseplant_id?_id=userId`  | `DELETE`  | This endpoint deletes an existing user houseplant based on the provided houseplant `_id`. This endpoint takes an additional `_id` query that corresponds to the user's `_id`. Note: This **does not** use the original base plant `_id` from the `plants` collection.  |
+
 ## plants.json
 ```json
 [
@@ -37,15 +44,14 @@
 [
     {
         "_id": "",
+        "dateJoined": "",
         "given_name": "",
         "family_name": "",
         "email": "",
-        "picture": "",
-        "sub": "",
         "housePlants": [ 
             {
                 "_id": "",
-                "plantId": "",//May need to add plantID vs unique user plant ID to add more than one
+                "plantId": "",
                 "commonName": "",
                 "nickname": "",
                 "lastWatered": "",
@@ -56,6 +62,7 @@
             },
             {
                 "_id": "",
+                "plantId": "",
                 "commonName": "",
                 "nickname": "",
                 "lastWatered": "",

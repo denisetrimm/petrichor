@@ -16,8 +16,13 @@ const {
 const {
     getUser,
     loginUser,
-    deleteUser
+    deleteUser,
 } = require("./handlers/userHandlers");
+
+const {
+    addPlantToHome,
+    removePlantFromHome
+} = require("./handlers/houseplantHandlers");
 
 // ________________________________________________
 
@@ -49,6 +54,17 @@ express()
     // DELETES A SPECIFIED USER
     .delete("/api/delete-user/:userId", deleteUser)
 
+
+    // HOUSEPLANT ENDPOINTS
+    // ________________________________________________
+
+    // ADDS A NEW HOUSEPLANT
+    .post("/api/add-user-plant", addPlantToHome)
+
+    // DELETES A SPECIFIED HOUSEPLANT
+    .delete("/api/delete-user-plant/:houseplant_Id", removePlantFromHome)
+
+    
     // CATCH ALL
     // ________________________________________________
 
