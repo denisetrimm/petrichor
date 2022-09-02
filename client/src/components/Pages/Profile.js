@@ -19,9 +19,10 @@ const Profile = () => {
             {isAuthenticated && plantUser &&
                 <>
                 <h1>Profile</h1>
-                <img src={user.picture} alt="Profile" style={{width: "120px", borderRadius: "50%"}}/>
+                <Avatar src={user.picture} alt="Profile"/>
                 <p>{user.given_name} {user.family_name}</p>
                 <p>{user.email}</p>
+                <p>Caring for {plantUser.housePlants.length} plants</p>
                 <p>Joined: {moment(plantUser.dateJoined).format("MMM DD, YYYY")}</p>
                 <button type="button" onClick={() => {deleteUserProfile()}}>Delete Profile</button>
                 </>
@@ -31,4 +32,11 @@ const Profile = () => {
     );
 }
 
+const Avatar = styled.img`
+    background-color: var(--color-creamAccent);
+    padding: 10px;
+    margin: 10px 0;
+    width: 120px;
+    border-radius: 50%;
+`
 export default Profile;
