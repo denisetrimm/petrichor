@@ -63,15 +63,15 @@ express()
     // ADDS A NEW HOUSEPLANT
     .post("/api/add-user-plant", addPlantToHome)
 
+    // UPDATES THE ROOM FOR A SPECIFIED HOUSEPLANT
+    .patch("/api/update-plant-room", updatePlantRoom)
+
     // DELETES A SPECIFIED HOUSEPLANT
     .delete("/api/delete-user-plant/:houseplant_Id", removePlantFromHome)
 
-    // DELETES ALL HOUSEPLANTS
+    // DELETES ALL HOUSEPLANTS FOR USER
     .delete("/api/delete-user-plants/:userId", removeAllPlantsFromHome)
 
-    // UPDATES THE ROOM FOR A SPECIFIED HOUSEPLANT
-    .patch("/api/update-plant-room", updatePlantRoom)
-    
     // CATCH ALL
     // ________________________________________________
 

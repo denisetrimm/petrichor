@@ -90,6 +90,83 @@ export const UserProvider = ({ children }) => {
         })
     }
 
+    // Missing fetches for following endpoints
+        // // UPDATES THE ROOM FOR A SPECIFIED HOUSEPLANT
+        // .patch("/api/update-plant-room", updatePlantRoom)
+
+        const updatePlantRoom = (plant, room) => {
+            fetch('/api/update-plant-room', {
+                method: "PATCH",
+                body: JSON.stringify({_id: plantUser._id, plant: plant, room: room}),
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type" : "application/json"
+                }
+            })
+            .then((res)=>res.json())
+            .then((data)=>{
+                console.log(data.data)
+                if(data.success){
+                    setPlantUser(data.data)
+                    alert(`Added plant ${plant.commonName} to ${room}`)
+                }
+            })
+        }
+        // // DELETES A SPECIFIED HOUSEPLANT
+        // .delete("/api/delete-user-plant/:houseplant_Id", removePlantFromHome)
+        const removePlantFromHome = (plant) => {
+            const text = "Are you sure? This action cannot be undone. Press OK to continue";
+            if (!window.confirm(text)) {
+                return
+            }
+            else {
+                fetch(`/api/delete-user-plant/${plant._id}?_id=${plantUser._id}`, {
+                    method: "DELETE",
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type" : "application/json"
+                    }
+                })
+                .then((res)=>res.json())
+                .then((data)=>{
+                    if (data.success){
+                        setPlantUser(data.data)
+                        alert("Plant deleted successfully")
+                    }
+                    else {
+                        alert("Could not delete plant. Please try again")
+                    }
+                })
+            }
+        }
+        // // DELETES ALL HOUSEPLANTS FOR USER
+        // .delete("/api/delete-user-plants/:userId", removeAllPlantsFromHome)
+        const removeAllPlantsFromHome = () => {
+            const text = "Are you sure? This action cannot be undone. Press OK to continue";
+            if (!window.confirm(text)) {
+                return
+            }
+            else {
+                fetch(`/api/delete-user-plants/${plantUser._id}`, {
+                    method: "DELETE",
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type" : "application/json"
+                    }
+                })
+                .then((res)=>res.json())
+                .then((data)=>{
+                    if (data.success){
+                        setPlantUser(data.data)
+                        alert("Removed all plants from your home")
+                    }
+                    else {
+                        alert("Could not delete plants. Please try again")
+                    }
+                })
+            }
+        }
+
 return (
         <UserContext.Provider
             value={{
@@ -97,6 +174,9 @@ return (
                 setPlantUser, 
                 deleteUserProfile,
                 addPlantToHome,
+                updatePlantRoom,
+                removePlantFromHome,
+                removeAllPlantsFromHome
             }}
         >
             {children}
