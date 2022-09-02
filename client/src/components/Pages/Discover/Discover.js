@@ -18,16 +18,15 @@ import TypeAhead from "./TypeAhead";
 import BackArrow from "../../UI/BackArrow";
 
 
-
-
 const Discover = () => {
     const { user, isAuthenticated, isLoading} = useAuth0();
     const {plantUser} = useContext(UserContext);
-    const { allPlants, filteredPlants }= useContext(PlantContext);
+    const { allPlants, filteredPlants, handleClear }= useContext(PlantContext);
     const navigate = useNavigate();
 
-    const handleClick = (plantId) => {
+    const handlePlantClick = (plantId) => {
         console.log("clicked!");
+        handleClear();
         navigate(`/plants/${plantId}`);
     }
 
@@ -46,7 +45,7 @@ const Discover = () => {
                 {filteredPlants.map(plant => {
                     console.log(plant)
                     return (
-                        <Card key={plant._id} id={plant._id} handleFunction={handleClick}>
+                        <Card key={plant._id} id={plant._id} handleFunction={handlePlantClick}>
                             <PlantCard plant={plant}/>
                         </Card>
                     )
@@ -63,8 +62,8 @@ const PlantGrid = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    /* position: relative; */
     gap: 15px 1%;
     margin-top: 40px;
+    width: 100%;
 `
 export default Discover;

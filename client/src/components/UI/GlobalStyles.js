@@ -117,6 +117,9 @@ const GlobalStyles = createGlobalStyle`
         transform: scale(.95);
         cursor: pointer;
     }
+    &:focus-visible {
+        outline: 4px lightblue solid ;
+    }
     }
 
     a {

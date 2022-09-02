@@ -14,7 +14,6 @@ const Wrapper = styled.div`
     background-color: whitesmoke;
     border: 2px solid var(--color-creamAccent);
     border-radius: 10px;
-    /* margin-top: 1%; */
     padding: 20px;
     width: 20%;
     max-height: 400px;
@@ -28,7 +27,6 @@ const Wrapper = styled.div`
     transition: ease-in-out 200ms;
 
     &:hover {
-        /* background-color: var(--color-primaryHighlightThin); */
         background-color: #ededed;
         transform: scale(1.01);
         cursor: pointer;

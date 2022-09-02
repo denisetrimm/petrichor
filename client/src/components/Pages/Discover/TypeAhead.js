@@ -10,115 +10,159 @@ import { UserContext } from '../../../context/UserContext';
 const TypeAhead = () => {
 
     const navigate = useNavigate();
-    const {allPlants} = useContext(PlantContext);
-    const [inputValue, setInputValue] = useState("");
+    const {
+        allPlants, 
+        filteredPlants, 
+        setFilteredPlants, 
+        handleClear, 
+        searchInputValue, 
+        setsearchInputValue,
+        searchActive,
+        setSearchActive
+    } = useContext(PlantContext);
 
-    // Return results that match what the user types
+    // IF THE USER INPUT FIELD IS BLANK, RESET SEARCH. IF USER IS TYPING, SHOW TYPEAHEAD
+    const handleInputChange = (e) => {
+        e === "" 
+            ?   handleClear() 
+            :   setsearchInputValue(e); 
+                setSearchActive(false)
+    }
+
+    // TYPEAHEAD - SEARCH FOR TYPED STRING IN THE PLANT NAMES
     const filteredPlantsCommon = allPlants.filter(plant => {
-                return plant.commonName.toLowerCase().includes(inputValue.toLowerCase())
+                return plant.commonName.toLowerCase().includes(searchInputValue.toLowerCase())
             })
     const filteredPlantsBotanical = allPlants.filter(plant => {
-                return plant.botanicalName.toLowerCase().includes(inputValue.toLowerCase())
+                return plant.botanicalName.toLowerCase().includes(searchInputValue.toLowerCase())
             })
-    // const filteredPlantsAdditional = allPlants.filter(plant => {
-    //             return plant.additionalName.toLowerCase().includes(inputValue.toLowerCase())
-    //         })
-    
-    // When a user clicks on a suggestion, navigate to the item details page and clear the input field
+
+    // TYPEAHEAD - WHEN THE USER CLICKS ON A TYPEAHEAD SUGGESTION, NAVIGATE TO THE ITEM DETAILS PAGE AND CLEAR THE INPUT FIELD
     const handleSuggestionClick = (plant) => {
+        handleClear();
         navigate(`/plants/${plant._id}`)
-        setInputValue("");
+    }
+
+    // SEARCH - HIDE TYPEAHEAD, ONLY SHOW FILTERED CARDS
+    const handleSearch = () => {
+        setSearchActive(true)
+
+        // SEARCH FOR TYPED STRING IN THE PLANT NAMES
+        const filteredPlantsCommon = allPlants.filter(plant => {
+            return plant.commonName.toLowerCase().includes(searchInputValue.toLowerCase())
+        })
+
+        const filteredPlantsBotanical = allPlants.filter(plant => {
+            return plant.botanicalName.toLowerCase().includes(searchInputValue.toLowerCase())
+        })
+
+        // REMOVE DUPLICATES OF PLANTS IF INPUT APPEARS IN BOTH COMMON AND BOTANICAL
+        let listOfFilteredPlants = [];
+
+        if (filteredPlantsCommon.length > 0 && filteredPlantsBotanical.length > 0){
+            filteredPlantsCommon.forEach(commonPlant => {
+                const duplicateplant = listOfFilteredPlants.find( listedPlant => {
+                    return listedPlant._id === commonPlant._id
+                })
+                if(!duplicateplant){
+                    listOfFilteredPlants.push(commonPlant)
+                }
+            });
+            filteredPlantsBotanical.forEach(botanicalPlant => {
+                const duplicateplant = listOfFilteredPlants.find( listedPlant => {
+                    return listedPlant._id === botanicalPlant._id
+                })
+                if(!duplicateplant){
+                    listOfFilteredPlants.push(botanicalPlant)
+                }
+            });
+        }
+        else {
+            listOfFilteredPlants = [...filteredPlantsCommon, ...filteredPlantsBotanical]
+        }
+        setFilteredPlants(listOfFilteredPlants)
     }
 
     return (
         <>
-        <FlexCol>
+        {/* <FlexCol> */}
             <SearchDiv>
                 <SearchBar 
                     type="text" 
-                    value={inputValue}
+                    value={searchInputValue}
                     placeholder="Plants, plants everywhere..."
-                    onChange={(e) => {setInputValue(e.target.value)}} 
-                    // onKeyDown={(e) => {
-                    //     e.key === "Enter" && ; Might have to add filtering logic later
-                    // }}
+                    onChange={(e) => {handleInputChange(e.target.value)}} 
+                    onKeyDown={(e) => {
+                        e.key === "Enter" && handleSearch()
+                    }}
                 />
-                <SearchBtn onClick={()=> {setInputValue("")}}><GoSearch/></SearchBtn>
-                {/* <ClearBtn onClick={()=> {setInputValue("")}}>Clear</ClearBtn> */}
+                <SearchBtn onClick={()=> {handleSearch()}}><GoSearch/></SearchBtn>
+                <ClearBtn onClick={()=> {handleClear()}}>Clear</ClearBtn>
             
-
         {
-            // Render matches
-            // (filteredPlantsCommon.length > 0 || filteredPlantsBotanical.length > 0 || filteredPlantsAdditional.length > 0) && inputValue.length >= 2 
-            (filteredPlantsCommon.length > 0 || filteredPlantsBotanical.length > 0 ) && inputValue.length >= 2
+            // RENDER TYPEAHEAD SUGGESTIONS
+            !searchActive && ( filteredPlantsCommon.length > 0 || filteredPlantsBotanical.length > 0 ) && searchInputValue.length >= 2
             &&
             <PlantList>
                 {
                     filteredPlantsCommon.map(plant => {
-                        // Find index of word and split for styling
-                        let indexOfsecondHalf = plant.commonName.toLowerCase().indexOf(inputValue.toLowerCase())
-                        let firstHalf = plant.commonName.slice(0, indexOfsecondHalf + inputValue.length)
-                        let secondHalf = plant.commonName.slice(indexOfsecondHalf + inputValue.length)
-                        // Clicking a suggestion navigates to the plant details page
+                        // FIND INDEX OF WORD IN COMMON NAME AND SPLIT FOR STYLING
+                        let indexOfsecondHalf = plant.commonName.toLowerCase().indexOf(searchInputValue.toLowerCase())
+                        let firstHalf = plant.commonName.slice(0, indexOfsecondHalf + searchInputValue.length)
+                        let secondHalf = plant.commonName.slice(indexOfsecondHalf + searchInputValue.length)
+                        // CLICKING A SUGGESTION NAVIGATES TO THE PLANT DETAILS PAGE
                         return <PlantListItem 
                                     key={plant._id} 
                                     onClick={()=> {handleSuggestionClick(plant)}}
                                 >
-                                    {firstHalf}<Prediction>{secondHalf}</Prediction> <Family> &#8226; <FamilySpan>{plant.botanicalName}</FamilySpan></Family>
+                                    {firstHalf}<Prediction>{secondHalf}</Prediction> <BotanicalName> &#8226; <BotanicalNameSpan>{plant.botanicalName}</BotanicalNameSpan></BotanicalName>
                                 </PlantListItem>
                     })}
                     {
                     filteredPlantsBotanical.map(plant => {
-                        // Find index of word and split for styling
-                        let indexOfsecondHalf = plant.botanicalName.toLowerCase().indexOf(inputValue.toLowerCase())
-                        let firstHalf = plant.botanicalName.slice(0, indexOfsecondHalf + inputValue.length)
-                        let secondHalf = plant.botanicalName.slice(indexOfsecondHalf + inputValue.length)
-                        // Clicking a suggestion navigates to the plant details page
+                        // FIND INDEX OF WORD IN BOTANICAL NAME AND SPLIT FOR STYLING
+                        let indexOfsecondHalf = plant.botanicalName.toLowerCase().indexOf(searchInputValue.toLowerCase())
+                        let firstHalf = plant.botanicalName.slice(0, indexOfsecondHalf + searchInputValue.length)
+                        let secondHalf = plant.botanicalName.slice(indexOfsecondHalf + searchInputValue.length)
+                        // CLICKING A SUGGESTION NAVIGATES TO THE PLANT DETAILS PAGE
                         return <PlantListItem 
                                     key={plant._id} 
                                     onClick={()=> {handleSuggestionClick(plant)}}
                                 >
-                                    {firstHalf}<Prediction>{secondHalf}</Prediction> <Family> &#8226; <FamilySpan>{plant.commonName}</FamilySpan></Family>
+                                    {plant.commonName}<BotanicalName> &#8226; <BotanicalNameSpan>{firstHalf}<Prediction>{secondHalf}</Prediction></BotanicalNameSpan></BotanicalName>
                                 </PlantListItem>
                     })
                 }
-                    {/* {
-                    filteredPlantsAdditional.map(plant => {
-                        // Find index of word and split for styling
-                        let indexOfsecondHalf = plant.additionalName.toLowerCase().indexOf(inputValue.toLowerCase())
-                        let firstHalf = plant.additionalName.slice(0, indexOfsecondHalf + inputValue.length)
-                        let secondHalf = plant.additionalName.slice(indexOfsecondHalf + inputValue.length)
-                        // Clicking a suggestion navigates to the plant details page
-                        return <PlantListItem 
-                                    key={plant._id} 
-                                    onClick={()=> {handleSuggestionClick(plant)}}
-                                >
-                                    {firstHalf}<Prediction>{secondHalf}</Prediction> <Family> &#8226; <FamilySpan>{plant.commonName}</FamilySpan></Family>
-                                </PlantListItem>
-                    })
-                } */}
             </PlantList> 
         }
         </SearchDiv>
-        </FlexCol>
+        {/* </FlexCol> */}
     </>
     );
 };
 
 export default TypeAhead;
 
-const SearchDiv = styled.div`
-    display: relative;
+const FlexCol = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 30px;
 `;
-const Family = styled.span`
+const SearchDiv = styled.div`
+    /* border: 1px solid purple; */
+    position: relative;
+    display: flex;
+    align-items: center;
+`;
+const BotanicalName = styled.span`
     font-style: italic;
     font-size: 12px;
 `;
-const FamilySpan = styled.span`
+const BotanicalNameSpan = styled.span`
     color: var(--color-gold);
 `;
 const SearchBar = styled.input`
-border: 1px solid purple;
     position: relative;
     font-size: 16px;
     height: 35px;
@@ -127,7 +171,8 @@ border: 1px solid purple;
     border: 2px solid var(--color-creamAccent);
     border-radius: 40px;
     &:focus-visible {
-        outline: 2px solid var(--color-secondary);
+        outline: 2px solid var(--color-creamAccent);
+        border: 2px solid var(--color-creamAccent);
     }
 `;
 const ClearBtn = styled.button`
@@ -135,12 +180,12 @@ const ClearBtn = styled.button`
     background-color: var(--color-primaryHighlightThick);
     border: none;
     border-radius: 40px;
-    font-size: 18px;
+    font-size: 12px;
     margin-left: 10px;
-    padding: 8px 12px;
+    padding: 6px 12px;
     transition: ease-in-out 100ms;
     &:focus-visible {
-        outline: 4px lightblue solid ;
+        outline: 4px lightblue solid;   
     }
     &:hover{
         transform: scale(1.05);
@@ -155,7 +200,6 @@ const SearchBtn = styled.button`
     background-color: var(--color-primaryMedium);
     border: none;
     border-radius: 50%;
-    /* font-size: 18px; */
     margin-left: 10px;
     padding: 5px 8px;
     transition: ease-in-out 100ms;
@@ -172,15 +216,16 @@ const SearchBtn = styled.button`
     }
 `;
 const PlantList = styled.ul`
-    z-index: 1;
+    z-index: 100;
     border-radius: 5px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     padding: 10px;
-    width: 500px;
-    margin-top: 5px;
+    width: 530px;
     background-color: white;
     font-size: 18px;
     position: absolute;
+    top: 60px;
+
 `;
 const PlantListItem = styled.li`
     z-index: 1;
@@ -193,10 +238,4 @@ const PlantListItem = styled.li`
 `;
 const Prediction = styled.span`
     font-weight: bold;
-`;
-const FlexCol = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-left: 30px;
 `;

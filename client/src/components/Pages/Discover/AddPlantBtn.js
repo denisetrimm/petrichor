@@ -32,7 +32,7 @@ const AddBtn = styled.button`
     position: absolute;
     top: -15px;
     left: 15px;
-    z-index: 100;
+    z-index: 80;
 
 `
 export default AddPlantBtn;
