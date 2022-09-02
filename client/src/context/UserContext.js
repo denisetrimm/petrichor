@@ -39,7 +39,7 @@ export const UserProvider = ({ children }) => {
 
     // DELETE USER LOGIC - USED IN PROFILE PAGE
     const deleteUserProfile = () => {
-        const text = "Are you sure? This action cannot be undone. Press OK to continue";
+        const text = "Are you sure? This action cannot be undone. Press OK to continue.";
         if (!window.confirm(text)) {
             return
         }
@@ -56,10 +56,10 @@ export const UserProvider = ({ children }) => {
                 if (data.success){
                     setPlantUser(null)
                     logout({ returnTo: window.location.origin })
-                    alert("User deleted successfully")
+                    alert("User deleted successfully.")
                 }
                 else {
-                    alert("Could not delete user. Please try again")
+                    alert("Could not delete user. Please try again.")
                 }
             })
         }
@@ -85,7 +85,7 @@ export const UserProvider = ({ children }) => {
             console.log(data.data)
             if(data.success){
                 setPlantUser(data.data)
-                alert(`Added plant ${plant.commonName} to My Home`)
+                alert(`Added plant ${plant.commonName} to My Home.`)
             }
         })
     }
@@ -108,14 +108,14 @@ export const UserProvider = ({ children }) => {
                 console.log(data.data)
                 if(data.success){
                     setPlantUser(data.data)
-                    alert(`Added plant ${plant.commonName} to ${room}`)
+                    alert(`Added plant ${plant.commonName} to ${room}.`)
                 }
             })
         }
         // // DELETES A SPECIFIED HOUSEPLANT
         // .delete("/api/delete-user-plant/:houseplant_Id", removePlantFromHome)
         const removePlantFromHome = (plant) => {
-            const text = "Are you sure? This action cannot be undone. Press OK to continue";
+            const text = "Are you sure? This action cannot be undone. Press OK to continue.";
             if (!window.confirm(text)) {
                 return
             }
@@ -131,10 +131,10 @@ export const UserProvider = ({ children }) => {
                 .then((data)=>{
                     if (data.success){
                         setPlantUser(data.data)
-                        alert("Plant deleted successfully")
+                        alert("Plant deleted successfully.")
                     }
                     else {
-                        alert("Could not delete plant. Please try again")
+                        alert("Could not delete plant. Please try again.")
                     }
                 })
             }
@@ -142,7 +142,7 @@ export const UserProvider = ({ children }) => {
         // // DELETES ALL HOUSEPLANTS FOR USER
         // .delete("/api/delete-user-plants/:userId", removeAllPlantsFromHome)
         const removeAllPlantsFromHome = () => {
-            const text = "Are you sure? This action cannot be undone. Press OK to continue";
+            const text = "Are you sure? This action cannot be undone. Press OK to continue.";
             if (!window.confirm(text)) {
                 return
             }
@@ -158,10 +158,10 @@ export const UserProvider = ({ children }) => {
                 .then((data)=>{
                     if (data.success){
                         setPlantUser(data.data)
-                        alert("Removed all plants from your home")
+                        alert("Removed all plants from your home.")
                     }
                     else {
-                        alert("Could not delete plants. Please try again")
+                        alert("Could not delete plants. Please try again.")
                     }
                 })
             }
