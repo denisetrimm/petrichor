@@ -23,7 +23,7 @@ const Profile = () => {
                 <img src={user.picture} alt="Profile" style={{width: "120px", borderRadius: "50%"}}/>
                 <p>{user.given_name} {user.family_name}</p>
                 <p>{user.email}</p>
-                <p>Joined: {moment(plantUser.dateJoined._d).format("MMM DD, YYYY")}</p>
+                <p>Joined: {moment(plantUser.dateJoined).format("MMM DD, YYYY")}</p>
                 <button type="button" onClick={() => {deleteUserProfile()}}>Delete Profile</button>
                 </>
             }

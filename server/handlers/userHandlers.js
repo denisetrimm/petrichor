@@ -48,7 +48,7 @@ const loginUser = async (req, res) => {
     const id = uuidv4(); 
     const newUser = {
         _id: id,
-        dateJoined: moment(),
+        dateJoined: moment().format(),
         given_name: given_name,
         family_name: family_name,
         email: email,
@@ -94,7 +94,7 @@ const deleteUser = async (req, res) => {
         await client.connect();
         const db = client.db();
 
-        // CHECK IF USER ALREADY EXISTS
+        // CHECK IF USER EXISTS
         const checkUser = await db.collection("users").findOne({ _id: userId })
         if (!checkUser) {
             // IF USER DOES NOT EXIST, RETURN 404
@@ -116,5 +116,5 @@ const deleteUser = async (req, res) => {
 module.exports = {
     getUser,
     loginUser,
-    deleteUser
+    deleteUser,
 }
