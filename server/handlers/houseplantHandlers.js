@@ -29,7 +29,7 @@ const addPlantToHome = async (req, res) => {
         dateAdded: date,
         lastWatered: date,
         nextWatering: moment().add(basePlant.wateringFrequency, "days").format(),
-        room: ""
+        room: basePlant.room || ""
     }
     console.log(newPlant)
     const client = new MongoClient(MONGO_URI, options);
@@ -53,6 +53,58 @@ const addPlantToHome = async (req, res) => {
             );
             const updatedUser = await db.collection("users").findOne({ _id: userId })
             res.status(201).json({ status: 201, success: true, data: updatedUser, message: `Added ${newPlant.commonName} (${updatedUser._id}) to your home` })
+        }
+    }
+    catch (err) {
+        res.status(500).json({ status: 500, message: err.message })
+    }
+    client.close();
+    console.log("disconnected!");
+};
+
+// UPDATES THE ROOM FOR A SPECIFIED HOUSEPLANT
+// .patch("/api/update-plant-room", updatePlantRoom)
+const updatePlantRoom = async (req, res) => {
+
+    const userId = req.body._id;
+    const houseplantId = req.body.plant._id;
+    const room = req.body.room;
+    const client = new MongoClient(MONGO_URI, options);
+
+    try {
+        await client.connect();
+        const db = client.db();
+
+        // CHECK IF USER EXISTS
+        const checkUser = await db.collection("users").findOne({ _id: userId })
+        if (!checkUser) {
+            // IF USER DOES NOT EXIST, RETURN 404
+            return res.status(404).json({ status: 404, success: false, data: userId, message: `User does not exist` })
+        }
+        else {
+            // CHECK IF HOUSEPLANT EXISTS
+            const checkPlant = await db.collection("users").findOne(
+                { 
+                    _id: userId,
+                    housePlants: { $elemMatch: {  _id: houseplantId}}
+                }
+            )
+            if(!checkPlant){
+                // IF PLANT DOES NOT EXIST, RETURN 404
+                return res.status(404).json({ status: 404, success: false, data: houseplantId, message: `This plant is not in your home.` })
+            }
+            else {
+                // IF HOUSEPLANT EXISTS, UPDATE HOUSEPLANT ROOM AND RETURN UPDATED USER
+                await db.collection("users").findOneAndUpdate({ 
+                        _id: userId,
+                        housePlants: { $elemMatch: {  _id: houseplantId}}
+                    },
+                    {$set: {"housePlants.$[elem].room" : room}}, 
+                    {arrayFilters: [ {"elem._id": houseplantId}], new: true}
+                );
+                const updatedUser = await db.collection("users").findOne({ _id: userId })
+                res.status(200).json({ status: 200, success: true, data: updatedUser, message: `Updated the room of plant ${houseplantId} to ${room}` })
+            }
         }
     }
     catch (err) {
@@ -148,6 +200,7 @@ const removeAllPlantsFromHome = async (req, res) => {
 
 module.exports = {
     addPlantToHome,
+    updatePlantRoom,
     removePlantFromHome,
     removeAllPlantsFromHome
 }

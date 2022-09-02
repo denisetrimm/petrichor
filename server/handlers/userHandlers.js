@@ -87,7 +87,6 @@ const loginUser = async (req, res) => {
 const deleteUser = async (req, res) => {
 
     const userId = req.params.userId;
-
     const client = new MongoClient(MONGO_URI, options);
 
     try {

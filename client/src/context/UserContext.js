@@ -8,6 +8,11 @@ export const UserProvider = ({ children }) => {
     const [plantUser, setPlantUser] = useState(null);
     const { user, isAuthenticated, isLoading, loginWithRedirect, logout } = useAuth0();
 
+    // ________________________________________________
+    // 
+    // USER FETCHES
+    // ________________________________________________
+
     // USE AUTHENTICATED USER DETAILS TO RETRIEVE/CREATE USER DATA
     useEffect(() => {
         if (!isAuthenticated){
@@ -26,14 +31,13 @@ export const UserProvider = ({ children }) => {
             })
             .then((res)=>res.json())
             .then((data)=>{
-                // console.log(data)
                 setPlantUser(data.data)
             })
         }
         
     }, [isAuthenticated])
 
-    // DELETE USER LOGIC - USED IN PROFILE
+    // DELETE USER LOGIC - USED IN PROFILE PAGE
     const deleteUserProfile = () => {
         const text = "Are you sure? This action cannot be undone. Press OK to continue";
         if (!window.confirm(text)) {
@@ -61,6 +65,12 @@ export const UserProvider = ({ children }) => {
         }
     }
 
+    // ________________________________________________
+    // 
+    // HOUSEPLANT FETCHES
+    // ________________________________________________
+
+    // ADD SINGLE HOUSEPLANT - USED IN DISCOVER PAGE
     const addPlantToHome = (plant) => {
         fetch('/api/add-user-plant', {
             method: "POST",
