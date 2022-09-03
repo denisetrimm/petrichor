@@ -27,8 +27,8 @@ const addPlantToHome = async (req, res) => {
         plantId: basePlant._id,
         _id: id,
         dateAdded: date,
-        lastWatered: basePlant.lastWatered || date,
-        nextWatering: moment().add(basePlant.wateringFrequency, "days").format(),
+        lastWatered: basePlant.lastWatered ? moment(basePlant.lastWatered).format() : date,
+        nextWatering: basePlant.lastWatered ? moment(basePlant.lastWatered).add(basePlant.wateringFrequency, "days").format() : moment().add(basePlant.wateringFrequency, "days").format(),
         room: basePlant.room || "",
         nickname: basePlant.nickname || ""
     }

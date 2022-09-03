@@ -32,13 +32,13 @@ const AddPlantForm = ({currentPlant})=> {
     // lastWatered
     // wateringFrequency
     // room
-
+    console.log(plantUser.home)
     return (
 
         <>
             <Wrapper>
                 <PlantForm onSubmit={(e)=> {handleSubmit(e)}}>
-                    <Label for="nickname">Last Watered</Label>
+                    <Label htmlFor="nickname">Nickname</Label>
                     <Input
                         type="text" 
                         placeholder="Add a nickname"
@@ -47,7 +47,7 @@ const AddPlantForm = ({currentPlant})=> {
                         value={newPlantInfo.nickname}
                         onChange={(e) => handleChange("nickname", e.target.value)}
                     />
-                    <Label for="lastWatered">Last Watered</Label>
+                    <Label htmlFor="lastWatered">Last Watered</Label>
                     <Input
                         type="date"
                         id="lastWatered"
@@ -55,7 +55,7 @@ const AddPlantForm = ({currentPlant})=> {
                         value={newPlantInfo.lastWatered}
                         onChange={(e) => handleChange("lastWatered", e.target.value)}
                     />
-                    <Label for="wateringFrequency">Watering Frequency</Label>
+                    <Label htmlFor="wateringFrequency">Watering Frequency</Label>
                     Every
                     <Input
                         type="number"
@@ -64,6 +64,19 @@ const AddPlantForm = ({currentPlant})=> {
                         value={newPlantInfo.wateringFrequency}
                         onChange={(e) => handleChange("wateringFrequency", e.target.value)}
                     />days
+                    <Label htmlFor="room">Room</Label>
+                    <Select 
+                        id="room"
+                        name="room"
+                        onChange={(e) => handleChange("room", e.target.value)}
+                    >
+                        <option value="">Where will she live...</option>
+                        {plantUser &&
+                            plantUser.home.map(room => {
+                                return <option value={Object.keys(room)[0]}>{`${Object.values(room)[0]}`}</option>
+                            })
+                        }
+                    </Select>
                     <AddBtn type="submit">
                         <MdAdd />Add plant to home 
                     </AddBtn>
@@ -80,11 +93,14 @@ const Wrapper = styled.div`
 const PlantForm = styled.form`
 
 `
+const Label = styled.label`
+
+`
 const Input = styled.input`
 
 `
-const Label = styled.label`
-
+const Select = styled.select`
+    display: block;
 `
 
 

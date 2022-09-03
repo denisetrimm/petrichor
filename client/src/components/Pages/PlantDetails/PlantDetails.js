@@ -66,7 +66,7 @@ const PlantDetails = () => {
         {plantUser &&
             <BackArrow/>
         }
-        { currentPlant &&
+        {currentPlant &&
             <>
             <FlexWrapper>
                 <PlantImg src={currentPlant.imgSrc}/>
