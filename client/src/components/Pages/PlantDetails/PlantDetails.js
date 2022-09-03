@@ -1,17 +1,21 @@
+// STYLING
 import styled from "styled-components";
+// HOOKS & CONTEXT
 import { useAuth0 } from "@auth0/auth0-react";
 import { useState, useEffect, useContext } from "react";
 import { PlantContext } from "../../../context/PlantContext";
 import { UserContext } from "../../../context/UserContext";
 import { useParams } from "react-router-dom";
+// COMPONENTS
+import DiscoverArrow from "./DiscoverArrow";
 import BackArrow from "../../UI/BackArrow";
-import CareRequirement from "./CareRequirement";
 import PlantCare from "./PlantCare";
+// TOOLTIPS
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
-
 // ICONS
 import { IoLeafOutline } from "react-icons/io5"; //Leaf
+import { IoLeaf } from "react-icons/io5"; //Leaf
 import { MdPets } from "react-icons/md"; //Pets
 import { TbShovel } from "react-icons/tb"; //Soil
 import { MdOutlineWbSunny } from "react-icons/md"; //Sun - Bright Indirect
@@ -30,7 +34,7 @@ import { MdOutlineSnooze } from "react-icons/md"; // Snooze
 import { BiTimeFive } from "react-icons/bi"; //Clock1
 import { BiTime } from "react-icons/bi"; //Clock2
 import { ImLoop2 } from "react-icons/im"; //Watering frequency - recurring loop
-import DiscoverArrow from "./DiscoverArrow";
+
 
 
 const PlantDetails = () => {

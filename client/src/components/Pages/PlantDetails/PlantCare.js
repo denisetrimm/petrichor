@@ -7,6 +7,7 @@ import { MdOutlineWbSunny } from "react-icons/md"; //Sun - Bright Indirect
 import { IoPartlySunnyOutline } from "react-icons/io5"; //Partial shade
 import { MdOutlineFilterDrama} from "react-icons/md"; //Low
 import { WiHumidity } from "react-icons/wi"; //Humidity
+import { ImLoop2 } from "react-icons/im"; //Watering frequency - recurring loop
 import { IoLeafOutline } from "react-icons/io5"; //Leaf
 import { WiRaindrops } from "react-icons/wi"; //Multi-water
 import { GiWateringCan } from "react-icons/gi"; //Watering can
@@ -19,22 +20,22 @@ const PlantCare = ({currentPlant}) => {
         <PlantCareWrapper>
             {/* SUNSHINE */}
             <Tippy content="Sunlight requirements">
-                <CareRequirement color="hsl(220, 10% , 59%)" backgroundColor="hsla(42, 69% , 72%, 0.4)">
+                <CareRequirement color="hsl(220, 10% , 39%)" backgroundColor="hsla(42, 79% , 72%, 0.3)">
                     {currentPlant.sunlightRequirements.includes("bright-indirect") && 
                     <RequirementWrapper>
-                        <MdOutlineWbSunny color="hsl(42, 69% , 70%)" size="30"/>
+                        <MdOutlineWbSunny color="hsl(42, 79% , 70%)" size="30"/>
                         <Def>Bright-indirect</Def>
                     </RequirementWrapper>
                     }
                     {currentPlant.sunlightRequirements.includes("partial shade") && 
                     <RequirementWrapper>
-                        <IoPartlySunnyOutline color="hsl(42, 69% , 70%)" size="30"/>
+                        <IoPartlySunnyOutline color="hsl(42, 79% , 70%)" size="30"/>
                         <Def>Partial shade</Def>
                     </RequirementWrapper>
                     }
                     {currentPlant.sunlightRequirements.includes("low") && 
                     <RequirementWrapper>
-                        <MdOutlineFilterDrama color="hsl(42, 69% , 70%)" size="30"/>
+                        <MdOutlineFilterDrama color="hsl(42, 79% , 70%)" size="30"/>
                         <Def>Low</Def>
                     </RequirementWrapper>
                     }
@@ -42,9 +43,9 @@ const PlantCare = ({currentPlant}) => {
             </Tippy>
             {/* PET-FRIENDLY */}
             <Tippy content="Pet-friendly">
-                <CareRequirement color="hsl(220, 10% , 59%)" backgroundColor="hsla(346, 60% , 79%, 0.3)">
+                <CareRequirement color="hsl(220, 10% , 39%)" backgroundColor="hsla(108, 23% , 79%, 0.4)">
                         <RequirementWrapper>
-                                <MdPets color="hsl(346, 39% , 79%)" size="30"/>
+                                <MdPets color="hsl(108, 23% , 79%)" size="30"/>
                             <Def>
                                 {currentPlant.petFriendly}
                             </Def>
@@ -53,7 +54,7 @@ const PlantCare = ({currentPlant}) => {
                 </Tippy>
             {/* HUMIDITY */}
             <Tippy content="Humidity level">
-                <CareRequirement color="hsl(220, 10% , 59%)" backgroundColor="hsla(210, 46% , 58%, 0.3)">
+                <CareRequirement color="hsl(220, 10% , 39%)" backgroundColor="hsla(210, 46% , 58%, 0.2)">
                         <RequirementWrapper>
                             <WiHumidity color="hsl(230, 14% , 65%)" size="30"/>
                             <Def>
@@ -64,11 +65,22 @@ const PlantCare = ({currentPlant}) => {
             </Tippy>
             {/* SOIL */}
             <Tippy content="Soil requirements">
-                <CareRequirement color="hsl(220, 10% , 59%)" backgroundColor="hsla(27, 70% , 87%, 0.5)">
+                <CareRequirement color="hsl(220, 10% , 39%)" backgroundColor="hsla(27, 70% , 87%, 0.5)">
                         <RequirementWrapper>
-                            <TbShovel color="hsl(230, 14% , 65%)" size="30"/>
+                            <TbShovel color="hsl(27, 90% , 80%)" size="30"/>
                             <Def>
                                 {currentPlant.soilRequirements.includes("None") ? "None" : `${currentPlant.soilRequirements} potting mix`}
+                            </Def>
+                        </RequirementWrapper>      
+                </CareRequirement>
+            </Tippy>
+            {/* WATERING FREQUENCY */}
+            <Tippy content="Watering frequency">
+                <CareRequirement color="hsl(220, 10% , 39%)" backgroundColor="hsl(180, 33% , 84%)">
+                        <RequirementWrapper>
+                            <ImLoop2 color="hsl(230, 14% , 65%)" size="20"/>
+                            <Def>
+                                {currentPlant.wateringFrequency/7} - {(currentPlant.wateringFrequency+7)/7} weeks
                             </Def>
                         </RequirementWrapper>      
                 </CareRequirement>
@@ -78,6 +90,13 @@ const PlantCare = ({currentPlant}) => {
     );
 }
 
+const PlantCareWrapper = styled.div`
+    /* border: 1px solid orange;    */
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+    margin: 30px 0;
+`
 const CareRequirement = styled.div`
     /* border: 1px solid red; */
     color: ${props => props.color};
@@ -87,15 +106,9 @@ const CareRequirement = styled.div`
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-around;
-    padding: 20px 30px;
-    margin: 15px;
+    padding: 10px 20px;
+    margin: 10px;
     border-radius: 20px;
-`
-const PlantCareWrapper = styled.div`
-    /* border: 1px solid orange;    */
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
 `
 const RequirementWrapper = styled.div`
     display: flex;
