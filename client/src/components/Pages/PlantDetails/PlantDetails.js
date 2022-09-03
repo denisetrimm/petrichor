@@ -30,6 +30,7 @@ import { MdOutlineSnooze } from "react-icons/md"; // Snooze
 import { BiTimeFive } from "react-icons/bi"; //Clock1
 import { BiTime } from "react-icons/bi"; //Clock2
 import { ImLoop2 } from "react-icons/im"; //Watering frequency - recurring loop
+import DiscoverArrow from "./DiscoverArrow";
 
 
 const PlantDetails = () => {
@@ -53,6 +54,9 @@ const PlantDetails = () => {
 
     return (
         <>
+        {!isAuthenticated &&
+            <DiscoverArrow/>
+        }
         {plantUser &&
             <BackArrow/>
         }

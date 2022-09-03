@@ -27,6 +27,12 @@ const Sidebar = () => {
                 </LogoLink>
             {isAuthenticated &&
                 <>
+                <NavigationLink exact to="/">
+                    <IconSpan>
+                        <GoSearch size={40} />
+                    </IconSpan> 
+                    <NameSpan>Discover</NameSpan>
+                </NavigationLink>
                 <NavigationLink exact to="/my-home">
                     <IconSpan>
                         <BiHome size={40} />
@@ -38,12 +44,6 @@ const Sidebar = () => {
                         <MdOutlineWaterDrop size={40} />
                     </IconSpan>
                     <NameSpan>Water</NameSpan>
-                </NavigationLink>
-                <NavigationLink exact to="/">
-                    <IconSpan>
-                        <GoSearch size={40} />
-                    </IconSpan> 
-                    <NameSpan>Discover</NameSpan>
                 </NavigationLink>
                 <NavigationLink exact to="/profile">
                     <IconSpan>

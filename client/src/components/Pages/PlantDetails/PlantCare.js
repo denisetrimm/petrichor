@@ -19,7 +19,7 @@ const PlantCare = ({currentPlant}) => {
         <PlantCareWrapper>
             {/* SUNSHINE */}
             <Tippy content="Sunlight requirements">
-                <CareRequirement color="hsl(220, 10% , 59%)" backgroundColor="hsla(42, 69% , 72%, 0.2)">
+                <CareRequirement color="hsl(220, 10% , 59%)" backgroundColor="hsla(42, 69% , 72%, 0.4)">
                     {currentPlant.sunlightRequirements.includes("bright-indirect") && 
                     <RequirementWrapper>
                         <MdOutlineWbSunny color="hsl(42, 69% , 70%)" size="30"/>
@@ -42,7 +42,7 @@ const PlantCare = ({currentPlant}) => {
             </Tippy>
             {/* PET-FRIENDLY */}
             <Tippy content="Pet-friendly">
-                <CareRequirement color="hsl(220, 10% , 59%)" backgroundColor="hsl(356, 32% , 91%)">
+                <CareRequirement color="hsl(220, 10% , 59%)" backgroundColor="hsla(346, 60% , 79%, 0.3)">
                         <RequirementWrapper>
                                 <MdPets color="hsl(346, 39% , 79%)" size="30"/>
                             <Def>
@@ -53,7 +53,7 @@ const PlantCare = ({currentPlant}) => {
                 </Tippy>
             {/* HUMIDITY */}
             <Tippy content="Humidity level">
-                <CareRequirement color="hsl(220, 10% , 59%)" backgroundColor="hsla(210, 46% , 58%, 0.1)">
+                <CareRequirement color="hsl(220, 10% , 59%)" backgroundColor="hsla(210, 46% , 58%, 0.3)">
                         <RequirementWrapper>
                             <WiHumidity color="hsl(230, 14% , 65%)" size="30"/>
                             <Def>
@@ -64,7 +64,7 @@ const PlantCare = ({currentPlant}) => {
             </Tippy>
             {/* SOIL */}
             <Tippy content="Soil requirements">
-                <CareRequirement color="hsl(220, 10% , 59%)" backgroundColor="hsla(27, 65% , 87%, 0.3)">
+                <CareRequirement color="hsl(220, 10% , 59%)" backgroundColor="hsla(27, 70% , 87%, 0.5)">
                         <RequirementWrapper>
                             <TbShovel color="hsl(230, 14% , 65%)" size="30"/>
                             <Def>
