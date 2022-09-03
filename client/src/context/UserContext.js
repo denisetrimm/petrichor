@@ -85,7 +85,7 @@ export const UserProvider = ({ children }) => {
             console.log(data.data)
             if(data.success){
                 setPlantUser(data.data)
-                alert(`Added plant ${plant.commonName} to My Home.`)
+                alert(`Added ${plant.nickname || plant.commonName} to My Home.`)
             }
         })
     }

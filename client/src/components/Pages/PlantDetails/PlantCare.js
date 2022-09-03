@@ -78,7 +78,7 @@ const PlantCare = ({currentPlant}) => {
             <Tippy content="Watering frequency">
                 <CareRequirement color="hsl(220, 10% , 39%)" backgroundColor="hsl(180, 33% , 84%)">
                         <RequirementWrapper>
-                            <ImLoop2 color="hsl(230, 14% , 65%)" size="20"/>
+                            <ImLoop2 color="hsl(230, 14% , 65%)" size="22"/>
                             <Def>
                                 {currentPlant.wateringFrequency/7} - {(currentPlant.wateringFrequency+7)/7} weeks
                             </Def>

@@ -27,10 +27,10 @@ const addPlantToHome = async (req, res) => {
         plantId: basePlant._id,
         _id: id,
         dateAdded: date,
-        lastWatered: date,
+        lastWatered: basePlant.lastWatered || date,
         nextWatering: moment().add(basePlant.wateringFrequency, "days").format(),
         room: basePlant.room || "",
-        nickname: basePlant.room || ""
+        nickname: basePlant.nickname || ""
     }
 
     const client = new MongoClient(MONGO_URI, options);

@@ -22,8 +22,8 @@ const MyHome = () => {
     const navigate = useNavigate();
 
     const handlePlantClick = (plantId) => {
-        console.log("clicked!");
-        console.log(`plantId`)
+        // console.log("clicked!");
+        // console.log(`plantId`)
         handleClear();
         navigate(`/plants/${plantId}`);
     }
@@ -41,7 +41,7 @@ const MyHome = () => {
             <PlantGrid>
                 {plantUser.housePlants.map(plant => {
                     return (
-                        <Card key={plant.plantId} id={plant.plantId} handleFunction={handlePlantClick}>
+                        <Card key={plant._id} id={plant.plantId} handleFunction={handlePlantClick}>
                             <HouseplantCard plant={plant}/>
                         </Card>
                     )

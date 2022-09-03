@@ -10,6 +10,8 @@ import { useParams } from "react-router-dom";
 import DiscoverArrow from "./DiscoverArrow";
 import BackArrow from "../../UI/BackArrow";
 import PlantCare from "./PlantCare";
+import AddPlantForm from "./AddPlantForm";
+import InHome from "./InHome";
 // TOOLTIPS
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
@@ -79,18 +81,24 @@ const PlantDetails = () => {
                         </Family>
                     </Tippy>
                     <PlantCare currentPlant={currentPlant}/>
-                    
+                    {plantUser &&
+                        <AddPlantForm currentPlant={currentPlant}/>
+                    }
                 </PlantInfo>
             </FlexWrapper>
+            {plantUser &&
+                <InHome/>
+            }
             </>
         }
+        
         
         </>
     );
 }
 
 const FlexWrapper = styled.div`
-    /* border: 1px solid purple; */
+    border: 1px solid purple;
     display: flex;
     position: relative;
     width: fit-content; /*Not sure about this*/
@@ -105,6 +113,7 @@ const PlantImg = styled.img`
     border-radius: 8px;
     max-width: 520px;
     max-height: 80%;
+    max-height: 600px;
 `
 const CommonName = styled.p`
     font-weight: bold;
