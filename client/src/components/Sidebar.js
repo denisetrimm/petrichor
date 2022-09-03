@@ -33,11 +33,11 @@ const Sidebar = () => {
                     </IconSpan>
                     <NameSpan>My Home</NameSpan>
                 </NavigationLink>
-                <NavigationLink exact to="/thirsty-bb">
+                <NavigationLink exact to="/water">
                     <IconSpan>
                         <MdOutlineWaterDrop size={40} />
                     </IconSpan>
-                    <NameSpan>Thirsty</NameSpan>
+                    <NameSpan>Water</NameSpan>
                 </NavigationLink>
                 <NavigationLink exact to="/">
                     <IconSpan>

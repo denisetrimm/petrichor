@@ -1,14 +1,14 @@
 import styled from "styled-components";
-import BackArrow from "../UI/BackArrow";
+import BackArrow from "../../UI/BackArrow";
 
 
-const MyHome = () => {
+const Water = () => {
     return (
         <>
         <BackArrow/>
-        MyHome
+        Water
         </>
     );
 }
 
-export default MyHome;
+export default Water;

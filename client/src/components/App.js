@@ -10,11 +10,11 @@ import {
 } from "react-router-dom";
 
 // PAGE COMPONENTS
-import MyHome from "./Pages/MyHome";
+import MyHome from "./Pages/MyHome/MyHome";
 import Discover from "./Pages/Discover/Discover";
 import PlantDetails from "./Pages/PlantDetails/PlantDetails";
-import ThirstyBB from "./Pages/ThirstyBB";
-import Profile from "./Pages/Profile";
+import Water from "./Pages/Water/Water";
+import Profile from "./Pages/Profile/Profile";
 import Sidebar from "./Sidebar";
 import NotFound from "./Pages/NotFound";
 import Banner from "./UI/Banner"
@@ -38,7 +38,7 @@ const App = () => {
 							<Route exact path="/" element={ <Discover /> } />
 							<Route exact path="/plants/:plantId" element={ <PlantDetails /> } />
 							<Route exact path="/my-home" element={ <MyHome /> } />
-							<Route exact path="/thirsty-bb" element={ <ThirstyBB /> } />
+							<Route exact path="/water" element={ <Water /> } />
 							<Route exact path="/profile" element={ <Profile /> } />
 							<Route path="*" element={ <NotFound /> } />
 						</Routes>
