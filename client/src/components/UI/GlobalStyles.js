@@ -17,7 +17,7 @@ const GlobalStyles = createGlobalStyle`
         --color-waterHighlight: hsla(210, 46% , 58%, 0.1);
         --color-lightBlue: hsl(192, 38% , 82%);
         --color-sunshine: hsl(42, 69% , 72%);
-        --color-sunshineHighlight: hsla(42, 69% , 72%, 0.3);
+        --color-sunshineHighlight: hsla(42, 69% , 72%, 0.1);
         --color-soil: hsl(27, 100% , 87%);
         --color-soilHighlight: hsla(27, 65% , 87%, 0.3);
         --color-pink: hsl(346, 39% , 79%);

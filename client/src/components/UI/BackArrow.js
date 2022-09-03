@@ -35,6 +35,7 @@ const PageTitle = styled.h2`
 const HoverLink = styled.button`
     padding: 5px;
     padding-bottom: 1px;
+    z-index: 101;
     &:hover {
         /* border-radius: 50%; */
         background-color: var(--color-primaryDark);
