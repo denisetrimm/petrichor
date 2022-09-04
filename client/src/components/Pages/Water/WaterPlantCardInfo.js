@@ -6,13 +6,13 @@ import { GiWateringCan } from "react-icons/gi"; //Watering can
 import { BsCalendar3 } from "react-icons/bs"; // Calendar1
 import { MdOutlineSnooze } from "react-icons/md"; // Snooze
 import { BiTime } from "react-icons/bi"; //Clock2
-
 import { MdOutlineChair } from "react-icons/md"; //Room
-import { MdOutlineWaterDrop } from "react-icons/md"; //Water
 import { BsCalendarCheck } from "react-icons/bs"; // Calendar2
+import { ImLoop2 } from "react-icons/im"; //Watering frequency - recurring loop
+
+import { MdOutlineWaterDrop } from "react-icons/md"; //Water
 import { MdRemove } from "react-icons/md"; // Snooze
 import { BiTimeFive } from "react-icons/bi"; //Clock1
-import { ImLoop2 } from "react-icons/im"; //Watering frequency - recurring loop
 import { IoIosArrowDown} from "react-icons/io";
 import { IoIosArrowUp} from "react-icons/io";
 //HOOKS & CONTEXT
@@ -20,10 +20,11 @@ import { useState, useContext } from "react";
 import { UserContext } from "../../../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import moment from 'moment';
+import ExtraWateringDetails from "./ExtraWateringDetails";
 
 const WaterPlantCardInfo = ({plant}) => {
     const navigate = useNavigate();
-    const { plantUser, waterSinglePlant, snoozeSinglePlant, removePlantFromHome} = useContext(UserContext);
+    const { waterSinglePlant, snoozeSinglePlant, removePlantFromHome} = useContext(UserContext);
     const [openDetails, setOpenDetails] = useState(false)
     const [showButtons, setShowButtons] = useState(false)
 
@@ -104,28 +105,7 @@ const WaterPlantCardInfo = ({plant}) => {
                     </ExpandBtn>
 
                 {/* SHOW EXTRA DETAILS */}
-                    {openDetails && 
-                    <>
-                        {plant.room && 
-                            <div>
-                                <MdOutlineChair size="16"/>
-                                <Room>{plantUser.home[plant.room]}</Room>
-                            </div>
-                        }
-                        <LastWatered>
-                            <BsCalendarCheck/>
-                            <Span> 
-                                Last watered {moment(plant.lastWatered).format("MMM Do")}
-                            </Span>
-                        </LastWatered>
-                        <div>
-                            <ImLoop2 color="hsl(230, 14% , 65%)" size="14"/>
-                            <Span>
-                                Water every {plant.wateringFrequency/7} - {(plant.wateringFrequency+7)/7} weeks
-                            </Span>
-                        </div>
-                    </>
-                    }
+                    {openDetails && <ExtraWateringDetails plant={plant}/>}
                     
             </MiniWrapper>
         </Wrapper>
@@ -181,10 +161,6 @@ const ExpandBtn = styled.button`
         background-color:transparent;
     }
 `
-const Span = styled.span`
-    margin-left: 10px;
-    font-size: 14px;
-`
 const WaterBtn = styled.button`
     background-color: var(--color-water);
     padding: 6px 8px;
@@ -217,15 +193,6 @@ const DeleteBtn = styled.button`
     &:hover{
         background-color: var(--color-pinkHighlight);
     }
-`
-const Room = styled.span`
-    font-size: 14px;
-    font-weight: normal;
-    margin-left: 5px;
-`
-const LastWatered = styled.p`
-    font-size: 14px;
-    padding: 5px 0;
 `
 const Due = styled.p`
 `
