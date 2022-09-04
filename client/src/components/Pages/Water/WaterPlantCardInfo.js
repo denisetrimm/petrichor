@@ -17,7 +17,6 @@ import { IoIosArrowDown} from "react-icons/io";
 import { IoIosArrowUp} from "react-icons/io";
 //HOOKS & CONTEXT
 import { useState, useContext } from "react";
-import { PlantContext } from "../../../context/PlantContext";
 import { UserContext } from "../../../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import moment from 'moment';
@@ -140,7 +139,6 @@ const Wrapper = styled.div`
     padding: 20px;
     width: 20%;
     position: relative;
-    /* display: flex; */
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
@@ -149,16 +147,15 @@ const Wrapper = styled.div`
     transition: ease-in-out 200ms;
     &:hover {
         background-color: #ededed;
-        /* transform: scale(1.01); */
         cursor: pointer;
     }
-    `
+`
 const MiniWrapper = styled.div`
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: flex-start;
-    `
+`
 const PlantImg = styled.img`
     border-radius: 8px;
     max-width: 80%;
@@ -232,4 +229,5 @@ const LastWatered = styled.p`
 `
 const Due = styled.p`
 `
+
 export default WaterPlantCardInfo;
