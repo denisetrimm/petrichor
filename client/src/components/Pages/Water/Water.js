@@ -30,8 +30,8 @@ const Water = () => {
     }
     
     useEffect(()=> {
-        if(plantUser && plantUser.housePlants.length > 0){
-            const filterPlants = plantUser.housePlants.filter(plant => {
+        if(plantUser && plantUser.houseplants.length > 0){
+            const filterPlants = plantUser.houseplants.filter(plant => {
                 return moment().isSameOrAfter(plant.nextWatering, "day")
             })
             if (filterPlants.length > 0) {

@@ -49,7 +49,7 @@ const addPlantToHome = async (req, res) => {
             // IF USER EXISTS, ADD PLANT TO HOUSEPLANT AND RETURN UPDATED USER 
             await db.collection("users").findOneAndUpdate(
                 {_id: userId},
-                {$push: {housePlants: newPlant}}, 
+                {$push: {houseplants: newPlant}}, 
                 // {returnNewDocument: true}
             );
             const updatedUser = await db.collection("users").findOne({ _id: userId })
@@ -87,7 +87,7 @@ const updatePlantRoom = async (req, res) => {
             const checkPlant = await db.collection("users").findOne(
                 { 
                     _id: userId,
-                    housePlants: { $elemMatch: {  _id: houseplantId}}
+                    houseplants: { $elemMatch: {  _id: houseplantId}}
                 }
             )
             if(!checkPlant){
@@ -98,9 +98,9 @@ const updatePlantRoom = async (req, res) => {
                 // IF HOUSEPLANT EXISTS, UPDATE HOUSEPLANT ROOM AND RETURN UPDATED USER
                 await db.collection("users").findOneAndUpdate({ 
                         _id: userId,
-                        housePlants: { $elemMatch: {  _id: houseplantId}}
+                        houseplants: { $elemMatch: {  _id: houseplantId}}
                     },
-                    {$set: {"housePlants.$[elem].room" : room}}, 
+                    {$set: {"houseplants.$[elem].room" : room}}, 
                     {arrayFilters: [ {"elem._id": houseplantId}], new: true}
                 );
                 const updatedUser = await db.collection("users").findOne({ _id: userId })
@@ -138,7 +138,7 @@ const removePlantFromHome = async (req, res) => {
             const checkPlant = await db.collection("users").findOne(
                 { 
                     _id: userId,
-                    housePlants: { $elemMatch: {  _id: houseplantId}}
+                    houseplants: { $elemMatch: {  _id: houseplantId}}
                 }
             )
             if(!checkPlant){
@@ -149,9 +149,9 @@ const removePlantFromHome = async (req, res) => {
                 // IF HOUSEPLANT EXISTS, DELETE HOUSEPLANT AND RETURN UPDATED USER
                 await db.collection("users").findOneAndUpdate({ 
                         _id: userId,
-                        housePlants: { $elemMatch: {  _id: houseplantId}}
+                        houseplants: { $elemMatch: {  _id: houseplantId}}
                     },
-                    {$pull: {housePlants: { _id: houseplantId}}}
+                    {$pull: {houseplants: { _id: houseplantId}}}
                 );
                 const updatedUser = await db.collection("users").findOne({ _id: userId })
                 res.status(200).json({ status: 200, success: true, data: updatedUser, message: `Deleted plant ${houseplantId}` })
@@ -186,7 +186,7 @@ const removeAllPlantsFromHome = async (req, res) => {
             // IF USER EXISTS, RESET HOUSEPLANT ARRAY AND RETURN UPDATED USER 
             await db.collection("users").findOneAndUpdate(
                 {_id: userId},
-                {$set: {housePlants: []}}, 
+                {$set: {houseplants: []}}, 
             );
             const updatedUser = await db.collection("users").findOne({ _id: userId })
             res.status(200).json({ status: 200, success: true, data: updatedUser, message: `Deleted all plants from your home` })

@@ -52,7 +52,7 @@ const loginUser = async (req, res) => {
         given_name: given_name,
         family_name: family_name,
         email: email,
-        housePlants: [],
+        houseplants: [],
         home: [ 
             {"bathroom": "Bathroom"},
             {"basement": "Basement"},

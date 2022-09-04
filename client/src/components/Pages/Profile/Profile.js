@@ -22,7 +22,7 @@ const Profile = () => {
                 <Avatar src={user.picture} alt="Profile"/>
                 <p>{user.given_name} {user.family_name}</p>
                 <p>{user.email}</p>
-                <p>Caring for {plantUser.housePlants.length} plants</p>
+                <p>Caring for {plantUser.houseplants.length} plants</p>
                 <p>Joined: {moment(plantUser.dateJoined).format("MMM DD, YYYY")}</p>
                 <button type="button" onClick={() => {deleteUserProfile()}}>Delete Profile</button>
                 </>

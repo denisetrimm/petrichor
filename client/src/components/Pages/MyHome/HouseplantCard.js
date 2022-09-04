@@ -4,16 +4,21 @@ import { UserContext } from "../../../context/UserContext";
 import { useAuth0 } from "@auth0/auth0-react";
 
 
-const HouseplantCard = ({plant}) => {
+const HouseplantCard = ({houseplant}) => {
     const { user, isAuthenticated, isLoading, logout} = useAuth0();
     const { plantUser } = useContext(UserContext);
 
     return (
         <>
+        {plantUser&&
+            <>
+            <PlantImg src={houseplant.imgSrc}/>
+            <CommonName>{houseplant.nickname ? houseplant.nickname: houseplant.commonName}</CommonName>
+            <BotanicalName>{houseplant.nickname ? houseplant.commonName: houseplant.botanicalName}</BotanicalName>
+            </>
+        }
         {/* <Wrapper> */}
-            <PlantImg src={plant.imgSrc}/>
-            <CommonName>{plant.commonName}</CommonName>
-            <BotanicalName>{plant.botanicalName}</BotanicalName>
+            
         {/* </Wrapper> */}
         </>
     );

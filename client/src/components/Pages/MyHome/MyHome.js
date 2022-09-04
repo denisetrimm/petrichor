@@ -37,16 +37,26 @@ const MyHome = () => {
         }
         {allPlants && 
         <>  
-            <p>You have {plantUser.housePlants.length} plants in your home.</p>
+        {plantUser && plantUser.houseplants.length === 0 &&
+            <>
+                <p>You haven't added any plants to your home yet.</p>
+                <button onClick={()=> {navigate("/")}}>Add some plants!</button>
+            </>
+        }
+
+                {plantUser && plantUser.houseplants.length > 0 &&
+                <>
+            <p>You have {plantUser.houseplants.length} plants in your home.</p>
             <PlantGrid>
-                {plantUser.housePlants.map(plant => {
-                    return (
-                        <Card key={plant._id} id={plant.plantId} handleFunction={handlePlantClick}>
-                            <HouseplantCard plant={plant}/>
-                        </Card>
-                    )
-                })}
-            </PlantGrid>
+                    {plantUser.houseplants.map(plant => {
+                        return (
+                            <Card key={plant._id} id={plant.plantId} handleFunction={handlePlantClick}>
+                                <HouseplantCard houseplant={plant}/>
+                            </Card>
+                        )
+                    })}
+            </PlantGrid></>
+                }
         </>
         }
         </>

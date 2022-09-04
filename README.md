@@ -48,7 +48,7 @@
         "given_name": "",
         "family_name": "",
         "email": "",
-        "housePlants": [ 
+        "houseplants": [ 
             {
                 "_id": "",
                 "plantId": "",
