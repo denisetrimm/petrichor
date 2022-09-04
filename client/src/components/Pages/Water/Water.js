@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import moment from 'moment';
 //COMPONENTS
 import Card from "../../UI/Card";
-import WaterPlantCard from "./WaterPlantCard";
+import WaterPlantCardInfo from "./WaterPlantCardInfo";
 import BackArrow from "../../UI/BackArrow";
 
 
@@ -53,7 +53,7 @@ const Water = () => {
                 {dueForWater.map(plant => {
                         return (
                             <Card key={plant.plantId} id={plant.plantId} handleFunction={handlePlantClick}>
-                                <WaterPlantCard plant={plant}/>
+                                <WaterPlantCardInfo plant={plant}/>
                             </Card>
                         )
                     }

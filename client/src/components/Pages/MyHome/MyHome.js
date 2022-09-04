@@ -10,7 +10,7 @@ import { UserContext } from "../../../context/UserContext";
 import { useNavigate } from "react-router-dom";
 //COMPONENTS
 import Card from "../../UI/Card";
-import HouseplantCard from "./HouseplantCard";
+import HouseplantCardInfo from "./HouseplantCardInfo";
 import BackArrow from "../../UI/BackArrow";
 
 
@@ -51,7 +51,7 @@ const MyHome = () => {
                     {plantUser.houseplants.map(plant => {
                         return (
                             <Card key={plant._id} id={plant.plantId} handleFunction={handlePlantClick}>
-                                <HouseplantCard houseplant={plant}/>
+                                <HouseplantCardInfo houseplant={plant}/>
                             </Card>
                         )
                     })}

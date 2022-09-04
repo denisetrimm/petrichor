@@ -13,7 +13,7 @@ import { UserContext } from "../../../context/UserContext";
 import { useNavigate } from "react-router-dom";
 //COMPONENTS
 import Card from "../../UI/Card";
-import PlantCard from "./PlantCard";
+import PlantCardInfo from "./PlantCardInfo";
 import TypeAhead from "./TypeAhead";
 import BackArrow from "../../UI/BackArrow";
 
@@ -25,7 +25,7 @@ const Discover = () => {
     const navigate = useNavigate();
 
     const handlePlantClick = (plantId) => {
-        console.log("clicked!");
+        // console.log("clicked!");
         handleClear();
         navigate(`/plants/${plantId}`);
     }
@@ -43,10 +43,10 @@ const Discover = () => {
 
             <PlantGrid>
                 {filteredPlants.map(plant => {
-                    console.log(plant)
+                    // console.log(plant)
                     return (
                         <Card key={plant._id} id={plant._id} handleFunction={handlePlantClick}>
-                            <PlantCard plant={plant}/>
+                            <PlantCardInfo plant={plant}/>
                         </Card>
                     )
                 })}

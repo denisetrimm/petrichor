@@ -29,15 +29,14 @@ const AddPlantForm = ({currentPlant})=> {
     const handleSubmit = (e) => {
         e.preventDefault();
         // console.log(e)
-        // console.log(newPlantInfo)
+        console.log(newPlantInfo)
         addPlantToHome(newPlantInfo);
     }
-// Need fields for
-    // nickname
-    // lastWatered
-    // wateringFrequency
-    // room
-    console.log(plantUser.home)
+
+    // DT - SHOULD THIS BE A STATE + USEEFFECT?
+    const roomArray = Object.entries(plantUser.home)
+    console.log(roomArray)
+
     return (
 
         <>
@@ -99,8 +98,8 @@ const AddPlantForm = ({currentPlant})=> {
                         >
                             <Option value="">Where will she live...</Option>
                             {plantUser &&
-                                plantUser.home.map(room => {
-                                    return <Option value={Object.keys(room)[0]}>{`${Object.values(room)[0]}`}</Option>
+                                roomArray.map(room => {
+                                    return <Option value={room[0]}>{room[1]}</Option>
                                 })
                             }
                         </Select>

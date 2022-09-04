@@ -53,18 +53,18 @@ const loginUser = async (req, res) => {
         family_name: family_name,
         email: email,
         houseplants: [],
-        home: [ 
-            {"bathroom": "Bathroom"},
-            {"basement": "Basement"},
-            {"bedroom": "Bedroom"}, 
-            {"entrance": "Entrance"},
-            {"kitchen": "Kitchen"}, 
-            {"livingRoom": "Living room"}, 
-            {"office": "Office"},
-            {"studio": "Studio"},
-            {"tvRoom": "TV room"},  
-            {"other": "Other"}
-        ],
+        home: {
+            bathroom: "Bathroom",
+            basement: "Basement",
+            bedroom: "Bedroom", 
+            entrance: "Entrance",
+            kitchen: "Kitchen", 
+            livingRoom: "Living room", 
+            office: "Office",
+            studio: "Studio",
+            tvRoom: "TV room",  
+            other: "Other"
+        },
     }
 
     const client = new MongoClient(MONGO_URI, options);
