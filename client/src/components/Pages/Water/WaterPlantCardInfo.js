@@ -88,7 +88,7 @@ const WaterPlantCardInfo = ({plant}) => {
                                 nextWeek: 'dddd',
                                 lastDay: '[yesterday]',
                                 lastWeek: '[last] dddd',
-                                sameElse: '[more than a week ago]'
+                                sameElse: '[over a week ago]'
                             })
                         }
                     </Due>

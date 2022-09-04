@@ -29,13 +29,13 @@ const AddPlantForm = ({currentPlant})=> {
     const handleSubmit = (e) => {
         e.preventDefault();
         // console.log(e)
-        console.log(newPlantInfo)
+        // console.log(newPlantInfo)
         addPlantToHome(newPlantInfo);
     }
 
     // DT - SHOULD THIS BE A STATE + USEEFFECT?
     const roomArray = Object.entries(plantUser.home)
-    console.log(roomArray)
+    // console.log(roomArray)
 
     return (
 

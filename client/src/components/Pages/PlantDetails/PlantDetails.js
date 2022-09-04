@@ -44,32 +44,49 @@ const PlantDetails = () => {
     const { plantId } = useParams();
     const { user, isAuthenticated, isLoading} = useAuth0();
     const {plantUser} = useContext(UserContext);
-    const { allPlants, filteredPlants } = useContext(PlantContext);
+    const { allPlants } = useContext(PlantContext);
     const [currentPlant, setCurrentPlant] = useState(null);
+    const [currentHouseplantArray, setCurrentHouseplantArray] = useState(null);
 
 
     useEffect(()=> {
+        let selectedPlant = null;
+
         if(allPlants){
-            const selectedPlant = allPlants.find(plant => {
+            selectedPlant = allPlants.find(plant => {
                 return plant._id === plantId
             })
             setCurrentPlant(selectedPlant)
+        }
+        if(plantUser && plantUser.houseplants.length > 0){
+            const selectedPlantArray = plantUser.houseplants.filter(plant => {
+                return selectedPlant._id === plant.plantId;
+            })
+            if (selectedPlantArray.length > 0){
+                // console.log(selectedPlantArray)
+                setCurrentHouseplantArray(selectedPlantArray)
+            }
         }
 
     }, [plantId])
 
     return (
         <>
-        {!isAuthenticated &&
-            <DiscoverArrow/>
-        }
-        {plantUser &&
-            <BackArrow/>
-        }
+        {/* FOR NON-LOGGED-IN USERS: ONLY GOES BACK TO DISCOVER PAGE */}
+            {!isAuthenticated &&
+                <DiscoverArrow/>
+            }
+        {/* FOR LOGGED IN USERS: GOES BACK TO THE PREVIOUS PAGE */}
+            {plantUser &&
+                <BackArrow/>
+            }
+
         {currentPlant &&
             <>
             <FlexWrapper>
+                {/* FOR ALL USERS: GENERAL PLANT DETAILS */}
                 <PlantImg src={currentPlant.imgSrc}/>
+
                 <PlantInfo>
                     <CommonName>{currentPlant.commonName}</CommonName>
                     <BotanicalName>{currentPlant.botanicalName}</BotanicalName>
@@ -80,14 +97,21 @@ const PlantDetails = () => {
                             <FamilySpan>{currentPlant.family}</FamilySpan>
                         </Family>
                     </Tippy>
-                    {plantUser &&
-                        <AddPlantForm currentPlant={currentPlant}/>
-                    }
+
+                    {/* FOR LOGGED IN USERS: FORM TO ADD A PLANT TO HOME */}
+                        {plantUser &&
+                            <AddPlantForm currentPlant={currentPlant}/>
+                        }
+
+                    {/* FOR ALL USERS: GENERAL PLANT CARE */}
                     <PlantCare currentPlant={currentPlant}/>
                 </PlantInfo>
+
             </FlexWrapper>
-            {plantUser &&
-                <InHome/>
+
+            {/* FOR LOGGED IN USERS: SHOW THIS PLANT IN THEIR HOME */}
+            {plantUser && currentHouseplantArray.length > 0 &&
+                <InHome currentPlant={currentPlant} currentHouseplantArray={currentHouseplantArray}/>
             }
             </>
         }
@@ -96,6 +120,7 @@ const PlantDetails = () => {
         </>
     );
 }
+
 
 const FlexWrapper = styled.div`
     /* border: 1px solid purple; */
