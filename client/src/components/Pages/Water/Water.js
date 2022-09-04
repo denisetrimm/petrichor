@@ -1,34 +1,24 @@
 //STYLING
 import styled from "styled-components";
 // ICONS
-
+import { WiRaindrops } from "react-icons/wi"; //Multi-water
 //HOOKS & CONTEXT
-import { useAuth0 } from "@auth0/auth0-react";
 import { useState, useEffect, useContext } from "react";
 import { PlantContext } from "../../../context/PlantContext";
 import { UserContext } from "../../../context/UserContext";
-import { useNavigate } from "react-router-dom";
 import moment from 'moment';
 //COMPONENTS
-import Card from "../../UI/Card";
 import WaterPlantCardInfo from "./WaterPlantCardInfo";
 import BackArrow from "../../UI/BackArrow";
 
 
 const Water = () => {
-    const { user, isAuthenticated, isLoading} = useAuth0();
-    const {plantUser} = useContext(UserContext);
-    const { allPlants, filteredPlants, handleClear }= useContext(PlantContext);
-    const [dueForWater, setDueForWater] = useState([]);
-    const navigate = useNavigate();
 
-    const handlePlantClick = (plantId) => {
-        console.log("clicked!");
-        console.log(`plantId`)
-        handleClear();
-        navigate(`/plants/${plantId}`);
-    }
+    const {plantUser, waterMultiplePlants} = useContext(UserContext);
+    const { allPlants}= useContext(PlantContext);
+    const [dueForWater, setDueForWater] = useState([]);
     
+    // WHEN PLANT USER IS UPDATED, CHECK FOR OVERDUE PLANTS
     useEffect(()=> {
         if(plantUser && plantUser.houseplants.length > 0){
             const filterPlants = plantUser.houseplants.filter(plant => {
@@ -40,39 +30,61 @@ const Water = () => {
         }
     },[plantUser])
 
+    // WATER EVERYTHING BUTTON
+    const handleWaterAllClick = (e) => {
+        e.stopPropagation();
+        waterMultiplePlants(dueForWater);
+    }
+
     return (
         <>
 
-        <h2>Water</h2>
-        {plantUser &&
-            <BackArrow/>
-        }
-        {allPlants && dueForWater.length > 0 &&
-        <>  
-            <PlantGrid>
-                {dueForWater.map(plant => {
-                        return (
-                            <Card key={plant.plantId} id={plant.plantId} handleFunction={handlePlantClick}>
-                                <WaterPlantCardInfo plant={plant}/>
-                            </Card>
-                        )
-                    }
-                )}
-            </PlantGrid>
-        </>
-        }
+            <h2>Water</h2>
+            
+            {plantUser &&
+                <BackArrow/>
+            }
+
+            {allPlants && dueForWater.length > 0 &&
+            <>  
+                {/* WATER EVERYTHING BUTTON */}
+                    <WaterAllBtn 
+                        type="button" 
+                        onClick={(e)=> {handleWaterAllClick(e)}}
+                    >
+                        <WiRaindrops size="50"/>
+                        Water all plants
+                    </WaterAllBtn>
+                    
+                {/* RENDER ALL PLANTS THAT ARE OVERDUE OR DUE TODAY */}
+                    <PlantGrid>
+                        {dueForWater.map(plant => {
+                                return (
+                                        <WaterPlantCardInfo key={plant.plantId} plant={plant}/>
+                                )
+                            })
+                        }
+                    </PlantGrid>
+            </>
+            }
         </>
     );
 }
 
 const PlantGrid = styled.div`
-    /* border: 1px solid blue; */
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 15px 1%;
     margin-top: 40px;
     width: 100%;
+`
+const WaterAllBtn = styled.button`
+    padding: 0 10px;
+    background-color: var(--color-water);
+    &:hover{
+        background-color: var(--color-waterHighlight);
+    }
 `
 
 export default Water;

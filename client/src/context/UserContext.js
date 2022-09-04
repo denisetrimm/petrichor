@@ -90,7 +90,6 @@ export const UserProvider = ({ children }) => {
         })
     }
 
-    // Missing fetches for following endpoints
         // // UPDATES THE ROOM FOR A SPECIFIED HOUSEPLANT
         // .patch("/api/update-plant-room", updatePlantRoom)
 
@@ -112,6 +111,27 @@ export const UserProvider = ({ children }) => {
                 }
             })
         }
+
+        // NEED FETCHES
+        // WATERS A SPECIFIED HOUSEPLANT
+        const waterSinglePlant = (plant) => {
+            alert(`Watered ${plant.nickname ? plant.nickname : plant.commonName}`)
+        }
+        // WATERS MULTIPLE HOUSEPLANTS
+        const waterMultiplePlants = (plantArray) => {
+            console.log(plantArray)
+            alert(`Watered all plants`)
+        }
+        // SNOOZE A SPECIFIED HOUSEPLANT
+        const snoozeSinglePlant = (plant) => {
+            alert(`Snoozed ${plant.nickname ? plant.nickname : plant.commonName} for <x> days`)
+        }
+        // WATERS MULTIPLE HOUSEPLANTS
+        const snoozeMultiplePlants = (plantArray) => {
+            console.log(plantArray)
+            alert(`Snoozed all plants`)
+        }
+
         // // DELETES A SPECIFIED HOUSEPLANT
         // .delete("/api/delete-user-plant/:houseplant_Id", removePlantFromHome)
         const removePlantFromHome = (plant) => {
@@ -174,6 +194,10 @@ return (
                 setPlantUser, 
                 deleteUserProfile,
                 addPlantToHome,
+                waterSinglePlant,
+                waterMultiplePlants,
+                snoozeSinglePlant,
+                snoozeMultiplePlants,
                 updatePlantRoom,
                 removePlantFromHome,
                 removeAllPlantsFromHome
