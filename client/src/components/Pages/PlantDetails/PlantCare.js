@@ -58,7 +58,7 @@ const PlantCare = ({currentPlant}) => {
                         <RequirementWrapper>
                             <WiHumidity color="hsl(230, 14% , 65%)" size="30"/>
                             <Def>
-                                {currentPlant.humidiyLevel}
+                                {currentPlant.humidityLevel}
                             </Def>
                         </RequirementWrapper>      
                 </CareRequirement>
@@ -95,7 +95,7 @@ const PlantCareWrapper = styled.div`
     display: flex;
     flex-wrap: wrap;
     width: 90%;
-    margin: 30px 0;
+    margin: 20px -10px;
 `
 const CareRequirement = styled.div`
     /* border: 1px solid red; */

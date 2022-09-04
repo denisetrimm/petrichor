@@ -80,10 +80,10 @@ const PlantDetails = () => {
                             <FamilySpan>{currentPlant.family}</FamilySpan>
                         </Family>
                     </Tippy>
-                    <PlantCare currentPlant={currentPlant}/>
                     {plantUser &&
                         <AddPlantForm currentPlant={currentPlant}/>
                     }
+                    <PlantCare currentPlant={currentPlant}/>
                 </PlantInfo>
             </FlexWrapper>
             {plantUser &&
@@ -98,7 +98,7 @@ const PlantDetails = () => {
 }
 
 const FlexWrapper = styled.div`
-    border: 1px solid purple;
+    /* border: 1px solid purple; */
     display: flex;
     position: relative;
     width: fit-content; /*Not sure about this*/
