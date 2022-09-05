@@ -16,7 +16,7 @@ import BackArrow from "../../UI/BackArrow";
 const Water = () => {
 
     const {plantUser, waterMultiplePlants} = useContext(UserContext);
-    const { allPlants}= useContext(PlantContext);
+    const {allPlants}= useContext(PlantContext);
     const [dueForWater, setDueForWater] = useState([]);
     
     // WHEN PLANT USER IS UPDATED, CHECK FOR OVERDUE PLANTS
@@ -42,18 +42,20 @@ const Water = () => {
 
     return (
         <>
-
             <h2>Water</h2>
             
             {plantUser &&
                 <BackArrow/>
             }
+
+            {/* PLACEHOLDER IN CASE THERE ARE NO PLANTS */}
             {allPlants && dueForWater.length === 0 &&
             <CaughtUp>
                 <RiPlantLine color="hsl(179, 30% , 29%)" size="80"/>
                 <CaughtUpText>All caught up!</CaughtUpText>
             </CaughtUp>
             }
+
             {allPlants && dueForWater.length > 0 &&
             <>  
                 {/* WATER EVERYTHING BUTTON */}

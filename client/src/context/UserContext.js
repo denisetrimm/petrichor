@@ -1,5 +1,6 @@
 import { useState, useEffect, createContext } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import { BsCodeSlash } from "react-icons/bs";
 
 export const UserContext = createContext(null);
 
@@ -71,6 +72,7 @@ export const UserProvider = ({ children }) => {
     // ________________________________________________
 
     // ADD SINGLE HOUSEPLANT - USED IN DISCOVER PAGE
+    // .post("/api/add-user-plant", addPlantToHome)
     const addPlantToHome = (plant) => {
         fetch('/api/add-user-plant', {
             method: "POST",
@@ -90,9 +92,8 @@ export const UserProvider = ({ children }) => {
         })
     }
 
-        // // UPDATES THE ROOM FOR A SPECIFIED HOUSEPLANT
+        // UPDATES THE ROOM FOR A SPECIFIED HOUSEPLANT
         // .patch("/api/update-plant-room", updatePlantRoom)
-
         const updatePlantRoom = (plant, room) => {
             fetch('/api/update-plant-room', {
                 method: "PATCH",
@@ -114,6 +115,7 @@ export const UserProvider = ({ children }) => {
 
 
         // UPDATES THE DETAILS FOR A SPECIFIED HOUSEPLANT
+        // .patch("/api/update-single-houseplant", updateSingleHouseplant)
         const updateSingleHouseplant = (plant) => {
             fetch('/api/update-single-houseplant', {
                 method: "PATCH",
@@ -134,6 +136,7 @@ export const UserProvider = ({ children }) => {
         }
 
         // WATERS A SPECIFIED HOUSEPLANT
+        // .patch("/api/water-plant", waterPlant)
         const waterSinglePlant = (plant) => {
             fetch('/api/water-plant', {
                 method: "PATCH",
@@ -153,14 +156,37 @@ export const UserProvider = ({ children }) => {
             })
         }
 
-        // NEED FETCHES
+
         // WATERS MULTIPLE HOUSEPLANTS
+        // .patch("/api/water-multiple-plants", waterMultiplePlants)
         const waterMultiplePlants = (plantArray) => {
+
             console.log(plantArray)
-            alert(`Watered all plants`)
+            
+            Promise.all(plantArray.forEach(plant => {
+                fetch('/api/water-plant', {
+                    method: "PATCH",
+                    body: JSON.stringify({_id: plantUser._id, plant: plant}),
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type" : "application/json"
+                    }
+                })
+                .then((res)=>res.json())
+                .then((data)=>{
+                    if(data.success){
+                        console.log(`Watered ${plant.commonName}`)
+                        setPlantUser(data.data)
+                    }
+                })
+            }))
+            .then(alert(`Watered all plants`))
+            
         }
+
+        // NEED FETCHES
         // UPDATE MULTIPLE HOUSEPLANTS
-        const updateHouseplant = (plant) => {
+        const updateMultipleHouseplants = (plant) => {
             console.log(plant)
             alert(`Updated ${plant.nickname ? plant.nickname : plant.commonName}`)
         }

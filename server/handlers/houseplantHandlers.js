@@ -53,7 +53,7 @@ const addPlantToHome = async (req, res) => {
                 // {returnNewDocument: true}
             );
             const updatedUser = await db.collection("users").findOne({ _id: userId })
-            res.status(201).json({ status: 201, success: true, data: updatedUser, message: `Added ${newPlant.commonName} (${updatedUser._id}) to your home` })
+            res.status(201).json({ status: 201, success: true, data: updatedUser, message: `Added ${newPlant.nickname ? newPlant.nickname : newPlant.commonName} (${updatedUser._id}) to your home` })
         }
     }
     catch (err) {
@@ -153,7 +153,7 @@ const updateSingleHouseplant = async (req, res) => {
                 return res.status(404).json({ status: 404, success: false, data: houseplantId, message: `This plant is not in your home.` })
             }
             else {
-                // IF HOUSEPLANT EXISTS, UPDATE HOUSEPLANT ROOM AND RETURN UPDATED USER
+                // IF HOUSEPLANT EXISTS, UPDATE HOUSEPLANT AND RETURN UPDATED USER
                 await db.collection("users").findOneAndUpdate({ 
                         _id: userId,
                         houseplants: { $elemMatch: {  _id: houseplantId}}
