@@ -160,8 +160,6 @@ export const UserProvider = ({ children }) => {
         // WATERS MULTIPLE HOUSEPLANTS
         // .patch("/api/water-multiple-plants", waterMultiplePlants)
         const waterMultiplePlants = (plantArray) => {
-
-            console.log(plantArray)
             
             Promise.all(plantArray.forEach(plant => {
                 fetch('/api/water-plant', {
@@ -192,7 +190,24 @@ export const UserProvider = ({ children }) => {
         }
         // SNOOZE A SPECIFIED HOUSEPLANT
         const snoozeSinglePlant = (plant) => {
-            alert(`Snoozed ${plant.nickname ? plant.nickname : plant.commonName} for <x> days`)
+
+            fetch('/api/snooze-plant', {
+                method: "PATCH",
+                body: JSON.stringify({_id: plantUser._id, plant: plant, snooze: plantUser.snooze}),
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type" : "application/json"
+                }
+            })
+            .then((res)=>res.json())
+            .then((data)=>{
+                console.log(data.data)
+                if(data.success){
+                    setPlantUser(data.data)
+                    alert(`Snoozed ${plant.nickname ? plant.nickname : plant.commonName} for ${plantUser.snooze} days`)
+                }
+            })
+            
         }
         // SNOOZE MULTIPLE HOUSEPLANTS
         const snoozeMultiplePlants = (plantArray) => {

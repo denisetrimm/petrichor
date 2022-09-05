@@ -119,6 +119,61 @@ const waterPlant = async (req, res) => {
     client.close();
     console.log("disconnected!");
 };
+// SNOOZE A SPECIFIED HOUSEPLANT
+// .patch("/api/snooze-plant", snoozePlant)
+const snoozePlant = async (req, res) => {
+
+    const userId = req.body._id;
+    const snoozeDuration = req.body.snooze;
+    const houseplantId = req.body.plant._id;
+    const plant = req.body.plant
+    const updatedNextWatering = moment().isSameOrAfter(plant.nextWatering, "day") 
+                                    ? moment().add(snoozeDuration, "days").format() 
+                                    : moment(plant.nextWatering).add(snoozeDuration, "days").format();
+    const client = new MongoClient(MONGO_URI, options);
+
+    try {
+        await client.connect();
+        const db = client.db();
+
+        // CHECK IF USER EXISTS
+        const checkUser = await db.collection("users").findOne({ _id: userId })
+        if (!checkUser) {
+            // IF USER DOES NOT EXIST, RETURN 404
+            return res.status(404).json({ status: 404, success: false, data: userId, message: `User does not exist` })
+        }
+        else {
+            // CHECK IF HOUSEPLANT EXISTS
+            const checkPlant = await db.collection("users").findOne(
+                { 
+                    _id: userId,
+                    houseplants: { $elemMatch: {  _id: houseplantId}}
+                }
+            )
+            if(!checkPlant){
+                // IF PLANT DOES NOT EXIST, RETURN 404
+                return res.status(404).json({ status: 404, success: false, data: houseplantId, message: `This plant is not in your home.` })
+            }
+            else {
+                // IF HOUSEPLANT EXISTS, UPDATE NEXT WATERING THEN RETURN UPDATED USER
+                await db.collection("users").findOneAndUpdate({ 
+                        _id: userId,
+                        houseplants: { $elemMatch: {  _id: houseplantId}}
+                    },
+                    {$set: {"houseplants.$[elem].nextWatering" : updatedNextWatering}}, 
+                    {arrayFilters: [ {"elem._id": houseplantId}], new: true}
+                );
+                const updatedUser = await db.collection("users").findOne({ _id: userId })
+                res.status(200).json({ status: 200, success: true, data: updatedUser, message: `Snoozed ${plant.nickname ? plant.nickname : plant.commonName} for ${snoozeDuration} days` })
+            }
+        }
+    }
+    catch (err) {
+        res.status(500).json({ status: 500, message: err.message })
+    }
+    client.close();
+    console.log("disconnected!");
+};
 
 // UPDATES THE DETAILS FOR A SPECIFIED HOUSEPLANT
 // .patch("/api/update-single-houseplant", updateSingleHouseplant)
@@ -320,6 +375,7 @@ module.exports = {
     updatePlantRoom,
     updateSingleHouseplant,
     waterPlant,
+    snoozePlant,
     removePlantFromHome,
     removeAllPlantsFromHome
 }

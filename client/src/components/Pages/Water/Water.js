@@ -52,7 +52,7 @@ const Water = () => {
             {allPlants && dueForWater.length === 0 &&
             <CaughtUp>
                 <RiPlantLine color="hsl(179, 30% , 29%)" size="80"/>
-                <CaughtUpText>All caught up!</CaughtUpText>
+                <CaughtUpText>No plants need watering</CaughtUpText>
             </CaughtUp>
             }
 
