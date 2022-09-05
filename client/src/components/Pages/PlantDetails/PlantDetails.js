@@ -51,6 +51,8 @@ const PlantDetails = () => {
 
     useEffect(()=> {
         let selectedPlant = null;
+        setCurrentPlant(null)
+        setCurrentHouseplantArray(null)
 
         if(allPlants){
             selectedPlant = allPlants.find(plant => {
@@ -66,9 +68,12 @@ const PlantDetails = () => {
                 // console.log(selectedPlantArray)
                 setCurrentHouseplantArray(selectedPlantArray)
             }
+            else {
+                setCurrentHouseplantArray(null)
+            }
         }
 
-    }, [plantId])
+    }, [plantId, plantUser])
 
     return (
         <>
@@ -110,9 +115,9 @@ const PlantDetails = () => {
             </FlexWrapper>
 
             {/* FOR LOGGED IN USERS: SHOW THIS PLANT IN THEIR HOME */}
-            {plantUser && currentHouseplantArray.length > 0 &&
+            {plantUser && currentPlant && currentHouseplantArray && currentHouseplantArray.length > 0 &&
                 <InHome currentPlant={currentPlant} currentHouseplantArray={currentHouseplantArray}/>
-            }
+            } 
             </>
         }
         

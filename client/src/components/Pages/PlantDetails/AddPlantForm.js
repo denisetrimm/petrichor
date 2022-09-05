@@ -28,9 +28,8 @@ const AddPlantForm = ({currentPlant})=> {
     }
     const handleSubmit = (e) => {
         e.preventDefault();
-        // console.log(e)
-        // console.log(newPlantInfo)
         addPlantToHome(newPlantInfo);
+        setFormOpen(false)
     }
 
     // DT - SHOULD THIS BE A STATE + USEEFFECT?

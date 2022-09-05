@@ -12,11 +12,10 @@ const InHome = ({currentPlant, currentHouseplantArray})=> {
     const navigate = useNavigate();
     const [showButtons, setShowButtons] = useState(false)
 
-    console.log(currentPlant.commonName.charAt(-1))
     return (
 
         <>
-
+            {plantUser && currentPlant && currentHouseplantArray &&
             <Wrapper>
                 <SubTitle>{currentPlant.commonName}{currentPlant.commonName.charAt(currentPlant.commonName.length -1) === "s" ? "'" : "s" } in your home</SubTitle>
                 <PlantGrid>
@@ -26,7 +25,7 @@ const InHome = ({currentPlant, currentHouseplantArray})=> {
                 }
                 </PlantGrid>
             </Wrapper>
-
+            }
         </>
     );
 };
