@@ -38,7 +38,7 @@ const HouseplantCardInfo = ({houseplant}) => {
     // WATER SINGLE PLANT
     const handleWaterPlantClick = (e) => {
         e.stopPropagation();
-        waterSinglePlant(houseplant);
+        waterSinglePlant(houseplant)
     }
     // SNOOZE
     const handleSnoozeClick = (e) => {
@@ -56,7 +56,10 @@ const HouseplantCardInfo = ({houseplant}) => {
         if(plantUser && plantUser.houseplants.length > 0 && moment().isAfter(houseplant.nextWatering, "day")){
             setOverdue(true)
         }
-    },[plantUser])
+        else{
+            setOverdue(false)
+        }
+    },[plantUser, houseplant.nextWatering])
 
     return (
         <>
