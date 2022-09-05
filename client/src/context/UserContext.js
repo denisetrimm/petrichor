@@ -112,11 +112,48 @@ export const UserProvider = ({ children }) => {
             })
         }
 
-        // NEED FETCHES
+
+        // UPDATES THE DETAILS FOR A SPECIFIED HOUSEPLANT
+        const updateSingleHouseplant = (plant) => {
+            fetch('/api/update-single-houseplant', {
+                method: "PATCH",
+                body: JSON.stringify({_id: plantUser._id, plant: plant}),
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type" : "application/json"
+                }
+            })
+            .then((res)=>res.json())
+            .then((data)=>{
+                console.log(data.data)
+                if(data.success){
+                    setPlantUser(data.data)
+                    alert(`Updated ${plant.nickname ? plant.nickname : plant.commonName}`)
+                }
+            })
+        }
+
         // WATERS A SPECIFIED HOUSEPLANT
         const waterSinglePlant = (plant) => {
-            alert(`Watered ${plant.nickname ? plant.nickname : plant.commonName}`)
+            fetch('/api/water-plant', {
+                method: "PATCH",
+                body: JSON.stringify({_id: plantUser._id, plant: plant}),
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type" : "application/json"
+                }
+            })
+            .then((res)=>res.json())
+            .then((data)=>{
+                console.log(data.data)
+                if(data.success){
+                    setPlantUser(data.data)
+                    alert(`Watered ${plant.nickname ? plant.nickname : plant.commonName}`)
+                }
+            })
         }
+
+        // NEED FETCHES
         // WATERS MULTIPLE HOUSEPLANTS
         const waterMultiplePlants = (plantArray) => {
             console.log(plantArray)
@@ -131,7 +168,7 @@ export const UserProvider = ({ children }) => {
         const snoozeSinglePlant = (plant) => {
             alert(`Snoozed ${plant.nickname ? plant.nickname : plant.commonName} for <x> days`)
         }
-        // WATERS MULTIPLE HOUSEPLANTS
+        // SNOOZE MULTIPLE HOUSEPLANTS
         const snoozeMultiplePlants = (plantArray) => {
             console.log(plantArray)
             alert(`Snoozed all plants`)
@@ -204,6 +241,7 @@ return (
                 snoozeSinglePlant,
                 snoozeMultiplePlants,
                 updatePlantRoom,
+                updateSingleHouseplant,
                 removePlantFromHome,
                 removeAllPlantsFromHome
             }}

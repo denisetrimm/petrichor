@@ -14,23 +14,24 @@ import { UserContext } from "../../../context/UserContext";
 
 const UpdateDetailsForm = ({currentPlant})=> {
     const { user, isAuthenticated, isLoading} = useAuth0();
-    const {plantUser, addPlantToHome, updateHouseplant, removePlantFromHome} = useContext(UserContext);
+    const {plantUser, addPlantToHome, updateSingleHouseplant, removePlantFromHome} = useContext(UserContext);
     const { allPlants, filteredPlants } = useContext(PlantContext);
 
-    const [newPlantInfo, setNewPlantInfo] = useState(currentPlant)
+    const [updatedPlantInfo, setUpdatedPlantInfo] = useState(currentPlant)
     const [formOpen, setFormOpen] = useState(false)
 
     const handleChange = (e, key, value) => {
         e.stopPropagation();
-        setNewPlantInfo({
-            ...newPlantInfo,
+        setUpdatedPlantInfo({
+            ...updatedPlantInfo,
             [key]: value
         })
     }
     const handleSubmit = (e) => {
         e.stopPropagation();
         e.preventDefault();
-        updateHouseplant(newPlantInfo);
+        updateSingleHouseplant(updatedPlantInfo);
+        console.log(updatedPlantInfo)
         setFormOpen(false)
     }
     // DELETE
@@ -58,7 +59,7 @@ const UpdateDetailsForm = ({currentPlant})=> {
                             placeholder="Add a nickname"
                             id="nickname"
                             name="nickname"
-                            value={newPlantInfo.nickname}
+                            value={updatedPlantInfo.nickname}
                             onChange={(e) => {handleChange(e,"nickname", e.target.value)}}
                         />
                     </InputDiv>
@@ -68,7 +69,7 @@ const UpdateDetailsForm = ({currentPlant})=> {
                             type="date"
                             id="lastWatered"
                             name="lastWatered"
-                            value={newPlantInfo.lastWatered}
+                            value={updatedPlantInfo.lastWatered}
                             onChange={(e) => handleChange(e, "lastWatered", e.target.value)}
                         />
                     </InputDiv>
@@ -81,7 +82,7 @@ const UpdateDetailsForm = ({currentPlant})=> {
                             type="number"
                             id="wateringFrequency"
                             name="wateringFrequency"
-                            value={newPlantInfo.wateringFrequency}
+                            value={updatedPlantInfo.wateringFrequency}
                             onChange={(e) => handleChange(e, "wateringFrequency", e.target.value)}
                         />days</FrequencySpan>
                     </InputDiv>
@@ -92,7 +93,7 @@ const UpdateDetailsForm = ({currentPlant})=> {
                             name="room"
                             onChange={(e) => handleChange(e, "room", e.target.value)}
                         >
-                            <Option value={newPlantInfo.room}>{plantUser.home[newPlantInfo.room]}</Option>
+                            <Option value={updatedPlantInfo.room}>{plantUser.home[updatedPlantInfo.room]}</Option>
                             {plantUser &&
                                 roomArray.map(room => {
                                     return <Option value={room[0]}>{room[1]}</Option>

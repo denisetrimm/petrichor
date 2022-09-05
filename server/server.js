@@ -22,6 +22,8 @@ const {
 const {
     addPlantToHome,
     updatePlantRoom,
+    updateSingleHouseplant,
+    waterPlant,
     removePlantFromHome,
     removeAllPlantsFromHome
 } = require("./handlers/houseplantHandlers");
@@ -65,6 +67,12 @@ express()
 
     // UPDATES THE ROOM FOR A SPECIFIED HOUSEPLANT
     .patch("/api/update-plant-room", updatePlantRoom)
+
+    // UPDATES THE DETAILS FOR A SPECIFIED HOUSEPLANT
+    .patch("/api/update-single-houseplant", updateSingleHouseplant)
+
+    // WATER A SPECIFIED HOUSEPLANT
+    .patch("/api/water-plant", waterPlant)
 
     // DELETES A SPECIFIED HOUSEPLANT
     .delete("/api/delete-user-plant/:houseplant_Id", removePlantFromHome)

@@ -27,6 +27,9 @@ const Water = () => {
             if (filterPlants.length > 0) {
                 setDueForWater(filterPlants)
             }
+            else{
+                setDueForWater([])
+            }
         }
     },[plantUser])
 
