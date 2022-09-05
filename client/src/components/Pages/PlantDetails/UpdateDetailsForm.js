@@ -12,13 +12,12 @@ import { useState, useEffect, useContext } from "react";
 import { PlantContext } from "../../../context/PlantContext";
 import { UserContext } from "../../../context/UserContext";
 
-const UpdateDetailsForm = ({currentPlant})=> {
+const UpdateDetailsForm = ({currentPlant, formOpen, setFormOpen})=> {
     const { user, isAuthenticated, isLoading} = useAuth0();
     const {plantUser, addPlantToHome, updateSingleHouseplant, removePlantFromHome} = useContext(UserContext);
     const { allPlants, filteredPlants } = useContext(PlantContext);
 
     const [updatedPlantInfo, setUpdatedPlantInfo] = useState(currentPlant)
-    const [formOpen, setFormOpen] = useState(false)
 
     const handleChange = (e, key, value) => {
         e.stopPropagation();
@@ -31,12 +30,12 @@ const UpdateDetailsForm = ({currentPlant})=> {
         e.stopPropagation();
         e.preventDefault();
         updateSingleHouseplant(updatedPlantInfo);
-        console.log(updatedPlantInfo)
         setFormOpen(false)
     }
     // DELETE
     const handleDeleteClick = (e) => {
         e.stopPropagation();
+        setFormOpen(false)
         removePlantFromHome(currentPlant)
     }
     // DT - SHOULD THIS BE A STATE + USEEFFECT?

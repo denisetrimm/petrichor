@@ -61,8 +61,8 @@ const HouseplantCardInfo = ({houseplant}) => {
     return (
         <>
             <Wrapper 
-                onMouseEnter={() => {setShowButtons(true)}} 
-                onMouseLeave={() => {setShowButtons(false)}} 
+                // onMouseEnter={() => {setShowButtons(true)}} 
+                // onMouseLeave={() => {setShowButtons(false)}} 
                 // onClick={() => {handlePlantClick(houseplant.plantId)}}
             >
                 <MiniWrapper>
@@ -102,7 +102,7 @@ const HouseplantCardInfo = ({houseplant}) => {
                             </ExpandBtn>
                         {/* SHOW UPDATE FORM */}
                             {formOpen &&
-                            <UpdateDetailsForm currentPlant={houseplant}/>
+                            <UpdateDetailsForm currentPlant={houseplant} formOpen={formOpen} setFormOpen={setFormOpen}/>
                             }
                         {/* SHOW PLANT DETAILS */}
                             {!formOpen &&
