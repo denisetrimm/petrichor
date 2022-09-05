@@ -62,7 +62,7 @@ const Water = () => {
                         onClick={(e)=> {handleWaterAllClick(e)}}
                     >
                         <WiRaindrops size="50"/>
-                        Water all plants
+                        <WaterAllText>Water all plants</WaterAllText>
                     </WaterAllBtn>
                     
                 {/* RENDER ALL PLANTS THAT ARE OVERDUE OR DUE TODAY */}
@@ -101,8 +101,16 @@ const CaughtUpText = styled.p`
     color: hsl(180, 73%, 4%);
     margin-top: 20px;
 `
+const WaterAllText = styled.span`
+    font-size: 20px;
+    font-weight: bold;
+    padding-bottom: 10px;
+    margin-top: 10px;
+`
 const WaterAllBtn = styled.button`
-    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    padding: 0 25px 0 10px;
     background-color: var(--color-water);
     &:hover{
         background-color: var(--color-waterHighlight);
