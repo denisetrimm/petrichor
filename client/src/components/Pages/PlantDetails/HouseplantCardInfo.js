@@ -88,16 +88,19 @@ const HouseplantCardInfo = ({houseplant}) => {
                                 //     </Span>
                                 // </>
                                 <>
-                                    <FiEdit/>
+                                    <FiEdit color="hsl(182, 22%, 47%)"/>
                                 </>
                                 }
                                 {formOpen &&
                                 <>
-                                    Close
-                                    <Span>
-                                        <IoIosArrowUp />
-                                    </Span>
+                                x
                                 </>
+                                // <>
+                                //     Close
+                                //     <Span>
+                                //         <IoIosArrowUp />
+                                //     </Span>
+                                // </>
                                 }
                             </ExpandBtn>
                         {/* SHOW UPDATE FORM */}
@@ -145,11 +148,11 @@ const HouseplantCardInfo = ({houseplant}) => {
                                     }
                                 </Due>
                                 {/* BUTTONS */}
-                                <>
+                                <ButtonDiv>
                                     <WaterBtn type="button" onClick={(e)=> {handleWaterPlantClick(e)}}><MdOutlineWaterDrop size="15"/>Water me!</WaterBtn>
                                     <SnoozeBtn type="button" onClick={(e)=> {handleSnoozeClick(e)}}><BiTimeFive size="15"/>Snooze </SnoozeBtn>
                                     {/* <DeleteBtn type="button" onClick={(e)=> {handleDeleteClick(e)}}><MdRemove size="15"/>Delete</DeleteBtn> */}
-                                </>
+                                </ButtonDiv>
                             </>
                         }
                     </PlantInfo>
@@ -162,19 +165,26 @@ const HouseplantCardInfo = ({houseplant}) => {
 
 const ExpandBtn = styled.button`
     /* border: 1px solid lavender; */
-    align-self: center;
-    background-color: ${props => props.formOpen? "hsla(182, 22% , 47%, 0.5)":"hsl(182, 22%, 47%)"};
+    /* align-self: center; */
+    position: absolute;
+    top: 25px;
+    left: -35px;
+    margin:0;
+    padding: ${props => props.formOpen? "3px 8px":"5px 8px"};
+    background-color: transparent;
+    color:grey;
+    /* background-color: ${props => props.formOpen? "hsla(182, 22% , 47%, 0.5)":"transparent"}; */
     width: fit-content;
     &:hover{
-        transform: none;
-        background-color: ${props => props.formOpen && "lightgrey"};
+        transform: scale(1.1);
+        background-color: lightgrey;
+        /* background-color: ${props => props.formOpen && "lightgrey"}; */
     }
 `
 const Span = styled.span`
     margin-left: 10px;
 `
 const Wrapper = styled.div`
-border: 1px solid red;
     background-color: whitesmoke;
     border: 2px solid var(--color-creamAccent);
     border-radius: 10px;
@@ -183,8 +193,6 @@ border: 1px solid red;
     max-width: 660px;
     max-height: 700px;
     position: relative;
-    display: flex;
-    justify-content: flex-start;
     box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
     transition-property: background-color, scale;
     transition: ease-in-out 200ms;
@@ -194,11 +202,11 @@ border: 1px solid red;
     }
 `
 const MiniWrapper = styled.div`
-border: 1px solid lightgray;
+    border: 1px solid lightgray;
     border-radius: 5px;
     position: relative;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
     width: 100%;
 `
@@ -210,7 +218,12 @@ const PlantImg = styled.img`
 const PlantInfo = styled.div`
     /* border: 1px solid green; */
     margin-left: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     position: relative;
+    width: 50%;
+    min-height: 390px;
 `
 const CommonName = styled.p`
     font-weight: bold;
@@ -221,6 +234,9 @@ const Due = styled.p`
     font-weight: bold;
     padding: 20px 0 0px;
     color: ${props => props.overdue ? "red" : "hsl(179, 30% , 29%)"};
+`
+const ButtonDiv = styled.div`
+    display: flex;
 `
 const WaterBtn = styled.button`
     background-color: var(--color-water);
@@ -234,6 +250,7 @@ const SnoozeBtn = styled.button`
     background-color: orange;
     padding: 6px 8px;
     z-index: 80;
+    margin-left: 5px;
     &:hover{
         background-color: var(--color-soilHighlight);
     }
@@ -241,6 +258,7 @@ const SnoozeBtn = styled.button`
 const DeleteBtn = styled.button`
     background-color: var(--color-pink);
     padding: 6px 8px;
+    margin: 0;
     z-index: 80;
     &:hover{
         background-color: var(--color-pinkHighlight);

@@ -1,24 +1,17 @@
 // STYLING
 import styled from "styled-components";
-// ICONS
-import { MdAdd } from "react-icons/md";
-import { BiDownArrow } from "react-icons/bi";
-import { IoIosArrowDown} from "react-icons/io";
-import { IoIosArrowUp} from "react-icons/io";
-import { MdRemove } from "react-icons/md"; // Snooze
 // HOOKS & CONTEXT
-import { useAuth0 } from "@auth0/auth0-react";
 import { useState, useEffect, useContext } from "react";
-import { PlantContext } from "../../../context/PlantContext";
 import { UserContext } from "../../../context/UserContext";
 
-const UpdateDetailsForm = ({currentPlant, formOpen, setFormOpen})=> {
-    const { user, isAuthenticated, isLoading} = useAuth0();
-    const {plantUser, addPlantToHome, updateSingleHouseplant, removePlantFromHome} = useContext(UserContext);
-    const { allPlants, filteredPlants } = useContext(PlantContext);
+const UpdateDetailsForm = ({currentPlant, setFormOpen})=> {
 
+    const {plantUser, updateSingleHouseplant, removePlantFromHome} = useContext(UserContext);
     const [updatedPlantInfo, setUpdatedPlantInfo] = useState(currentPlant)
+    // DT - SHOULD THIS BE A STATE + USEEFFECT?
+    const roomArray = Object.entries(plantUser.home)    
 
+    // UPDATE NEW PLANT OBJECT WITH INPUT VALUES
     const handleChange = (e, key, value) => {
         e.stopPropagation();
         setUpdatedPlantInfo({
@@ -26,6 +19,7 @@ const UpdateDetailsForm = ({currentPlant, formOpen, setFormOpen})=> {
             [key]: value
         })
     }
+    // UPDATE PLANT IN DATABASE
     const handleSubmit = (e) => {
         e.stopPropagation();
         e.preventDefault();
@@ -38,19 +32,15 @@ const UpdateDetailsForm = ({currentPlant, formOpen, setFormOpen})=> {
         setFormOpen(false)
         removePlantFromHome(currentPlant)
     }
-    // DT - SHOULD THIS BE A STATE + USEEFFECT?
-    const roomArray = Object.entries(plantUser.home)
-    // console.log(roomArray)
+
 
     return (
 
         <>
             <Wrapper>
-                {/* BUTTON OPENS/CLOSES FORM */}
-                
-                {/* ADD OPTIONAL DETAILS FOR PLANT */}
-                <PlantForm onSubmit={(e)=> {handleSubmit(e)}}>
-                    <>
+                {/* UPDATE OPTIONAL DETAILS FOR PLANT */}
+                <PlantForm onSubmit={(e)=> {handleSubmit(e)}} >
+
                     <InputDiv>
                         <Label htmlFor="nickname">Nickname:</Label>
                         <Input
@@ -62,29 +52,7 @@ const UpdateDetailsForm = ({currentPlant, formOpen, setFormOpen})=> {
                             onChange={(e) => {handleChange(e,"nickname", e.target.value)}}
                         />
                     </InputDiv>
-                    <InputDiv>
-                        <Label htmlFor="lastWatered">Last Watered:</Label>
-                        <Input
-                            type="date"
-                            id="lastWatered"
-                            name="lastWatered"
-                            value={updatedPlantInfo.lastWatered}
-                            onChange={(e) => handleChange(e, "lastWatered", e.target.value)}
-                        />
-                    </InputDiv>
-                    <InputDiv>
-                        <Label htmlFor="wateringFrequency">Water:</Label>
-                        <FrequencySpan>
-                        Every
-                        
-                        <InputFrequency
-                            type="number"
-                            id="wateringFrequency"
-                            name="wateringFrequency"
-                            value={updatedPlantInfo.wateringFrequency}
-                            onChange={(e) => handleChange(e, "wateringFrequency", e.target.value)}
-                        />days</FrequencySpan>
-                    </InputDiv>
+
                     <InputDiv>
                         <Label htmlFor="room">Room:</Label>
                         <Select 
@@ -100,78 +68,81 @@ const UpdateDetailsForm = ({currentPlant, formOpen, setFormOpen})=> {
                             }
                         </Select>
                     </InputDiv>
-                    <AddBtn type="submit">
-                        {/* <MdAdd /> Save  */}
-                        Save
-                    </AddBtn>
-                    <DeleteBtn type="button" onClick={(e)=> {handleDeleteClick(e)}}>Delete plant</DeleteBtn>
-                    </>
+
+                    <InputDiv>
+                        <Label htmlFor="lastWatered">Last Watered:</Label>
+                        <Input
+                            type="date"
+                            id="lastWatered"
+                            name="lastWatered"
+                            value={updatedPlantInfo.lastWatered}
+                            onChange={(e) => handleChange(e, "lastWatered", e.target.value)}
+                        />
+                    </InputDiv>
+
+                    <InputDiv>
+                        <Label htmlFor="wateringFrequency">Water:</Label>
+                        <FrequencySpan>
+                            Every
+                            <InputFrequency
+                                type="number"
+                                id="wateringFrequency"
+                                name="wateringFrequency"
+                                value={updatedPlantInfo.wateringFrequency}
+                                onChange={(e) => handleChange(e, "wateringFrequency", e.target.value)}
+                            />
+                            days
+                        </FrequencySpan>
+                    </InputDiv>
+                    
+                    <ButtonDiv>
+                        <DeleteBtn type="button" onClick={(e)=> {handleDeleteClick(e)}}>Delete plant</DeleteBtn>
+                        <SaveBtn type="submit">Save</SaveBtn>
+                    </ButtonDiv>
                 </PlantForm>
             </Wrapper>
             
         </>
     );
 };
-const DeleteBtn = styled.button`
-    background-color: orangered;
-    padding: 8px;
-    z-index: 80;
-    align-self: center;
-    &:hover{
-        background-color: var(--color-pinkHighlight);
-    }
-    margin: 0;
-`
+
 const Wrapper = styled.div`
-    width: 90%;
     /* border: 1px solid maroon; */
-
+    width: 100%;
 `
-const ExpandBtn = styled.button`
-    /* border: 1px solid lavender; */
-    align-self: center;
-    margin: 20px 0 10px;
+const PlantForm = styled.form`
+    /* border: 2px solid red; */
+    background-color: var(--color-primaryHighlightThin);
+    border-radius: 10px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
     width: fit-content;
-    &:hover{
-        transform: none;
-        background-color: ${props => props.formOpen && "hsl(182, 22% , 47%)"};
-    }
-    background-color: ${props => props.formOpen? "hsla(182, 22% , 47%, 0.5)":"hsl(182, 22%, 47%)"};
-
 `
 const InputDiv = styled.div`
     /* border: 1px solid lavender; */
     margin: 10px;
 `
-const PlantForm = styled.form`
-    background-color: var(--color-primaryHighlightThin);
-    border-radius: 10px;
-    /* border: 1px solid red; */
-    /* box-shadow: 0 4px 2px -2px lightgrey; */
-    display: flex;
-    flex-direction: column;
-    width: fit-content;
-`
 const Label = styled.label`
     font-weight: bold;
     color: hsl(220, 10% , 49%);
 `
-const FrequencySpan = styled.span`
-    margin-left: 10px;
-`
 const Input = styled.input`
     position: relative;
     font-size: 16px;
+    width: 54%;
     height: 35px;
     padding-left: 12px;
     margin: 0 10px;
     border: 2px solid var(--color-creamAccent);
-
     border-radius: 40px;
     &:focus-visible {
         outline: 2px solid var(--color-creamAccent);
         border: 2px solid var(--color-creamAccent);
     }
+`
+const FrequencySpan = styled.span`
+    margin-left: 10px;
 `
 const InputFrequency = styled.input`
     position: relative;
@@ -202,10 +173,25 @@ const Select = styled.select`
 `
 const Option = styled.option`
 `
-
-const AddBtn = styled.button`
+const ButtonDiv = styled.div`
+    display: flex;
+    justify-content: flex-end;
+`
+const DeleteBtn = styled.button`
+    background-color: orangered;
+    font-size: 14px;
+    /* padding: 8px; */
+    margin: 0;
+    z-index: 80;
+    align-self: center;
+    &:hover{
+        background-color: var(--color-pinkHighlight);
+    }
+`
+const SaveBtn = styled.button`
     background-color: hsl(182, 22% , 47%);
-    padding: 10px 20px;
+    padding: 10px 40px;
+    margin: 15px;
     z-index: 80;
     align-self: center;
 `

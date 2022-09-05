@@ -2,6 +2,7 @@
 import styled from "styled-components";
 // ICONS
 import { WiRaindrops } from "react-icons/wi"; //Multi-water
+import { RiPlantLine } from "react-icons/ri"; //Plant
 //HOOKS & CONTEXT
 import { useState, useEffect, useContext } from "react";
 import { PlantContext } from "../../../context/PlantContext";
@@ -47,7 +48,12 @@ const Water = () => {
             {plantUser &&
                 <BackArrow/>
             }
-
+            {allPlants && dueForWater.length === 0 &&
+            <CaughtUp>
+                <RiPlantLine color="hsl(179, 30% , 29%)" size="80"/>
+                <CaughtUpText>All caught up!</CaughtUpText>
+            </CaughtUp>
+            }
             {allPlants && dueForWater.length > 0 &&
             <>  
                 {/* WATER EVERYTHING BUTTON */}
@@ -81,6 +87,19 @@ const PlantGrid = styled.div`
     gap: 15px 1%;
     margin-top: 40px;
     width: 100%;
+`
+const CaughtUp = styled.div`
+    margin-top: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 50vh;
+`
+const CaughtUpText = styled.p`
+    font-size: 20px;
+    font-weight: bold;
+    color: hsl(180, 73%, 4%);
+    margin-top: 20px;
 `
 const WaterAllBtn = styled.button`
     padding: 0 10px;
