@@ -122,6 +122,11 @@ export const UserProvider = ({ children }) => {
             console.log(plantArray)
             alert(`Watered all plants`)
         }
+        // UPDATE MULTIPLE HOUSEPLANTS
+        const updateHouseplant = (plant) => {
+            console.log(plant)
+            alert(`Updated ${plant.nickname ? plant.nickname : plant.commonName}`)
+        }
         // SNOOZE A SPECIFIED HOUSEPLANT
         const snoozeSinglePlant = (plant) => {
             alert(`Snoozed ${plant.nickname ? plant.nickname : plant.commonName} for <x> days`)

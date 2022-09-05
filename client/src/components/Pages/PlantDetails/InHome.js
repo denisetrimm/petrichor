@@ -39,6 +39,7 @@ const Wrapper = styled.div`
     /* justify-content: center; */
     align-items: center;
     margin-top: 60px;
+    width: 100%;
 `
 const SubTitle = styled.h3`
     /* box-shadow: 0 4px 2px -2px lightgrey; */
@@ -46,6 +47,7 @@ const SubTitle = styled.h3`
     border-top: 2px solid grey;
 `
 const PlantGrid = styled.div`
+    /* border: 1px solid red; */
     display: flex;
     flex-wrap: wrap;
     justify-content: center;

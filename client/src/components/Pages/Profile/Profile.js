@@ -1,15 +1,18 @@
 import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../../../context/UserContext";
 import moment from 'moment';
 import BackArrow from "../../UI/BackArrow";
 
 const Profile = () => {
     const { user, isAuthenticated, isLoading, logout} = useAuth0();
-    const {deleteUserProfile, plantUser} = useContext(UserContext);
+    const {deleteUserProfile, removeAllPlantsFromHome, plantUser} = useContext(UserContext);
+    const [snooze, setSnooze] = useState(plantUser.snooze || 3)
 
-    
+    const setSnoozeDuration = () => {
+        alert(`Snooze duration is now ${snooze} days.`)
+    }
     return (
         <>
         <BackArrow/>
@@ -24,7 +27,11 @@ const Profile = () => {
                 <p>{user.email}</p>
                 <p>Caring for {plantUser.houseplants.length} plants</p>
                 <p>Joined: {moment(plantUser.dateJoined).format("MMM DD, YYYY")}</p>
+                <br></br> {/*REMOVE*/}
+                <h3>Settings</h3>
                 <button type="button" onClick={() => {deleteUserProfile()}}>Delete Profile</button>
+                <button type="button" onClick={() => {removeAllPlantsFromHome()}}>Remove all plants from My Home</button>
+                <button type="button" onClick={() => {setSnoozeDuration()}}>Set snooze duration</button>
                 </>
             }
             

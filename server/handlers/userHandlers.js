@@ -65,6 +65,7 @@ const loginUser = async (req, res) => {
             tvRoom: "TV room",  
             other: "Other"
         },
+        snooze: 3,
     }
 
     const client = new MongoClient(MONGO_URI, options);
