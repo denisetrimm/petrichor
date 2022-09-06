@@ -3,9 +3,7 @@ import styled from "styled-components";
 // ICONS
 import { WiRaindrops } from "react-icons/wi"; //Multi-water
 //HOOKS & CONTEXT
-import { useAuth0 } from "@auth0/auth0-react";
 import { useState, useEffect, useContext } from "react";
-import { PlantContext } from "../../../context/PlantContext";
 import { UserContext } from "../../../context/UserContext";
 import moment from 'moment';
 //COMPONENTS
@@ -13,12 +11,8 @@ import HouseplantCardInfo from "./HouseplantCardInfo";
 
 const Room = ({room})=> {
 
-    const { user, isAuthenticated, isLoading} = useAuth0();
     const {plantUser, waterMultiplePlants} = useContext(UserContext);
-    const { allPlants, filteredPlants, handleClear }= useContext(PlantContext);
-    
     const [currentRoomHouseplants, setCurrentRoomHouseplants] = useState();
-
 
     // WHEN PLANT USER IS UPDATED, CHECK FOR HOUSEPLANT ROOMS
     useEffect(()=> {
@@ -49,18 +43,20 @@ const Room = ({room})=> {
             {currentRoomHouseplants &&
             <>
                 <RoomTitle>{plantUser.home[room] || "General - Unassigned"}</RoomTitle>
+
                     {/* WATER EVERYTHING BUTTON */}
                     <WaterAllBtn 
                         type="button" 
                         onClick={(e)=> {handleWaterAllClick(e)}}
                     >
                         <WiRaindrops size="50"/>
-                        <WaterAllText>Water overdue plants in {plantUser.home[room] || "General"}</WaterAllText>
+                        <WaterAllText>Water overdue plants</WaterAllText>
                     </WaterAllBtn>
+                    
                 <PlantGrid>
                     {currentRoomHouseplants.map(plant => {
                             return (
-                                    <HouseplantCardInfo key={plant._id} plant={plant}/>
+                                <HouseplantCardInfo key={plant._id} plant={plant}/>
                             )
                         })
                     }
@@ -72,20 +68,18 @@ const Room = ({room})=> {
 }
 
 const RoomTitle = styled.h3`
+    font-size: 20px;
     margin-top: 40px;
+    padding: 40px 200px 0;
     color: var(--color-primaryMedium);
     border-top: 1px solid lightgrey;
-    padding: 40px 200px 0;
 `
 const PlantGrid = styled.div`
-    /* border: 1px solid lightgrey;
-    padding: 20px;
-    border-radius: 15px; */
+    margin: 40px 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 15px 1%;
-    margin: 40px 0;
     width: 100%;
 `
 const WaterAllText = styled.span`
@@ -98,7 +92,9 @@ const WaterAllBtn = styled.button`
     display: flex;
     align-self: flex-end;
     align-items: center;
-    padding: 0 25px 0 10px;
+    margin-right: 110px;
+    margin-bottom: 0;
+    padding: 0 20px 0 2px;
     background-color: var(--color-water);
     &:hover{
         background-color: var(--color-waterHighlight);

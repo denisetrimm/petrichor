@@ -1,25 +1,19 @@
 //STYLING
 import styled from "styled-components";
-// ICONS
-
 //HOOKS & CONTEXT
-import { useAuth0 } from "@auth0/auth0-react";
 import { useState, useEffect, useContext } from "react";
 import { PlantContext } from "../../../context/PlantContext";
 import { UserContext } from "../../../context/UserContext";
 import { useNavigate } from "react-router-dom";
 //COMPONENTS
-import Card from "../../UI/Card";
-import HouseplantCardInfo from "./HouseplantCardInfo";
 import BackArrow from "../../UI/BackArrow";
 import Room from "./Room"
 
 
 const MyHome = () => {
 
-    const { user, isAuthenticated, isLoading} = useAuth0();
     const {plantUser} = useContext(UserContext);
-    const { allPlants, filteredPlants, handleClear }= useContext(PlantContext);
+    const { allPlants}= useContext(PlantContext);
     const [roomsInUse, setRoomsInUse] = useState([]);
     const navigate = useNavigate();
 
@@ -42,7 +36,6 @@ const MyHome = () => {
 
     return (
         <>
-
             <h2>My Home</h2>
 
             {plantUser &&
@@ -69,18 +62,15 @@ const MyHome = () => {
                     <>
                         {roomsInUse.map(room => {
                             return (
-                                <>
                                 <Wrapper>
                                     <Room room={room}/>
                                 </Wrapper>
-
-                                </>
                             )
                         })}
                     </>
                     }
                 </>
-                    }
+                }
             </>
             }
         </>
@@ -95,10 +85,5 @@ const Wrapper = styled.div`
 `
 const NumPlants = styled.p`
     margin-top: 20px;
-`
-const NumPlantsSpan = styled.span`
-    color: var(--color-primaryDark);
-    font-weight: bold;
-    font-size: 20px;
 `
 export default MyHome;

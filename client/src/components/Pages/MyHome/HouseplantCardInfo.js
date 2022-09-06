@@ -1,15 +1,6 @@
 // STYLING
 import styled from "styled-components";
 // ICONS
-import { WiRaindrops } from "react-icons/wi"; //Multi-water
-import { GiWateringCan } from "react-icons/gi"; //Watering can
-import { BsCalendar3 } from "react-icons/bs"; // Calendar1
-import { MdOutlineSnooze } from "react-icons/md"; // Snooze
-import { BiTime } from "react-icons/bi"; //Clock2
-import { MdOutlineChair } from "react-icons/md"; //Room
-import { BsCalendarCheck } from "react-icons/bs"; // Calendar2
-import { ImLoop2 } from "react-icons/im"; //Watering frequency - recurring loop
-
 import { MdOutlineWaterDrop } from "react-icons/md"; //Water
 import { MdRemove } from "react-icons/md"; // Snooze
 import { BiTimeFive } from "react-icons/bi"; //Clock1
@@ -18,18 +9,17 @@ import { IoIosArrowUp} from "react-icons/io";
 //HOOKS & CONTEXT
 import { useState, useEffect, useContext } from "react";
 import { UserContext } from "../../../context/UserContext";
-import { useNavigate } from "react-router-dom";
 import moment from 'moment';
+// OTHER COMPONENTS
 import ExtraHouseplantDetails from "./ExtraHouseplantDetails";
 
+
 const HouseplantCardInfo = ({plant}) => {
-    const navigate = useNavigate();
+
     const { plantUser, waterSinglePlant, snoozeSinglePlant, removePlantFromHome} = useContext(UserContext);
     const [openDetails, setOpenDetails] = useState(false)
     const [showButtons, setShowButtons] = useState(false)
     const [overdue, setOverdue] = useState(false)
-    const [formOpen, setFormOpen] = useState(false)
-
 
     // WATER SINGLE PLANT
     const handleWaterPlantClick = (e) => {
@@ -83,47 +73,49 @@ const HouseplantCardInfo = ({plant}) => {
                             : plant.commonName
                         }
                     />
+
                     <CommonName>
                         {plant.nickname 
                             ? plant.nickname 
                             : plant.commonName
                         }
                     </CommonName>
+
                     <Due overdue={overdue}>
                         {!overdue &&
-                            <>
-                                Due {moment(plant.nextWatering)
-                                    .calendar(null, {
-                                        sameDay: '[today]',
-                                        nextDay: '[tomorrow]',
-                                        nextWeek: 'dddd',
-                                        lastDay: '[yesterday]',
-                                        lastWeek: '[last] dddd',
-                                        sameElse: 'dddd MMM Do'
-                                    })
-                                }
-                            </>
-                            }
-                            {overdue &&
-                            <>
-                                Overdue ({moment(plant.nextWatering)
-                                    .calendar(null, {
-                                        sameDay: '[today]',
-                                        nextDay: '[tomorrow]',
-                                        nextWeek: 'dddd',
-                                        lastDay: '[yesterday]',
-                                        lastWeek: '[last] dddd',
-                                        sameElse: 'MMM Do'
-                                    })
+                        <>
+                            Due {moment(plant.nextWatering)
+                                .calendar(null, {
+                                    sameDay: '[today]',
+                                    nextDay: '[tomorrow]',
+                                    nextWeek: 'dddd',
+                                    lastDay: '[yesterday]',
+                                    lastWeek: '[last] dddd',
+                                    sameElse: 'dddd MMM Do'
                                 })
-                            </>
                             }
+                        </>
+                        }
+                        {overdue &&
+                        <>
+                            Overdue ({moment(plant.nextWatering)
+                                .calendar(null, {
+                                    sameDay: '[today]',
+                                    nextDay: '[tomorrow]',
+                                    nextWeek: 'dddd',
+                                    lastDay: '[yesterday]',
+                                    lastWeek: '[last] dddd',
+                                    sameElse: 'MMM Do'
+                                })
+                            })
+                        </>
+                        }
                     </Due>
 
                 {/* BUTTON OPENS/CLOSES EXTRA DETAILS */}
                     <ExpandBtn 
-                            openDetails={openDetails}
-                            onClick={(e)=> {e.stopPropagation();setOpenDetails(!openDetails)}}
+                        openDetails={openDetails}
+                        onClick={(e)=> {e.stopPropagation();setOpenDetails(!openDetails)}}
                     >
                         {openDetails 
                             ? <IoIosArrowUp color="hsl(220, 10% , 59%)" size="20"/> 
@@ -132,7 +124,9 @@ const HouseplantCardInfo = ({plant}) => {
                     </ExpandBtn>
 
                 {/* SHOW EXTRA DETAILS */}
-                    {openDetails && <ExtraHouseplantDetails setOpenDetails={setOpenDetails} plant={plant}/>}
+                    {openDetails && 
+                        <ExtraHouseplantDetails setOpenDetails={setOpenDetails} plant={plant}/>
+                    }
                     
             </MiniWrapper>
         </Wrapper>
@@ -158,10 +152,10 @@ const Wrapper = styled.div`
     }
 `
 const MiniWrapper = styled.div`
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
 `
 const PlantImg = styled.img`
     border-radius: 8px;
@@ -223,7 +217,6 @@ const DeleteBtn = styled.button`
 `
 const Due = styled.p`
     font-size: 14px;
-    /* font-weight: bold; */
     padding: 20px 0 0px;
     color: ${props => props.overdue ? "red" : "hsl(179, 30% , 29%)"};
 `
