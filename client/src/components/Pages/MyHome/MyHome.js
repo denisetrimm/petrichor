@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import Card from "../../UI/Card";
 import HouseplantCardInfo from "./HouseplantCardInfo";
 import BackArrow from "../../UI/BackArrow";
+import Room from "./Room"
 
 
 const MyHome = () => {
@@ -19,58 +20,78 @@ const MyHome = () => {
     const { user, isAuthenticated, isLoading} = useAuth0();
     const {plantUser} = useContext(UserContext);
     const { allPlants, filteredPlants, handleClear }= useContext(PlantContext);
+    const [roomArray, setRoomArray] = useState([]);
+    const [roomsInUse, setRoomsInUse] = useState([]);
     const navigate = useNavigate();
+    // let roomsInUse = [];
 
-    const handlePlantClick = (plantId) => {
-        // console.log("clicked!");
-        // console.log(`plantId`)
-        handleClear();
-        navigate(`/plants/${plantId}`);
-    }
+    // WHEN PLANT USER IS UPDATED, CHECK FOR OVERDUE PLANTS
+    useEffect(()=> {
+
+        if(plantUser && plantUser.houseplants.length > 0){
+                const usingRoom = []
+
+                plantUser.houseplants.forEach(plant => {
+                    if(!usingRoom.includes(plant.room)){
+                        usingRoom.push(plant.room)
+                        // roomsInUse.push(plant.room)
+                    }
+                })
+                setRoomsInUse(usingRoom)
+            }
+
+    },[plantUser])
 
     return (
         <>
 
-        <h2>My Home</h2>
-        {plantUser &&
-            <BackArrow/>
-        }
-        {allPlants && 
-        <>  
-        {plantUser && plantUser.houseplants.length === 0 &&
-            <>
-                <p>You haven't added any plants to your home yet.</p>
-                <button onClick={()=> {navigate("/")}}>Add some plants!</button>
-            </>
-        }
+            <h2>My Home</h2>
 
+            {plantUser &&
+                <BackArrow/>
+            }
+
+            {allPlants && 
+            <>  
+                {/* PLACE HOLDER WHEN THERE ARE NO PLANTS */}
+                {plantUser && plantUser.houseplants.length === 0 &&
+                    <>
+                        <p>You haven't added any plants to your home yet.</p>
+                        <button onClick={()=> {navigate("/")}}>Add some plants!</button>
+                    </>
+                }
+
+                {/* IF USER IS SIGNED IN AND HAS AT LEAST 1 PLANT, INDICATE NUMBER OF PLANTS*/}
                 {plantUser && plantUser.houseplants.length > 0 &&
                 <>
-            <p>You have {plantUser.houseplants.length} plants in your home.</p>
-            <PlantGrid>
-                    {plantUser.houseplants.map(plant => {
-                        return (
-                            <Card key={plant._id} id={plant.plantId} handleFunction={handlePlantClick}>
-                                <HouseplantCardInfo houseplant={plant}/>
-                            </Card>
-                        )
-                    })}
-            </PlantGrid></>
-                }
-        </>
-        }
+                    <NumPlants>You have {plantUser.houseplants.length} plants in your home.</NumPlants>
+
+                    {/* RENDER ROOMS */}
+                    {roomsInUse &&
+                    <>
+                        {roomsInUse.map(room => {
+                            return (
+                                <>
+                                    <Room room={room}/>
+                                </>
+                            )
+                        })}
+                    </>
+                    }
+                </>
+                    }
+            </>
+            }
         </>
     );
 }
 
-const PlantGrid = styled.div`
-    /* border: 1px solid blue; */
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px 1%;
-    margin-top: 40px;
-    width: 100%;
+const NumPlants = styled.p`
+    margin-top: 20px;
 `
-
+const NumPlantsSpan = styled.span`
+    color: var(--color-primaryDark);
+    font-weight: bold;
+    font-size: 20px;
+`
 export default MyHome;
