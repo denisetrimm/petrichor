@@ -1,14 +1,13 @@
 // STYLING
 import styled from "styled-components";
 // HOOKS & CONTEXT
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import { UserContext } from "../../../context/UserContext";
 
 const UpdateDetailsForm = ({currentPlant, setFormOpen})=> {
 
     const {plantUser, updateSingleHouseplant, removePlantFromHome} = useContext(UserContext);
     const [updatedPlantInfo, setUpdatedPlantInfo] = useState(currentPlant)
-    // DT - SHOULD THIS BE A STATE + USEEFFECT?
     const roomArray = Object.entries(plantUser.home)    
 
     // UPDATE NEW PLANT OBJECT WITH INPUT VALUES
@@ -19,6 +18,7 @@ const UpdateDetailsForm = ({currentPlant, setFormOpen})=> {
             [key]: value
         })
     }
+
     // UPDATE PLANT IN DATABASE
     const handleSubmit = (e) => {
         e.stopPropagation();
@@ -26,13 +26,13 @@ const UpdateDetailsForm = ({currentPlant, setFormOpen})=> {
         updateSingleHouseplant(updatedPlantInfo);
         setFormOpen(false)
     }
+
     // DELETE
     const handleDeleteClick = (e) => {
         e.stopPropagation();
         setFormOpen(false)
         removePlantFromHome(currentPlant)
     }
-
 
     return (
 
@@ -107,11 +107,9 @@ const UpdateDetailsForm = ({currentPlant, setFormOpen})=> {
 };
 
 const Wrapper = styled.div`
-    /* border: 1px solid maroon; */
     width: 100%;
 `
 const PlantForm = styled.form`
-    /* border: 2px solid red; */
     background-color: var(--color-primaryHighlightThin);
     border-radius: 10px;
     padding: 5px;
@@ -120,7 +118,6 @@ const PlantForm = styled.form`
     width: fit-content;
 `
 const InputDiv = styled.div`
-    /* border: 1px solid lavender; */
     margin: 10px;
 `
 const Label = styled.label`

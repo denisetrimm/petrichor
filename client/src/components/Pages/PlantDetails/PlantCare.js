@@ -8,9 +8,6 @@ import { IoPartlySunnyOutline } from "react-icons/io5"; //Partial shade
 import { MdOutlineFilterDrama} from "react-icons/md"; //Low
 import { WiHumidity } from "react-icons/wi"; //Humidity
 import { ImLoop2 } from "react-icons/im"; //Watering frequency - recurring loop
-import { IoLeafOutline } from "react-icons/io5"; //Leaf
-import { WiRaindrops } from "react-icons/wi"; //Multi-water
-import { GiWateringCan } from "react-icons/gi"; //Watering can
 // TOOLTIPS
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
@@ -18,6 +15,7 @@ import 'tippy.js/dist/tippy.css';
 const PlantCare = ({currentPlant}) => {
     return (
         <PlantCareWrapper>
+            
             {/* SUNSHINE */}
             <Tippy content="Sunlight requirements">
                 <CareRequirement color="hsl(220, 10% , 39%)" backgroundColor="hsla(42, 79% , 72%, 0.3)">
@@ -41,17 +39,19 @@ const PlantCare = ({currentPlant}) => {
                     }
                 </CareRequirement>
             </Tippy>
+
             {/* PET-FRIENDLY */}
             <Tippy content="Pet-friendly">
                 <CareRequirement color="hsl(220, 10% , 39%)" backgroundColor="hsla(108, 23% , 79%, 0.4)">
                         <RequirementWrapper>
-                                <MdPets color="hsl(108, 23% , 79%)" size="30"/>
+                            <MdPets color="hsl(108, 23% , 79%)" size="30"/>
                             <Def>
                                 {currentPlant.petFriendly}
                             </Def>
                         </RequirementWrapper>      
                 </CareRequirement>
-                </Tippy>
+            </Tippy>
+
             {/* HUMIDITY */}
             <Tippy content="Humidity level">
                 <CareRequirement color="hsl(220, 10% , 39%)" backgroundColor="hsla(210, 46% , 58%, 0.2)">
@@ -63,6 +63,7 @@ const PlantCare = ({currentPlant}) => {
                         </RequirementWrapper>      
                 </CareRequirement>
             </Tippy>
+            
             {/* SOIL */}
             <Tippy content="Soil requirements">
                 <CareRequirement color="hsl(220, 10% , 39%)" backgroundColor="hsla(27, 70% , 87%, 0.5)">
@@ -74,6 +75,7 @@ const PlantCare = ({currentPlant}) => {
                         </RequirementWrapper>      
                 </CareRequirement>
             </Tippy>
+
             {/* WATERING FREQUENCY */}
             <Tippy content="Watering frequency">
                 <CareRequirement color="hsl(220, 10% , 39%)" backgroundColor="hsl(180, 33% , 84%)">
@@ -91,14 +93,12 @@ const PlantCare = ({currentPlant}) => {
 }
 
 const PlantCareWrapper = styled.div`
-    /* border: 1px solid orange;    */
     display: flex;
     flex-wrap: wrap;
     width: 90%;
     margin: 20px -10px;
 `
 const CareRequirement = styled.div`
-    /* border: 1px solid red; */
     color: ${props => props.color};
     background-color: ${props => props.backgroundColor};
     width: fit-content;

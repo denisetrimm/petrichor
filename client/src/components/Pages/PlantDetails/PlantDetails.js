@@ -1,5 +1,7 @@
 // STYLING
 import styled from "styled-components";
+// ICONS
+import { IoLeafOutline } from "react-icons/io5"; //Leaf
 // HOOKS & CONTEXT
 import { useAuth0 } from "@auth0/auth0-react";
 import { useState, useEffect, useContext } from "react";
@@ -15,39 +17,16 @@ import InHome from "./InHome";
 // TOOLTIPS
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
-// ICONS
-import { IoLeafOutline } from "react-icons/io5"; //Leaf
-import { IoLeaf } from "react-icons/io5"; //Leaf
-import { MdPets } from "react-icons/md"; //Pets
-import { TbShovel } from "react-icons/tb"; //Soil
-import { MdOutlineWbSunny } from "react-icons/md"; //Sun - Bright Indirect
-import { IoPartlySunnyOutline } from "react-icons/io5"; //Partial shade
-import { MdOutlineFilterDrama} from "react-icons/md"; //Low
-import { WiHumidity } from "react-icons/wi"; //Humidity
-import { WiRaindrops } from "react-icons/wi"; //Multi-water
-import { GiWateringCan } from "react-icons/gi"; //Watering can
-
-import { MdOutlineChair } from "react-icons/md"; //Room
-import { MdOutlineWaterDrop } from "react-icons/md"; //Water
-
-import { BsCalendar } from "react-icons/bs"; // Calendar1
-import { BsCalendarCheck } from "react-icons/bs"; // Calendar2
-import { MdOutlineSnooze } from "react-icons/md"; // Snooze
-import { BiTimeFive } from "react-icons/bi"; //Clock1
-import { BiTime } from "react-icons/bi"; //Clock2
-import { ImLoop2 } from "react-icons/im"; //Watering frequency - recurring loop
-
 
 
 const PlantDetails = () => {
 
     const { plantId } = useParams();
-    const { user, isAuthenticated, isLoading} = useAuth0();
+    const { isAuthenticated } = useAuth0();
     const {plantUser} = useContext(UserContext);
     const { allPlants } = useContext(PlantContext);
     const [currentPlant, setCurrentPlant] = useState(null);
     const [currentHouseplantArray, setCurrentHouseplantArray] = useState(null);
-
 
     useEffect(()=> {
         let selectedPlant = null;
@@ -65,14 +44,12 @@ const PlantDetails = () => {
                 return selectedPlant._id === plant.plantId;
             })
             if (selectedPlantArray.length > 0){
-                // console.log(selectedPlantArray)
                 setCurrentHouseplantArray(selectedPlantArray)
             }
             else {
                 setCurrentHouseplantArray(null)
             }
         }
-
     }, [plantId, plantUser])
 
     return (
@@ -120,22 +97,17 @@ const PlantDetails = () => {
             } 
             </>
         }
-        
-        
         </>
     );
 }
 
-
 const FlexWrapper = styled.div`
-    /* border: 1px solid purple; */
     display: flex;
     position: relative;
-    width: fit-content; /*Not sure about this*/
+    width: fit-content;
     justify-content: center;
 `
 const PlantInfo = styled.div`
-    /* border: 1px solid green; */
     margin-left: 40px;
     max-width: 500px;
 `
