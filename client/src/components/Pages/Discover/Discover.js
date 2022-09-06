@@ -11,12 +11,25 @@ import { UserContext } from "../../../context/UserContext";
 //COMPONENTS
 import PlantCardInfo from "./PlantCardInfo";
 import TypeAhead from "./TypeAhead";
+import TypeAheadTest from "./TypeAheadTest";
+import SortFilter from "./SortFilter"
 import BackArrow from "../../UI/BackArrow";
+import { useEffect, useState } from "react";
 
 
 const Discover = () => {
     const {plantUser} = useContext(UserContext);
-    const { allPlants, filteredPlants}= useContext(PlantContext);
+    const {allPlants, filteredPlants, sortType}= useContext(PlantContext);
+    const [sortedPlants, setSortedPlants] = useState(allPlants||null)
+
+    useEffect(()=> {
+        if (plantUser && filteredPlants){
+            setSortedPlants(filteredPlants)
+        }
+        console.log(`Discover:`)
+        console.log(filteredPlants)
+        
+    },[plantUser, allPlants, filteredPlants, sortType])
 
     return (
         <>
@@ -28,11 +41,13 @@ const Discover = () => {
                 }
 
             {/* DISPLAY SEARCH BAR AND PLANT CARDS */}
-                {allPlants && 
+                {allPlants && filteredPlants && sortedPlants &&
                 <>  
+                    {/* <TypeAheadTest/> */}
                     <TypeAhead/>
+                    <SortFilter />
                     <PlantGrid>
-                        {filteredPlants.map(plant => {
+                        {sortedPlants.map(plant => {
                             return (
                                 <PlantCardInfo key={plant._id} plant={plant}/>
                             )
