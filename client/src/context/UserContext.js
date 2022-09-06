@@ -182,12 +182,6 @@ export const UserProvider = ({ children }) => {
             
         }
 
-        // NEED FETCHES
-        // UPDATE MULTIPLE HOUSEPLANTS
-        const updateMultipleHouseplants = (plant) => {
-            console.log(plant)
-            alert(`Updated ${plant.nickname ? plant.nickname : plant.commonName}`)
-        }
         // SNOOZE A SPECIFIED HOUSEPLANT
         const snoozeSinglePlant = (plant) => {
 
@@ -209,10 +203,24 @@ export const UserProvider = ({ children }) => {
             })
             
         }
-        // SNOOZE MULTIPLE HOUSEPLANTS
-        const snoozeMultiplePlants = (plantArray) => {
-            console.log(plantArray)
-            alert(`Snoozed all plants`)
+        // SET GLOBAL SNOOZE DURATION
+        const updateSnooze = (snoozeDuration) => {
+            fetch('/api/set-snooze', {
+                method: "PATCH",
+                body: JSON.stringify({_id: plantUser._id, snooze: snoozeDuration}),
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type" : "application/json"
+                }
+            })
+            .then((res)=>res.json())
+            .then((data)=>{
+                console.log(data.data)
+                if(data.success){
+                    setPlantUser(data.data)
+                    alert(`Snooze set to ${snoozeDuration} days`)
+                }
+            })
         }
 
         // // DELETES A SPECIFIED HOUSEPLANT
@@ -280,7 +288,7 @@ return (
                 waterSinglePlant,
                 waterMultiplePlants,
                 snoozeSinglePlant,
-                snoozeMultiplePlants,
+                updateSnooze,
                 updatePlantRoom,
                 updateSingleHouseplant,
                 removePlantFromHome,

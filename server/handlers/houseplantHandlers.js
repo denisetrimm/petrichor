@@ -175,6 +175,41 @@ const snoozePlant = async (req, res) => {
     console.log("disconnected!");
 };
 
+//  SET GLOBAL SNOOZE DURATION
+// .patch("/api/set-snooze", setSnooze)
+const setSnooze = async (req, res) => {
+
+    const userId = req.body._id;
+    const snoozeDuration = req.body.snooze;
+    const client = new MongoClient(MONGO_URI, options);
+
+    try {
+        await client.connect();
+        const db = client.db();
+
+        // CHECK IF USER EXISTS
+        const checkUser = await db.collection("users").findOne({ _id: userId })
+        if (!checkUser) {
+            // IF USER DOES NOT EXIST, RETURN 404
+            return res.status(404).json({ status: 404, success: false, data: userId, message: `User does not exist` })
+        }
+        else {
+            
+                await db.collection("users").findOneAndUpdate(
+                    { _id: userId},
+                    {$set: {"snooze" : snoozeDuration}}, 
+                );
+                const updatedUser = await db.collection("users").findOne({ _id: userId })
+                res.status(200).json({ status: 200, success: true, data: updatedUser, message: `Snooze set to ${snoozeDuration} days` })
+            }
+    }
+    catch (err) {
+        res.status(500).json({ status: 500, message: err.message })
+    }
+    client.close();
+    console.log("disconnected!");
+};
+
 // UPDATES THE DETAILS FOR A SPECIFIED HOUSEPLANT
 // .patch("/api/update-single-houseplant", updateSingleHouseplant)
 const updateSingleHouseplant = async (req, res) => {
@@ -376,6 +411,7 @@ module.exports = {
     updateSingleHouseplant,
     waterPlant,
     snoozePlant,
+    setSnooze,
     removePlantFromHome,
     removeAllPlantsFromHome
 }
