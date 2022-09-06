@@ -13,17 +13,18 @@ const Profile = () => {
     const [snooze, setSnooze] = useState(null)
     const [formOpen, setFormOpen] = useState(false)
 
-    const setSnoozeDuration = (e) => {
-        e.preventDefault();
-        updateSnooze(snooze)
-    }
-
     // WHEN PLANT USER IS UPDATED, UPDATE THE SNOOZE
     useEffect(()=> {
         if(plantUser){
             setSnooze(plantUser.snooze)
         }
     },[plantUser])
+    
+    const setSnoozeDuration = (e) => {
+        e.preventDefault();
+        updateSnooze(snooze)
+        setFormOpen(false)
+    }
 
     return (
         <>
@@ -31,7 +32,7 @@ const Profile = () => {
             { isLoading &&
                 <p>Loading...</p>
             }
-            {isAuthenticated && plantUser &&
+            {isAuthenticated && user && plantUser &&
                 <>
                 <h1>Profile</h1>
                 <Avatar src={user.picture} alt="Profile"/>
