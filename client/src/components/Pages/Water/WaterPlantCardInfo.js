@@ -1,15 +1,6 @@
 // STYLING
 import styled from "styled-components";
 // ICONS
-import { WiRaindrops } from "react-icons/wi"; //Multi-water
-import { GiWateringCan } from "react-icons/gi"; //Watering can
-import { BsCalendar3 } from "react-icons/bs"; // Calendar1
-import { MdOutlineSnooze } from "react-icons/md"; // Snooze
-import { BiTime } from "react-icons/bi"; //Clock2
-import { MdOutlineChair } from "react-icons/md"; //Room
-import { BsCalendarCheck } from "react-icons/bs"; // Calendar2
-import { ImLoop2 } from "react-icons/im"; //Watering frequency - recurring loop
-
 import { MdOutlineWaterDrop } from "react-icons/md"; //Water
 import { MdRemove } from "react-icons/md"; // Snooze
 import { BiTimeFive } from "react-icons/bi"; //Clock1
@@ -131,10 +122,10 @@ const Wrapper = styled.div`
     }
 `
 const MiniWrapper = styled.div`
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
 `
 const PlantImg = styled.img`
     border-radius: 8px;
