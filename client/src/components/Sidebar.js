@@ -1,23 +1,20 @@
 import styled from "styled-components";
-
 // ICONS
 import Logo from "./UI/Logo";
 import { GoSearch } from "react-icons/go"; // DISCOVER
 import { BiHome } from "react-icons/bi"; // MY HOME
 import { MdOutlineWaterDrop } from "react-icons/md"; // THIRSTY BB
 import { FaRegUserCircle } from "react-icons/fa"; // PROFILE
-
 // LINKS
 import { Link } from "react-router-dom"
 import { NavLink } from "react-router-dom";
-
 // AUTHENTICATION
 import LoginButton from "./Login"
 import LogoutButton from "./Logout"
 import { useAuth0 } from "@auth0/auth0-react";
 
 const Sidebar = () => {
-    const { user, isAuthenticated, isLoading } = useAuth0();
+    const { isAuthenticated } = useAuth0();
 
     return (
         <>
@@ -33,24 +30,28 @@ const Sidebar = () => {
                     </IconSpan> 
                     <NameSpan>Discover</NameSpan>
                 </NavigationLink>
+
                 <NavigationLink exact to="/my-home">
                     <IconSpan>
                         <BiHome size={40} />
                     </IconSpan>
                     <NameSpan>My Home</NameSpan>
                 </NavigationLink>
+
                 <NavigationLink exact to="/water">
                     <IconSpan>
                         <MdOutlineWaterDrop size={40} />
                     </IconSpan>
                     <NameSpan>Water</NameSpan>
                 </NavigationLink>
+
                 <NavigationLink exact to="/profile">
                     <IconSpan>
                         <FaRegUserCircle size={40} />
                     </IconSpan> 
                     <NameSpan>Profile</NameSpan>
                 </NavigationLink>
+
                 <LogoutButton/>
                 </>
             }
@@ -91,7 +92,6 @@ const NavigationLink = styled(NavLink)`
     display: flex;
     align-items: center;
     transition: background-color 400ms ease-out;
-
     &:nth-of-type(2) {
         margin-top: 140px;
     }

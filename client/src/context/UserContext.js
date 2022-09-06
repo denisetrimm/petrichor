@@ -1,13 +1,12 @@
 import { useState, useEffect, createContext } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import { BsCodeSlash } from "react-icons/bs";
 
 export const UserContext = createContext(null);
 
 export const UserProvider = ({ children }) => {
 
     const [plantUser, setPlantUser] = useState(null);
-    const { user, isAuthenticated, isLoading, loginWithRedirect, logout } = useAuth0();
+    const { user, isAuthenticated, logout } = useAuth0();
 
     // ________________________________________________
     // 
@@ -17,11 +16,9 @@ export const UserProvider = ({ children }) => {
     // USE AUTHENTICATED USER DETAILS TO RETRIEVE/CREATE USER DATA
     useEffect(() => {
         if (!isAuthenticated){
-            console.log("logged out")
             setPlantUser(null)
         }
         else {
-            console.log("logging in")
             fetch('/api/login-user', {
                 method: "POST",
                 body: JSON.stringify({given_name: user.given_name, family_name: user.family_name, email: user.email}),
@@ -84,7 +81,6 @@ export const UserProvider = ({ children }) => {
         })
         .then((res)=>res.json())
         .then((data)=>{
-            // console.log(data.data)
             if(data.success){
                 setPlantUser(data.data)
                 alert(`Added ${plant.nickname || plant.commonName} to My Home.`)
@@ -105,7 +101,6 @@ export const UserProvider = ({ children }) => {
             })
             .then((res)=>res.json())
             .then((data)=>{
-                console.log(data.data)
                 if(data.success){
                     setPlantUser(data.data)
                     alert(`Added plant ${plant.commonName} to ${room}.`)
@@ -127,7 +122,6 @@ export const UserProvider = ({ children }) => {
             })
             .then((res)=>res.json())
             .then((data)=>{
-                console.log(data.data)
                 if(data.success){
                     setPlantUser(data.data)
                     alert(`Updated ${plant.nickname ? plant.nickname : plant.commonName}`)
@@ -148,7 +142,6 @@ export const UserProvider = ({ children }) => {
             })
             .then((res)=>res.json())
             .then((data)=>{
-                console.log(data.data)
                 if(data.success){
                     setPlantUser(data.data)
                     alert(`Watered ${plant.nickname ? plant.nickname : plant.commonName}`)
@@ -195,7 +188,6 @@ export const UserProvider = ({ children }) => {
             })
             .then((res)=>res.json())
             .then((data)=>{
-                console.log(data.data)
                 if(data.success){
                     setPlantUser(data.data)
                     alert(`Snoozed ${plant.nickname ? plant.nickname : plant.commonName} for ${plantUser.snooze} days`)

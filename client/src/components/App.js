@@ -27,12 +27,15 @@ const App = () => {
 		<GlobalStyles/>
 		<BrowserRouter>
 			<Wrapper>
+
 				<NavContainer>
 					<Sidebar />
 				</NavContainer>
+
 				<MainContainer>
 					<Banner/>
 					<Petrichor>Petrichor <Phonetic>/ˈpeˌtrīkôr/</Phonetic>  <Definition>The scent produced when rain falls on dry soil</Definition></Petrichor>
+					
 					<PageContainer>
 						<Routes>
 							<Route exact path="/" element={ <Discover /> } />
@@ -43,6 +46,7 @@ const App = () => {
 							<Route path="*" element={ <NotFound /> } />
 						</Routes>
 					</PageContainer>
+
 				</MainContainer>
 			</Wrapper>
 		</BrowserRouter>
@@ -50,30 +54,20 @@ const App = () => {
 	);
 }
 
-export default App;
-
 const Wrapper = styled.div`
-  /* border: 1px solid red; */
 	height: 100%;
 	display: flex;
 `
 const NavContainer = styled.div`
-    /* border: 1px solid purple; */
     min-width: 13%;
-    /* max-width: 180px; */
-	/* height: 100vh; */
-    /* flex-grow: 2;
-    flex-shrink: 5; */
 `
 const MainContainer = styled.div`
-    /* border: 1px solid blue; */
     width: 80%;
     flex-grow: 15;
     flex-shrink: 1;
     height: 100%;
 	display: relative;
 	background-color: var(--color-cream);
-    
 `
 const Petrichor = styled.h1`
 	color: var(--color-cream);
@@ -94,13 +88,11 @@ const Phonetic = styled.span`
 	font-family: var(--font-secondary);
 `
 const PageContainer = styled.div`
-    /* border: 1px solid green; */
     flex-grow: 15;
     flex-shrink: 1;
     height: 100%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	/* margin: 20px; */
-    
 `
+export default App;

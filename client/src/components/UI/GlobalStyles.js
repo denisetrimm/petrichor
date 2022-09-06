@@ -29,9 +29,6 @@ const GlobalStyles = createGlobalStyle`
         --color-greyAccent: hsl(220, 10% , 59%);
         --font-primary: 'Raleway', Arial, sans-serif;
         --font-secondary: 'Mate', serif;
-        /* --font-heading: 'Permanent Marker', Arial, Helvetica, sans-serif;
-        --font-body: 'Kosugi', Arial, Helvetica, sans-serif;
-        --padding-page: 24px; */
     }
 
     *,
@@ -48,8 +45,6 @@ const GlobalStyles = createGlobalStyle`
     }
 
     html, body {
-        /* width: 100%; */
-        /* height: 100vh; */
     }
 
     html, body, div, span, applet, object, iframe,
@@ -90,7 +85,6 @@ const GlobalStyles = createGlobalStyle`
 
     body {
         line-height: 1.25;
-        /* height: 100vh; */
         background-color: var(--color-cream);
     }
 
@@ -105,21 +99,19 @@ const GlobalStyles = createGlobalStyle`
         width: fit-content;
         border-radius: 40px;
         transition: background-color ease-out 300ms;
-
-    &:hover{
-        /* background-color: var(--color-primaryHighlight); */
-        background-color: var(--color-primaryDark);
-        transform: scale(.98);
-        cursor: pointer;
-    }
-    &:active{
-        background-color: var(--color-primaryDark);
-        transform: scale(.95);
-        cursor: pointer;
-    }
-    &:focus-visible {
-        outline: 4px lightblue solid ;
-    }
+        &:hover{
+            background-color: var(--color-primaryDark);
+            transform: scale(.98);
+            cursor: pointer;
+        }
+        &:active{
+            background-color: var(--color-primaryDark);
+            transform: scale(.95);
+            cursor: pointer;
+        }
+        &:focus-visible {
+            outline: 4px lightblue solid ;
+        }
     }
 
     a {

@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import { TbDropletFilled } from "react-icons/tb";
 
 const Logo = () => {

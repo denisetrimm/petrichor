@@ -1,0 +1,35 @@
+[
+    {
+        "_id": "",
+        "dateJoined": "",
+        "given_name": "",
+        "family_name": "",
+        "email": "",
+        "houseplants": [ 
+            {
+                "_id": "",
+                "plantId": "",
+                "commonName": "",
+                "nickname": "",
+                "lastWatered": "",
+                "wateringFrequency": "",
+                "nextWatering": "",
+                "room": "",
+                "dateAdded": ""
+            },
+            {
+                "_id": "",
+                "plantId": "",
+                "commonName": "",
+                "nickname": "",
+                "lastWatered": "",
+                "wateringFrequency": "",
+                "nextWatering": "",
+                "room": "",
+                "dateAdded": ""
+            }
+        ],
+        "home": [ 
+            "livingRoom", "tvRoom", "bedroom", "kitchen", "office", "basement", "bathroom", "other"]
+    }
+]
