@@ -1,19 +1,19 @@
-
+// STYLING
 import styled from 'styled-components';
+// ICONS
 import { GoSearch } from "react-icons/go";
 import { TbAdjustments } from "react-icons/tb";
 import { TbAdjustmentsOff } from "react-icons/tb";
-import {useState, useContext} from 'react';
+// CONTEXT & HOOKS
+import {useContext} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PlantContext } from '../../../context/PlantContext';
-import { UserContext } from '../../../context/UserContext';
 
 const TypeAhead = () => {
 
     const navigate = useNavigate();
     const {
         allPlants, 
-        filteredPlants, 
         setFilteredPlants, 
         handleClear, 
         searchInputValue, 
@@ -22,8 +22,6 @@ const TypeAhead = () => {
         setSearchActive,
         sortOpen,
         setSortOpen,
-        sortType, 
-        setSortType, 
     } = useContext(PlantContext);
 
     // IF THE USER INPUT FIELD IS BLANK, RESET SEARCH. IF USER IS TYPING, SHOW TYPEAHEAD

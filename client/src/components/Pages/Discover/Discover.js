@@ -1,9 +1,5 @@
 //STYLING
 import styled from "styled-components";
-// ICONS
-import { TbAdjustmentsHorizontal } from "react-icons/tb";
-import { TbAdjustments } from "react-icons/tb";
-import { TbAdjustmentsOff } from "react-icons/tb";
 //HOOKS & CONTEXT
 import { useContext } from "react";
 import { PlantContext } from "../../../context/PlantContext";
@@ -11,7 +7,6 @@ import { UserContext } from "../../../context/UserContext";
 //COMPONENTS
 import PlantCardInfo from "./PlantCardInfo";
 import TypeAhead from "./TypeAhead";
-import TypeAheadTest from "./TypeAheadTest";
 import SortFilter from "./SortFilter"
 import BackArrow from "../../UI/BackArrow";
 import { useEffect, useState } from "react";
@@ -44,9 +39,8 @@ const Discover = () => {
             {/* DISPLAY SEARCH BAR AND PLANT CARDS */}
                 {allPlants && filteredPlants &&
                 <>  
-                    {/* <TypeAheadTest/> */}
                     <TypeAhead/>
-                    <SortFilter />
+                    <SortFilter/>
                     <PlantGrid>
                         {filteredPlants.map(plant => {
                             return (
