@@ -9,24 +9,10 @@ import PlantCardInfo from "./PlantCardInfo";
 import TypeAhead from "./TypeAhead";
 import SortFilter from "./SortFilter"
 import BackArrow from "../../UI/BackArrow";
-import { useEffect, useState } from "react";
-
 
 const Discover = () => {
     const {plantUser} = useContext(UserContext);
-    const {allPlants, filteredPlants, setFilteredPlants, sortType}= useContext(PlantContext);
-    
-    // const [sortedPlants, setSortedPlants] = useState(allPlants||null)
-
-    // useEffect(()=> {
-    //     if (filteredPlants){
-    //         setSortedPlants(filteredPlants)
-    //     }
-    //     console.log(`Discover:`)
-    //     console.log(filteredPlants)
-        
-    // },[allPlants, filteredPlants, sortType])
-    console.log(filteredPlants)
+    const {allPlants, filteredPlants, setFilteredPlants}= useContext(PlantContext);
 
     return (
         <>

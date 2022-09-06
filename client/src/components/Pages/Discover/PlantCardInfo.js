@@ -10,8 +10,8 @@ import { useNavigate } from "react-router-dom";
 const PlantCardInfo = ({plant}) => {
     const {plantUser} = useContext(UserContext);
     const { handleClear }= useContext(PlantContext);
-    const navigate = useNavigate();
     const [showButtons, setShowButtons] = useState(false)
+    const navigate = useNavigate();
 
     const handlePlantClick = (plantId) => {
         handleClear();

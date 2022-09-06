@@ -159,10 +159,7 @@ const TypeAhead = () => {
     );
 };
 
-export default TypeAhead;
-
 const SearchDiv = styled.div`
-    /* border: 1px solid purple; */
     position: relative;
     display: flex;
     align-items: center;
@@ -230,7 +227,6 @@ const SearchBtn = styled.button`
 const AdjustmentsBtn = styled.button`
     padding: 4px 5px 2px 6px;
     margin-left: 5px;
-
 `
 const PlantList = styled.ul`
     z-index: 100;
@@ -242,7 +238,6 @@ const PlantList = styled.ul`
     font-size: 18px;
     position: absolute;
     top: 60px;
-
 `;
 const PlantListItem = styled.li`
     z-index: 1;
@@ -256,3 +251,5 @@ const PlantListItem = styled.li`
 const Prediction = styled.span`
     font-weight: bold;
 `;
+
+export default TypeAhead;
