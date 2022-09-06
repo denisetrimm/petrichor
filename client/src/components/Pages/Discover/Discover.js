@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 
 const Discover = () => {
     const {plantUser} = useContext(UserContext);
-    const {allPlants, filteredPlants, sortType}= useContext(PlantContext);
+    const {allPlants, filteredPlants, setFilteredPlants, sortType}= useContext(PlantContext);
     
     // const [sortedPlants, setSortedPlants] = useState(allPlants||null)
 
@@ -26,6 +26,7 @@ const Discover = () => {
     //     console.log(filteredPlants)
         
     // },[allPlants, filteredPlants, sortType])
+    console.log(filteredPlants)
 
     return (
         <>
@@ -40,7 +41,7 @@ const Discover = () => {
                 {allPlants && filteredPlants &&
                 <>  
                     <TypeAhead/>
-                    <SortFilter/>
+                    <SortFilter filteredPlants={filteredPlants} setFilteredPlants={setFilteredPlants}/>
                     <PlantGrid>
                         {filteredPlants.map(plant => {
                             return (

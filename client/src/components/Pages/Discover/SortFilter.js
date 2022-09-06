@@ -13,12 +13,12 @@ import { PlantContext } from '../../../context/PlantContext';
 import { UserContext } from '../../../context/UserContext';
 import { useEffect } from "react";
 
-const SortFilter = () => {
+const SortFilter = ({filteredPlants, setFilteredPlants}) => {
 
     const {
         allPlants, 
-        filteredPlants, 
-        setFilteredPlants,
+        // filteredPlants, 
+        // setFilteredPlants,
         sortOpen,
         sortType, 
         setSortType, 
@@ -83,27 +83,33 @@ const SortFilter = () => {
     }
 
     // SWITCH THAT CALLS THE CORRECT FUNCTION WHEN RADIO BUTTON IS CLICKED
-    useEffect(()=> {
+    const handleClick = (e)=> {
 
-        switch(sortType) {
+        let newArray = [];
+        switch(e.target.value) {
 
             case ("commonAscending"):
-                setFilteredPlants(filteredPlants.sort(compareCommonNamesAsc))
+                newArray = filteredPlants.sort(compareCommonNamesAsc)
+                console.log(newArray)
+                setFilteredPlants((prev)=> [...newArray])
                 console.log("ca complete")
                 break;
 
             case ("commonDescending"):
-                setFilteredPlants(filteredPlants.sort(compareCommonNamesDsc))
+                newArray = filteredPlants.sort(compareCommonNamesDsc)
+                setFilteredPlants((prev)=> [...newArray])
                 console.log("cd complete")
                 break;
 
             case ("botanicalAscending"):
-                setFilteredPlants(filteredPlants.sort(compareBotanicalNamesAsc))
+                newArray = filteredPlants.sort(compareBotanicalNamesAsc)
+                setFilteredPlants((prev)=> [...newArray])
                 console.log("ba complete")
                 break;
 
             case ("botanicalDescending"):
-                setFilteredPlants(filteredPlants.sort(compareBotanicalNamesDsc))
+                newArray = filteredPlants.sort(compareBotanicalNamesDsc)
+                setFilteredPlants((prev)=> [...newArray])
                 console.log("bd complete")
                 break;
 
@@ -111,14 +117,8 @@ const SortFilter = () => {
                 console.log("switch default")
                 setFilteredPlants(allPlants)
         }
-        console.log(filteredPlants)
-        console.log(sortType)
-
-    }, [sortType, allPlants])
-
-    // const handleChange = (e) => {
-    //     setSortType(e.target.value)
-    // }
+    }
+        
 
     return (
         <>
@@ -132,8 +132,8 @@ const SortFilter = () => {
                         id="commonAscending"
                         value="commonAscending"
                         name="sortName"
-                        checked={sortType === "commonAscending" && true}
-                        onChange={(e)=> {setSortType(e.target.value)}}
+                        // checked={sortType === "commonAscending" && true}
+                        onClick={handleClick}
                     />
                     <AiOutlineSortAscending size="20"/>
                 </label>
@@ -143,8 +143,8 @@ const SortFilter = () => {
                         id="commonDescending"
                         value="commonDescending"
                         name="sortName"
-                        checked={sortType === "commonDescending" && true}
-                        onChange={(e)=> {setSortType(e.target.value)}}
+                        // checked={sortType === "commonDescending" && true}
+                        onClick={handleClick}
                     />
                     <AiOutlineSortDescending size="20"/>
                 </label>
@@ -156,8 +156,8 @@ const SortFilter = () => {
                         id="botanicalAscending"
                         value="botanicalAscending"
                         name="sortName"
-                        checked={sortType === "botanicalAscending" && true}
-                        onChange={(e)=> {setSortType(e.target.value)}}
+                        // checked={sortType === "botanicalAscending" && true}
+                        onClick={handleClick}
                     />
                     <AiOutlineSortAscending size="20"/>
                 </label>
@@ -167,9 +167,9 @@ const SortFilter = () => {
                     type="radio"
                     id="botanicalDescending"
                     value="botanicalDescending"
-                    checked={sortType === "botanicalDescending" && true}
+                    // checked={sortType === "botanicalDescending" && true}
                     name="sortName"
-                    onChange={(e)=> {setSortType(e.target.value)}}
+                    onClick={handleClick}
                 />
                 <AiOutlineSortDescending size="20"/>
                 </label>
