@@ -20,23 +20,21 @@ const MyHome = () => {
     const { user, isAuthenticated, isLoading} = useAuth0();
     const {plantUser} = useContext(UserContext);
     const { allPlants, filteredPlants, handleClear }= useContext(PlantContext);
-    const [roomArray, setRoomArray] = useState([]);
     const [roomsInUse, setRoomsInUse] = useState([]);
     const navigate = useNavigate();
-    // let roomsInUse = [];
 
-    // WHEN PLANT USER IS UPDATED, CHECK FOR OVERDUE PLANTS
+    // WHEN PLANT USER IS UPDATED, CHECK FOR HOUSEPLANT ROOMS
     useEffect(()=> {
 
         if(plantUser && plantUser.houseplants.length > 0){
-                const usingRoom = []
+                let usingRoom = []
 
                 plantUser.houseplants.forEach(plant => {
                     if(!usingRoom.includes(plant.room)){
                         usingRoom.push(plant.room)
-                        // roomsInUse.push(plant.room)
                     }
                 })
+                usingRoom = usingRoom.sort()
                 setRoomsInUse(usingRoom)
             }
 
@@ -72,7 +70,10 @@ const MyHome = () => {
                         {roomsInUse.map(room => {
                             return (
                                 <>
+                                <Wrapper>
                                     <Room room={room}/>
+                                </Wrapper>
+
                                 </>
                             )
                         })}
@@ -86,6 +87,12 @@ const MyHome = () => {
     );
 }
 
+const Wrapper = styled.div`
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`
 const NumPlants = styled.p`
     margin-top: 20px;
 `

@@ -178,7 +178,7 @@ export const UserProvider = ({ children }) => {
                     }
                 })
             }))
-            .then(alert(`Watered all plants`))
+            .then(alert(`Watered overdue plants`))
             
         }
 

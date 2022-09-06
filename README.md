@@ -1,4 +1,4 @@
-# plant-bb 🪴🌿
+# Petrichor 🪴🌿
 
 ## Plant Endpoints
 
