@@ -15,22 +15,16 @@ import { useEffect } from "react";
 
 const SortFilter = () => {
 
-    const {plantUser, addPlantToHome} = useContext(UserContext);
     const {
         allPlants, 
         filteredPlants, 
         setFilteredPlants,
         sortOpen,
-        setSortOpen,
         sortType, 
         setSortType, 
-        handleClear, 
-        searchInputValue, 
-        setsearchInputValue,
-        searchActive,
-        setSearchActive
     } = useContext(PlantContext);
 
+    // SORTING FUNCTIONS - COMMON
     const compareCommonNamesAsc = (a, b) => {
         const nameA = a.commonName.toUpperCase();
         const nameB = b.commonName.toUpperCase();
@@ -45,12 +39,12 @@ const SortFilter = () => {
         return comparison
     }
 
-    const compareBotanicalNamesAsc = (a, b) => {
-        const nameA = a.botanicalName.toUpperCase();
-        const nameB = b.botanicalName.toUpperCase();
+    const compareCommonNamesDsc = (a, b) => {
+        const nameA = a.commonName.toUpperCase();
+        const nameB = b.commonName.toUpperCase();
 
         let comparison = 0;
-        if (nameA > nameB){
+        if (nameA < nameB){
             comparison = 1
         }
         else {
@@ -58,12 +52,14 @@ const SortFilter = () => {
         }
         return comparison
     }
-    const compareCommonNamesDsc = (a, b) => {
-        const nameA = a.commonName.toUpperCase();
-        const nameB = b.commonName.toUpperCase();
+
+    // SORTING FUNCTIONS - BOTANICAL
+    const compareBotanicalNamesAsc = (a, b) => {
+        const nameA = a.botanicalName.toUpperCase();
+        const nameB = b.botanicalName.toUpperCase();
 
         let comparison = 0;
-        if (nameA < nameB){
+        if (nameA > nameB){
             comparison = 1
         }
         else {
@@ -86,6 +82,7 @@ const SortFilter = () => {
         return comparison
     }
 
+    // SWITCH THAT CALLS THE CORRECT FUNCTION WHEN RADIO BUTTON IS CLICKED
     useEffect(()=> {
 
         switch(sortType) {
@@ -115,19 +112,16 @@ const SortFilter = () => {
                 setFilteredPlants(allPlants)
         }
         console.log(filteredPlants)
+        console.log(sortType)
 
-    }, [sortType, allPlants, filteredPlants])
+    }, [sortType, allPlants])
 
-    const handleChange = (e) => {
-        setSortType(e.target.value)
-    }
-    
+    // const handleChange = (e) => {
+    //     setSortType(e.target.value)
+    // }
 
     return (
         <>
-            {/* <button type="button" onClick={() => {setSortOpen(!sortOpen)}}>
-                {!sortOpen ?<TbAdjustments size="20"/> : <TbAdjustmentsOff size="20"/>}
-            </button> */}
             {sortOpen && filteredPlants &&
             <>
                 <FlexDiv>
@@ -139,7 +133,7 @@ const SortFilter = () => {
                         value="commonAscending"
                         name="sortName"
                         checked={sortType === "commonAscending" && true}
-                        onChange={(e)=> {handleChange(e)}}
+                        onChange={(e)=> {setSortType(e.target.value)}}
                     />
                     <AiOutlineSortAscending size="20"/>
                 </label>
@@ -150,7 +144,7 @@ const SortFilter = () => {
                         value="commonDescending"
                         name="sortName"
                         checked={sortType === "commonDescending" && true}
-                        onChange={(e)=> {handleChange(e)}}
+                        onChange={(e)=> {setSortType(e.target.value)}}
                     />
                     <AiOutlineSortDescending size="20"/>
                 </label>
@@ -163,10 +157,11 @@ const SortFilter = () => {
                         value="botanicalAscending"
                         name="sortName"
                         checked={sortType === "botanicalAscending" && true}
-                        onChange={(e)=> {handleChange(e)}}
+                        onChange={(e)=> {setSortType(e.target.value)}}
                     />
                     <AiOutlineSortAscending size="20"/>
                 </label>
+
                 <label htmlFor="botanicalDescending">
                 <input 
                     type="radio"
@@ -174,7 +169,7 @@ const SortFilter = () => {
                     value="botanicalDescending"
                     checked={sortType === "botanicalDescending" && true}
                     name="sortName"
-                    onChange={(e)=> {handleChange(e)}}
+                    onChange={(e)=> {setSortType(e.target.value)}}
                 />
                 <AiOutlineSortDescending size="20"/>
                 </label>
@@ -190,7 +185,6 @@ const FlexDiv = styled.div`
     justify-content: center;
     align-items: center;
 `
-
 const NameSpan = styled.span`
     font-weight: bold;
     color: var(--color-primaryMedium);

@@ -20,16 +20,17 @@ import { useEffect, useState } from "react";
 const Discover = () => {
     const {plantUser} = useContext(UserContext);
     const {allPlants, filteredPlants, sortType}= useContext(PlantContext);
-    const [sortedPlants, setSortedPlants] = useState(allPlants||null)
+    
+    // const [sortedPlants, setSortedPlants] = useState(allPlants||null)
 
-    useEffect(()=> {
-        if (plantUser && filteredPlants){
-            setSortedPlants(filteredPlants)
-        }
-        console.log(`Discover:`)
-        console.log(filteredPlants)
+    // useEffect(()=> {
+    //     if (filteredPlants){
+    //         setSortedPlants(filteredPlants)
+    //     }
+    //     console.log(`Discover:`)
+    //     console.log(filteredPlants)
         
-    },[plantUser, allPlants, filteredPlants, sortType])
+    // },[allPlants, filteredPlants, sortType])
 
     return (
         <>
@@ -41,13 +42,13 @@ const Discover = () => {
                 }
 
             {/* DISPLAY SEARCH BAR AND PLANT CARDS */}
-                {allPlants && filteredPlants && sortedPlants &&
+                {allPlants && filteredPlants &&
                 <>  
                     {/* <TypeAheadTest/> */}
                     <TypeAhead/>
                     <SortFilter />
                     <PlantGrid>
-                        {sortedPlants.map(plant => {
+                        {filteredPlants.map(plant => {
                             return (
                                 <PlantCardInfo key={plant._id} plant={plant}/>
                             )
