@@ -111,7 +111,7 @@ export const UserProvider = ({ children }) => {
             .then((data)=>{
                 if(data.success){
                     setPlantUser(data.data)
-                    alert(`Added plant ${plant.commonName} to ${room}.`)
+                    alert(`Added ${plant.nickname || plant.commonName} to ${plantUser.home[room]}.`)
                 }
                 else{
                     alert(data.message)

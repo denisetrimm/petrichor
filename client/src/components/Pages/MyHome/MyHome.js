@@ -46,10 +46,10 @@ const MyHome = () => {
             <>  
                 {/* PLACE HOLDER WHEN THERE ARE NO PLANTS */}
                 {plantUser && plantUser.houseplants.length === 0 &&
-                    <>
+                    <NoHouseplants>
                         <p>You haven't added any plants to your home yet.</p>
                         <button onClick={()=> {navigate("/")}}>Add some plants!</button>
-                    </>
+                    </NoHouseplants>
                 }
 
                 {/* IF USER IS SIGNED IN AND HAS AT LEAST 1 PLANT, INDICATE NUMBER OF PLANTS*/}
@@ -77,6 +77,13 @@ const MyHome = () => {
     );
 }
 
+const NoHouseplants = styled.div`
+    margin-top: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 50vh;
+`
 const Wrapper = styled.div`
     width: 80%;
     display: flex;
