@@ -73,7 +73,7 @@ const PlantDetails = () => {
                     <CommonName>{currentPlant.commonName}</CommonName>
                     <BotanicalName>{currentPlant.botanicalName}</BotanicalName>
                     
-                    <Tippy content="Family">
+                    <Tippy content="Family" delay={[500, 0]}>
                         <Family>
                             <IoLeafOutline color="hsl(179, 30% , 29%)" size="20"/>
                             <FamilySpan>{currentPlant.family}</FamilySpan>

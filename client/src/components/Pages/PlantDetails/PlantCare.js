@@ -17,7 +17,7 @@ const PlantCare = ({currentPlant}) => {
         <PlantCareWrapper>
             
             {/* SUNSHINE */}
-            <Tippy content="Sunlight requirements">
+            <Tippy content="Sunlight requirements" delay={[500, 0]}>
                 <CareRequirement color="hsl(220, 10% , 39%)" backgroundColor="hsla(42, 79% , 72%, 0.3)">
                     {currentPlant.sunlightRequirements.includes("bright-indirect") && 
                     <RequirementWrapper>
@@ -41,7 +41,7 @@ const PlantCare = ({currentPlant}) => {
             </Tippy>
 
             {/* PET-FRIENDLY */}
-            <Tippy content="Pet-friendly">
+            <Tippy content="Pet-friendly" delay={[500, 0]}>
                 <CareRequirement color="hsl(220, 10% , 39%)" backgroundColor="hsla(108, 23% , 79%, 0.4)">
                         <RequirementWrapper>
                             <MdPets color="hsl(108, 23% , 79%)" size="30"/>
@@ -53,7 +53,7 @@ const PlantCare = ({currentPlant}) => {
             </Tippy>
 
             {/* HUMIDITY */}
-            <Tippy content="Humidity level">
+            <Tippy content="Humidity level" delay={[500, 0]}>
                 <CareRequirement color="hsl(220, 10% , 39%)" backgroundColor="hsla(210, 46% , 58%, 0.2)">
                         <RequirementWrapper>
                             <WiHumidity color="hsl(230, 14% , 65%)" size="30"/>
@@ -65,7 +65,7 @@ const PlantCare = ({currentPlant}) => {
             </Tippy>
             
             {/* SOIL */}
-            <Tippy content="Soil requirements">
+            <Tippy content="Soil requirements" delay={[500, 0]}>
                 <CareRequirement color="hsl(220, 10% , 39%)" backgroundColor="hsla(27, 70% , 87%, 0.5)">
                         <RequirementWrapper>
                             <TbShovel color="hsl(27, 90% , 80%)" size="30"/>
@@ -77,7 +77,7 @@ const PlantCare = ({currentPlant}) => {
             </Tippy>
 
             {/* WATERING FREQUENCY */}
-            <Tippy content="Watering frequency">
+            <Tippy content="Watering frequency" delay={[500, 0]}>
                 <CareRequirement color="hsl(220, 10% , 39%)" backgroundColor="hsl(180, 33% , 84%)">
                         <RequirementWrapper>
                             <ImLoop2 color="hsl(230, 14% , 65%)" size="22"/>
