@@ -160,29 +160,29 @@ const WaterBtn = styled.button`
     left: 15px;
     z-index: 80;
     &:hover{
-        background-color: var(--color-waterHighlight);
+        background-color: var(--color-waterDark);
     }
 `
 const SnoozeBtn = styled.button`
-    background-color: var(--color-soil);
+    background-color: var(--color-snooze);
     padding: 6px 8px;
     position: absolute;
     top: 40px;
     left: 15px;
     z-index: 80;
     &:hover{
-        background-color: var(--color-soilHighlight);
+        background-color: var(--color-snoozeDark);
     }
 `
 const DeleteBtn = styled.button`
-    background-color: var(--color-pink);
+    background-color: var(--color-delete);
     padding: 6px 8px;
     position: absolute;
     top: 80px;
     left: 15px;
     z-index: 80;
     &:hover{
-        background-color: var(--color-pinkHighlight);
+        background-color: var(--color-deleteDark);
     }
 `
 const Due = styled.p`

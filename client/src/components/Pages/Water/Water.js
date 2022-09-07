@@ -115,7 +115,7 @@ const WaterAllBtn = styled.button`
     padding: 0 25px 0 10px;
     background-color: var(--color-water);
     &:hover{
-        background-color: var(--color-waterHighlight);
+        background-color: var(--color-waterDark);
     }
 `
 

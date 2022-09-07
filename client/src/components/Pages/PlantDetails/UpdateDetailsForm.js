@@ -175,14 +175,13 @@ const ButtonDiv = styled.div`
     justify-content: flex-end;
 `
 const DeleteBtn = styled.button`
-    background-color: orangered;
+    background-color: hsl(11,80%,60%);
     font-size: 14px;
-    /* padding: 8px; */
     margin: 0;
     z-index: 80;
     align-self: center;
     &:hover{
-        background-color: var(--color-pinkHighlight);
+        background-color: orangered;
     }
 `
 const SaveBtn = styled.button`

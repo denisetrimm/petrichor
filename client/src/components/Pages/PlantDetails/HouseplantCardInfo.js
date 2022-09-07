@@ -195,7 +195,7 @@ const Due = styled.p`
     font-size: 14px;
     font-weight: bold;
     padding: 20px 0 0px;
-    color: ${props => props.overdue ? "red" : "hsl(179, 30% , 29%)"};
+    color: ${props => props.overdue ? "orangered" : "hsl(179, 30% , 29%)"};
 `
 const ButtonDiv = styled.div`
     display: flex;
@@ -205,16 +205,16 @@ const WaterBtn = styled.button`
     padding: 6px 8px;
     z-index: 80;
     &:hover{
-        background-color: var(--color-waterHighlight);
+        background-color: var(--color-waterDark);
     }
 `
 const SnoozeBtn = styled.button`
-    background-color: orange;
+    background-color: var(--color-snoozeDark);
     padding: 6px 8px;
     z-index: 80;
     margin-left: 5px;
     &:hover{
-        background-color: var(--color-soilHighlight);
+        background-color: var(--color-snooze);
     }
 `
 export default HouseplantCardInfo;

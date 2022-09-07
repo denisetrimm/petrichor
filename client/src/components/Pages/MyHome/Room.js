@@ -97,7 +97,7 @@ const WaterAllBtn = styled.button`
     padding: 0 20px 0 2px;
     background-color: var(--color-water);
     &:hover{
-        background-color: var(--color-waterHighlight);
+        background-color: var(--color-waterDark);
     }
 `
 export default Room;
