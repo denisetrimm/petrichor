@@ -7,8 +7,9 @@ import { UserContext } from "../../../context/UserContext";
 import moment from 'moment';
 import BackArrow from "../../UI/BackArrow";
 
+
 const Profile = () => {
-    const { user, isAuthenticated, isLoading, logout} = useAuth0();
+    const { user, isAuthenticated, isLoading } = useAuth0();
     const {deleteUserProfile, removeAllPlantsFromHome, updateSnooze, plantUser} = useContext(UserContext);
     const [snooze, setSnooze] = useState(null)
     const [formOpen, setFormOpen] = useState(false)
@@ -30,42 +31,54 @@ const Profile = () => {
         <>
         <BackArrow/>
             { isLoading &&
-                <p>Loading...</p>
+                <CenterDiv>
+                    <LoadingMessage>Just a moment...</LoadingMessage>
+                </CenterDiv>
             }
             {isAuthenticated && user && plantUser &&
                 <>
-                <h1>Profile</h1>
-                <Avatar src={user.picture} alt="Profile"/>
-                <p>{user.given_name} {user.family_name}</p>
-                <p>{user.email}</p>
-                <p>Caring for {plantUser.houseplants.length} plants</p>
-                <p>Joined: {moment(plantUser.dateJoined).format("MMM DD, YYYY")}</p>
-                <br></br> {/*REMOVE*/}
-                <h3>Settings</h3>
+                    <h2>Profile</h2>
 
-                <button type="button" onClick={() => {setFormOpen(!formOpen)}}>
-                    Set snooze duration
-                    <Span>
-                        {formOpen ? <IoIosArrowUp /> : <IoIosArrowDown/>}
-                    </Span>
-                </button>
-                {plantUser && formOpen &&
-                    <form onSubmit={(e)=> {setSnoozeDuration(e)}}>
-                            Snooze for 
-                            <Input
-                                type="number" 
-                                placeholder="snooze for"
-                                id="snoozeDuration"
-                                name="snoozeDuration"
-                                value={snooze}
-                                onChange={(e) => {setSnooze(e.target.value)}}
-                            />
-                            days
-                            <SaveBtn type="submit">Save</SaveBtn>
-                    </form>
-                }
-                <button type="button" onClick={() => {removeAllPlantsFromHome()}}>Remove all plants from My Home</button>
-                <button type="button" onClick={() => {deleteUserProfile()}}>Delete Profile</button>
+                    <UserDetails>
+                        <Avatar src={user.picture || plantUser.picture} alt="Profile"/>
+                        <p>{user.given_name} {user.family_name}</p>
+                        <p>{user.email}</p>
+                    </UserDetails>
+                    <UserDetails>
+                        <Info>Caring for {plantUser.houseplants.length} plants</Info>
+                    </UserDetails>
+                        <p>Joined:<InfoSpan>{moment(plantUser.dateJoined).format("MMM DD, YYYY")}</InfoSpan> </p>
+
+                    <Settings>Settings</Settings>
+
+                    <SnoozeButton 
+                        type="button"
+                        formOpen={formOpen}  
+                        onClick={() => {setFormOpen(!formOpen)}}
+                    >
+                        Set snooze duration
+                        <Span>
+                            {formOpen ? <IoIosArrowUp /> : <IoIosArrowDown/>}
+                        </Span>
+                    </SnoozeButton>
+                    {plantUser && formOpen &&
+                        <form onSubmit={(e)=> {setSnoozeDuration(e)}}>
+                                Snooze for 
+                                <Input
+                                    type="number" 
+                                    placeholder="snooze for"
+                                    id="snoozeDuration"
+                                    name="snoozeDuration"
+                                    value={snooze}
+                                    onChange={(e) => {setSnooze(e.target.value)}}
+                                />
+                                days
+                                <SaveBtn type="submit">Save</SaveBtn>
+                        </form>
+                    }
+
+                    <Button type="button" onClick={() => {removeAllPlantsFromHome()}}>Remove all plants from My Home</Button>
+                    <Button type="button" onClick={() => {deleteUserProfile()}}>Delete Profile</Button>
                 </>
             }
             
@@ -73,12 +86,65 @@ const Profile = () => {
     );
 }
 
+const CenterDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+`
+const LoadingMessage = styled.p`
+    font-size: 30px;
+    margin: 10px;
+`
 const Avatar = styled.img`
     background-color: var(--color-creamAccent);
     padding: 10px;
-    margin: 10px 0;
+    margin: 40px 0;
     width: 120px;
     border-radius: 50%;
+`
+const UserDetails = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+`
+const Info = styled.span`
+    color: hsl(179, 30% , 29%);
+    font-weight: bold;
+`
+const InfoSpan = styled.span`
+    color: hsl(179, 30% , 29%);
+    margin-left: 10px;
+`
+const Settings = styled.h3`
+    border-top: 1px solid lightgrey;
+    padding: 20px 80px;
+    margin-top: 40px;
+`
+const Button = styled.button`
+    margin: 10px;
+    font-size: 14px;
+    border: 1px solid var(--color-primaryMedium);
+    color:black;
+    background-color: transparent;
+    &:hover{
+        color: #fff;
+        background-color: var(--color-primaryMedium);
+    }
+`
+const SnoozeButton = styled.button`
+    margin: 10px;
+    font-size: 14px;
+    border: 1px solid ${props => props.formOpen ? "none": "hsl(182, 22%, 47%)"};
+    color: ${props => props.formOpen ? "white": "black"};
+    background-color: ${props => props.formOpen ? "hsla(182, 22% , 47%, 0.5)": "transparent"};
+    &:hover{
+        color: #fff;
+        background-color: var(--color-primaryMedium);
+    }
 `
 const Span = styled.span`
     margin-left: 10px;
