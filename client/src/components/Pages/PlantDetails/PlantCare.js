@@ -82,7 +82,12 @@ const PlantCare = ({currentPlant}) => {
                         <RequirementWrapper>
                             <ImLoop2 color="hsl(230, 14% , 65%)" size="22"/>
                             <Def>
-                                {currentPlant.wateringFrequency/7} - {(currentPlant.wateringFrequency+7)/7} weeks
+                                {+currentPlant.wateringFrequency % 7 === 0 &&  
+                                    <> {+currentPlant.wateringFrequency / 7 } - {((+currentPlant.wateringFrequency + 7) / 7)} weeks</>
+                                }
+                                {+currentPlant.wateringFrequency % 7 !== 0 &&  
+                                    <>{+currentPlant.wateringFrequency} days</>
+                                }
                             </Def>
                         </RequirementWrapper>      
                 </CareRequirement>

@@ -30,7 +30,15 @@ const ExtraWateringDetails = ({plant}) => {
         <div>
             <ImLoop2 color="hsl(230, 14% , 65%)" size="14"/>
             <Span>
-                Water every {plant.wateringFrequency/7} - {(plant.wateringFrequency+7)/7} weeks
+                {+plant.wateringFrequency === 7 &&
+                    <>Water weekly</>
+                }
+                {(+plant.wateringFrequency % 7 === 0) && +plant.wateringFrequency !== 7 &&
+                    <>Water every {+plant.wateringFrequency / 7} weeks</>
+                }
+                {+plant.wateringFrequency % 7 !== 0 &&  
+                    <>Water every {+plant.wateringFrequency} days</>
+                }
             </Span>
         </div>
         </>
