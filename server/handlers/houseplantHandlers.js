@@ -14,9 +14,10 @@ const { v4: uuidv4 } = require("uuid");
 const moment = require("moment");
 
 // ADDS A NEW HOUSEPLANT
-// .post("/api/add-user-plant", addPlantToHome)
+// ________________________________________________
+
 const addPlantToHome = async (req, res) => {
-    console.log(req.body)
+
     const userId = req.body._id;
     const basePlant = req.body.plant;
 
@@ -60,11 +61,13 @@ const addPlantToHome = async (req, res) => {
         res.status(500).json({ status: 500, message: err.message })
     }
     client.close();
-    console.log("disconnected!");
 };
 
+
+
 // WATER A SPECIFIED HOUSEPLANT
-// .patch("/api/water-plant", waterPlant)
+// ________________________________________________
+
 const waterPlant = async (req, res) => {
 
     const userId = req.body._id;
@@ -117,10 +120,12 @@ const waterPlant = async (req, res) => {
         res.status(500).json({ status: 500, message: err.message })
     }
     client.close();
-    console.log("disconnected!");
 };
+
+
 // SNOOZE A SPECIFIED HOUSEPLANT
-// .patch("/api/snooze-plant", snoozePlant)
+// ________________________________________________
+
 const snoozePlant = async (req, res) => {
 
     const userId = req.body._id;
@@ -172,11 +177,12 @@ const snoozePlant = async (req, res) => {
         res.status(500).json({ status: 500, message: err.message })
     }
     client.close();
-    console.log("disconnected!");
 };
 
+
 //  SET GLOBAL SNOOZE DURATION
-// .patch("/api/set-snooze", setSnooze)
+// ________________________________________________
+
 const setSnooze = async (req, res) => {
 
     const userId = req.body._id;
@@ -207,11 +213,12 @@ const setSnooze = async (req, res) => {
         res.status(500).json({ status: 500, message: err.message })
     }
     client.close();
-    console.log("disconnected!");
 };
 
+
 // UPDATES THE DETAILS FOR A SPECIFIED HOUSEPLANT
-// .patch("/api/update-single-houseplant", updateSingleHouseplant)
+// ________________________________________________
+
 const updateSingleHouseplant = async (req, res) => {
 
     const userId = req.body._id;
@@ -266,11 +273,11 @@ const updateSingleHouseplant = async (req, res) => {
         res.status(500).json({ status: 500, message: err.message })
     }
     client.close();
-    console.log("disconnected!");
 };
 
 // UPDATES THE ROOM FOR A SPECIFIED HOUSEPLANT
-// .patch("/api/update-plant-room", updatePlantRoom)
+// ________________________________________________
+
 const updatePlantRoom = async (req, res) => {
 
     const userId = req.body._id;
@@ -318,11 +325,11 @@ const updatePlantRoom = async (req, res) => {
         res.status(500).json({ status: 500, message: err.message })
     }
     client.close();
-    console.log("disconnected!");
 };
 
 // DELETES A SPECIFIED HOUSEPLANT
-// .delete("/api/delete-user-plant/:houseplant_Id?_id=userId", removePlantFromHome)
+// ________________________________________________
+
 const removePlantFromHome = async (req, res) => {
 
     const houseplantId = req.params.houseplant_Id;
@@ -368,11 +375,11 @@ const removePlantFromHome = async (req, res) => {
         res.status(500).json({ status: 500, message: err.message })
     }
     client.close();
-    console.log("disconnected!");
 };
 
 // DELETES ALL HOUSEPLANTS
-// .delete("/api/delete-user-plants/:userId", removeAllPlantsFromHome)
+// ________________________________________________
+
 const removeAllPlantsFromHome = async (req, res) => {
 
     const userId = req.params.userId
@@ -402,7 +409,6 @@ const removeAllPlantsFromHome = async (req, res) => {
         res.status(500).json({ status: 500, message: err.message })
     }
     client.close();
-    console.log("disconnected!");
 };
 
 module.exports = {

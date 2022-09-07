@@ -9,11 +9,9 @@ const options = {
     useUnifiedTopology: true,
 };
 
-// IMPORT UUID
-const { v4: uuidv4 } = require('uuid');
-
 // RETURNS ALL PLANTS
-// .get("/api/get-plants", getPlants)
+// ________________________________________________
+
 const getPlants = async (req, res) => {
 
     const client = new MongoClient(MONGO_URI, options);
@@ -23,21 +21,21 @@ const getPlants = async (req, res) => {
         const db = client.db();
         const result = await db.collection("plants").find().toArray();
         if (result.length === 0){
-            return res.status(404).json({ status: 404, message: "No plants were found." })
+            return res.status(404).json({ status: 404, success: false, message: "No plants were found." })
         }
         else {
-            return res.status(200).json({ status: 200, data: result })
+            return res.status(200).json({ status: 200, success: true, data: result })
         }
     }
     catch (err) {
         res.status(500).json({ status: 500, message: err.message })
     }
     client.close();
-    console.log("disconnected");
 };
 
 // RETURNS A SINGLE PLANT
-// .get("/api/get-plant/:plantId", getSinglePlant)
+// ________________________________________________
+
 const getSinglePlant = async (req, res) => {
 
     const plantId = req.params.plantId;
@@ -59,7 +57,6 @@ const getSinglePlant = async (req, res) => {
         res.status(500).json({ status: 500, message: err.message })
     }
     client.close();
-    console.log("disconnected");
 };
 
 

@@ -25,8 +25,13 @@ useEffect(()=> {
     fetch("/api/get-plants")
     .then((res)=>res.json())
     .then((data)=>{
-        setAllPlants(data.data)
-        setFilteredPlants(data.data)
+        if(data.status === 200){
+            setAllPlants(data.data)
+            setFilteredPlants(data.data)
+        }
+        else {
+            alert(data.message)
+        }
     })
 }, [])
 

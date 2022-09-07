@@ -15,7 +15,8 @@ const moment = require("moment");
 
 
 // RETURNS A SINGLE USER
-// .get("/api/get-user/:userId", getUser)
+// ________________________________________________
+
 const getUser = async (req, res) => {
 
     const userId = req.params.userId;
@@ -37,11 +38,11 @@ const getUser = async (req, res) => {
         res.status(500).json({ status: 500, message: err.message })
     }
     client.close();
-    console.log("disconnected");
 };
 
 // IF USER EXISTS, RETURNS USER DATA - IF USER DOESN'T EXIST, CREATES USER AND RETURNS DATA
-// .post("/api/login-user", loginUser)
+// ________________________________________________________________________________________________
+
 const loginUser = async (req, res) => {
 
     const { given_name, family_name, email } = req.body;
@@ -90,12 +91,12 @@ const loginUser = async (req, res) => {
         res.status(500).json({ status: 500, message: err.message })
     }
     client.close();
-    console.log("disconnected!");
 };
 
 
 // DELETES A SPECIFIED USER
-// .delete("/api/delete-user/:userId", deleteUser)
+// ________________________________________________
+
 const deleteUser = async (req, res) => {
 
     const userId = req.params.userId;
@@ -121,7 +122,6 @@ const deleteUser = async (req, res) => {
         res.status(500).json({ status: 500, message: err.message })
     }
     client.close();
-    console.log("disconnected!");
 };
 
 module.exports = {

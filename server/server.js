@@ -79,7 +79,7 @@ express()
     // SNOOZE A SPECIFIED HOUSEPLANT
     .patch("/api/snooze-plant", snoozePlant)
 
-    //  SET GLOBAL SNOOZE DURATION
+    // SET GLOBAL SNOOZE DURATION
     .patch("/api/set-snooze", setSnooze)
 
     // DELETES A SPECIFIED HOUSEPLANT

@@ -29,7 +29,12 @@ export const UserProvider = ({ children }) => {
             })
             .then((res)=>res.json())
             .then((data)=>{
-                setPlantUser(data.data)
+                if (data.success){
+                    setPlantUser(data.data)
+                }
+                else{
+                    alert(data.message)
+                }
             })
         }
         
@@ -85,6 +90,9 @@ export const UserProvider = ({ children }) => {
                 setPlantUser(data.data)
                 alert(`Added ${plant.nickname || plant.commonName} to My Home.`)
             }
+            else{
+                alert(data.message)
+            }
         })
     }
 
@@ -104,6 +112,9 @@ export const UserProvider = ({ children }) => {
                 if(data.success){
                     setPlantUser(data.data)
                     alert(`Added plant ${plant.commonName} to ${room}.`)
+                }
+                else{
+                    alert(data.message)
                 }
             })
         }
@@ -126,6 +137,9 @@ export const UserProvider = ({ children }) => {
                     setPlantUser(data.data)
                     alert(`Updated ${plant.nickname ? plant.nickname : plant.commonName}`)
                 }
+                else{
+                    alert(data.message)
+                }
             })
         }
 
@@ -145,6 +159,9 @@ export const UserProvider = ({ children }) => {
                 if(data.success){
                     setPlantUser(data.data)
                     alert(`Watered ${plant.nickname ? plant.nickname : plant.commonName}`)
+                }
+                else{
+                    alert(data.message)
                 }
             })
         }
@@ -169,6 +186,9 @@ export const UserProvider = ({ children }) => {
                         console.log(`Watered ${plant.commonName}`)
                         setPlantUser(data.data)
                     }
+                    else{
+                        alert(data.message)
+                    }
                 })
             }))
             .then(alert(`Watered overdue plants`))
@@ -192,6 +212,9 @@ export const UserProvider = ({ children }) => {
                     setPlantUser(data.data)
                     alert(`Snoozed ${plant.nickname ? plant.nickname : plant.commonName} for ${plantUser.snooze} days`)
                 }
+                else{
+                    alert(data.message)
+                }
             })
             
         }
@@ -211,6 +234,9 @@ export const UserProvider = ({ children }) => {
                 if(data.success){
                     setPlantUser(data.data)
                     alert(`Snooze set to ${snoozeDuration} days`)
+                }
+                else{
+                    alert(data.message)
                 }
             })
         }
