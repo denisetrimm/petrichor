@@ -1,21 +1,31 @@
 # Petrichor 🪴🌿
 
-## Setup Prerequisites
+## Setup prerequisites
 * An active account on MongoDB
 
-## Getting Started
-* Install yarn packages
-* Create MongoDB database
-* Create .env passkey with the `MONGO_URI`
-* Run the `batchImport.js` file
+## Getting started
+
+### Install packages
+* `cd` into the `server` folder and enter `yarn install`
+* `cd` into the `client` folder and enter `yarn install`
+
+### Set up MongoDB database
+* Create new MongoDB database and collection
+* Create `.env` passkey with the `MONGO_URI`
+* In the project `server` folder, use node to run the `batchImport.js` file
 
 The `plants.json` data is now available in your database.
 
-`cd` into both server and client directories and `yarn start`.
+### Spin up project
+
+* `cd` into the `server` folder and enter `yarn start`
+* `cd` into the `client` folder and enter `yarn start`
 
 Enjoy!
 
-## Plant Endpoints
+---
+
+## Plant endpoints
 
 | Endpoint | Method | Description            |
 | -------- | ------ | ---------------------- |
@@ -24,7 +34,7 @@ Enjoy!
 
 
 
-## User Endpoints
+## User endpoints
 
 | Endpoint | Method | Description            |
 | -------- | ------ | ---------------------- |
@@ -34,7 +44,7 @@ Enjoy!
 
 
 
-## (User) Houseplant Endpoints
+## Houseplant endpoints
 
 | Endpoint | Method | Description            |
 | -------- | ------ | ---------------------- |
@@ -49,8 +59,42 @@ Enjoy!
 
 
 ---
+## Features and functionality
+
+### Without signing in:
+
+### Discover page
+
+![Discover](client\src\assets\screenshots\Discover-notLoggedIn.png)
+ 
+Search, filter, and sort plants.
+![Discover - Search and filter](client\src\assets\screenshots\Discover-notLoggedIn-filterSort.png)
+
+### Plant details page
+Click on a plant to see additional details and care requirements.
+![Plant Details](client\src\assets\screenshots\PlantDetails-notLoggedIn.png)
+
+### After signing in:
+Note: Authentication is through Google using the Auth0 provider.
+
+Hovering over a plant card allows you to access the quick add button.
+
+![Discover - Quick add](client\src\assets\screenshots\Discover-loggedIn.png)
+
+The Plant Details page allows you to enter additional details before adding the plant to your home
+
+![Discover - Quick add form](client\src\assets\screenshots\PlantDetails-quickAddForm.png)
+
+Existing plants of that type in your home are also listed and editable
+
+![Discover - Quick add form](client\src\assets\screenshots\PlantDetails-homePlants.png)
+
+---
 
 ## `plants` collection (plants.json) 
+
+The following is an example of a single plant object.
+
 ```json
 [
     {
@@ -69,6 +113,8 @@ Enjoy!
 ]
 ```
 ## `users` collection (created on first login)
+The following is an example of a single user object.
+
 ```json
 [
     {
