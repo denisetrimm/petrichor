@@ -55,8 +55,8 @@ const loginUser = async (req, res) => {
         email: email,
         houseplants: [],
         home: {
-            bathroom: "Bathroom",
             basement: "Basement",
+            bathroom: "Bathroom",
             bedroom: "Bedroom", 
             entrance: "Entrance",
             kitchen: "Kitchen", 

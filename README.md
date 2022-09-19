@@ -1,18 +1,48 @@
 # Petrichor 🪴🌿
 
+## About
+
+The term "Petrichor" refers to the scent produced when rain falls on dry soil. 
+
+This application allows users to track the watering schedules of their plants.
+
+Users can log in with their Google account and add plants to their home space, move plants to different rooms, see when each plant is due for water and either water or snooze it.
+
+Things to note:
+
+* This project was created with the MERN stack.
+* I created the plant database from scratch. There are currently 16 available houseplants to choose from. 
+* I plan on adding functionality to allow users to create new plants and upload photos of their own houseplants.
+ ---
+
 ## Setup prerequisites
-* An active account on MongoDB
+* Working knowledge of MongoDB and an active account
+* A fork of this repository
 
 ## Getting started
 
-### Install packages
-* `cd` into the `server` folder and enter `yarn install`
-* `cd` into the `client` folder and enter `yarn install`
+### Install yarn packages
+In your code editor:
+* `cd` into the `server` folder and enter `yarn install`.
+* `cd` into the `client` folder and enter `yarn install`.
 
 ### Set up MongoDB database
-* Create new MongoDB database and collection
-* Create `.env` passkey with the `MONGO_URI`
-* In the project `server` folder, use node to run the `batchImport.js` file
+In MongoDB
+* Create a new MongoDB database.
+* From the database page, click **Connect**, then select **Connect your application**.
+* Ensure the driver is set to *Node.js*, version *4.1 or later*.
+* Take note of your connection string for the following steps.
+  
+For more information about connecting to the database, [review the MongoDB documentation](https://www.mongodb.com/docs/atlas/driver-connection/).
+  
+In your code editor:
+* Create a `.env` file in the project's `server` folder.
+* Add the following passkey and save the file:
+
+        MONGO_URI=<connectionString>
+
+  **Note:** Ensure that the user, database, and password in the connection string are correct. You will need to replace the placeholder \<password> with your real password.
+* Use node to run the `server/batchImport.js` file
 
 The `plants.json` data is now available in your database.
 
@@ -21,11 +51,70 @@ The `plants.json` data is now available in your database.
 * `cd` into the `server` folder and enter `yarn start`
 * `cd` into the `client` folder and enter `yarn start`
 
-Enjoy!
+🪴Enjoy!🪴
 
 ---
+## Features and functionality
 
-## Plant endpoints
+### Without signing in:
+
+### Discover page
+
+![Discover](client/src/assets/screenshots/Discover-notLoggedIn.png)
+ 
+Search, filter, and sort plants by their common or botanical name.
+
+![Discover - Search and filter](client/src/assets/screenshots/Discover-notLoggedIn-filterSort.png)
+
+### Plant details page
+
+Click on a plant to see additional details and care requirements.
+
+![Plant Details](client/src/assets/screenshots/PlantDetails-notLoggedIn.png)
+
+### After signing in:
+
+Note: Authentication is through Google using the Auth0 provider.
+
+Hovering over a plant card allows you to access the **quick add** button.
+
+![Discover - Quick add](client/src/assets/screenshots/Discover-loggedIn.png)
+
+### Plant Details Page (signed in)
+
+The Plant Details page allows you to enter additional details before adding the plant to your home
+
+![Plant Details - Quick add form](client/src/assets/screenshots/PlantDetails-quickAddForm.png)
+
+Existing plants of that type in your home are also listed and editable
+
+![Plant Details - Edit plants](client/src/assets/screenshots/PlantDetails-homePlants.png)
+
+### My Home page 
+
+View plants by room. Clicking **Water overdue plants** only waters plants *in that room* that are due today or past due.
+
+![My Home page](client/src/assets/screenshots/MyHome-noHover.png)
+
+Water, snooze, delete, or update the room of an individual plant by hovering over it and clicking the appropriate action.
+
+![My Home page with hovering](client/src/assets/screenshots/MyHome-hover.png)
+
+### Water page
+
+View all plants that are due today or past due. Click **Water all plants** to water every plant listed. Water, snooze, or delete an individual plant by hovering over it and clicking the appropriate action.
+![Water page](client/src/assets/screenshots/Water-hover.png)
+
+### Profile page
+
+View profile details and edit the snooze duration for all plants. Delete all plants or user profile.
+
+![Profile page](client/src/assets/screenshots/Profile.png)
+
+---
+## Endpoints 
+
+### Plant endpoints
 
 | Endpoint | Method | Description            |
 | -------- | ------ | ---------------------- |
@@ -34,7 +123,7 @@ Enjoy!
 
 
 
-## User endpoints
+### User endpoints
 
 | Endpoint | Method | Description            |
 | -------- | ------ | ---------------------- |
@@ -44,7 +133,7 @@ Enjoy!
 
 
 
-## Houseplant endpoints
+### Houseplant endpoints
 
 | Endpoint | Method | Description            |
 | -------- | ------ | ---------------------- |
@@ -57,41 +146,10 @@ Enjoy!
 | `/delete-user-plant/:houseplant_id?_id=userId`  | `DELETE`  | This endpoint deletes an existing user houseplant based on the provided houseplant `_id`. This endpoint takes an additional `_id` query that corresponds to the user's `_id`. Note: This **does not** use the original base plant `_id` from the `plants` collection.  |
 | `/delete-user-plants/:userId`  | `DELETE`  | This endpoint removes all houseplants from the user's `houseplants` array. |
 
-
 ---
-## Features and functionality
+## Database collections
 
-### Without signing in:
-
-### Discover page
-
-![Discover](client/src/assets/screenshots/Discover-notLoggedIn.png)
- 
-Search, filter, and sort plants.
-![Discover - Search and filter](client/src/assets/screenshots/Discover-notLoggedIn-filterSort.png)
-
-### Plant details page
-Click on a plant to see additional details and care requirements.
-![Plant Details](client/src/assets/screenshots/PlantDetails-notLoggedIn.png)
-
-### After signing in:
-Note: Authentication is through Google using the Auth0 provider.
-
-Hovering over a plant card allows you to access the quick add button.
-
-![Discover - Quick add](client/src/assets/screenshots/Discover-loggedIn.png)
-
-The Plant Details page allows you to enter additional details before adding the plant to your home
-
-![Discover - Quick add form](client/src/assets/screenshots/PlantDetails-quickAddForm.png)
-
-Existing plants of that type in your home are also listed and editable
-
-![Discover-Quick add form](client/src/assets/screenshots/PlantDetails-homePlants.png)
-
----
-
-## `plants` collection (plants.json) 
+### `plants` collection (plants.json) 
 
 The following is an example of a single plant object.
 
@@ -112,7 +170,7 @@ The following is an example of a single plant object.
     }
 ]
 ```
-## `users` collection (created on first login)
+### `users` collection (created on first login)
 The following is an example of a single user object.
 
 ```json
@@ -148,8 +206,8 @@ The following is an example of a single user object.
             }, 
         ],
         "home": { 
-            "bathroom":"Bathroom",
             "basement":"Basement",
+            "bathroom":"Bathroom",
             "bedroom":"Bedroom",
             "entrance":"Entrance",
             "kitchen":"Kitchen",
