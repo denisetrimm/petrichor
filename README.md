@@ -65,29 +65,29 @@ Enjoy!
 
 ### Discover page
 
-![Discover](client\src\assets\screenshots\Discover-notLoggedIn.png)
+![Discover](client/src/assets/screenshots/Discover-notLoggedIn.png)
  
 Search, filter, and sort plants.
-![Discover - Search and filter](client\src\assets\screenshots\Discover-notLoggedIn-filterSort.png)
+![Discover - Search and filter](client/src/assets/screenshots/Discover-notLoggedIn-filterSort.png)
 
 ### Plant details page
 Click on a plant to see additional details and care requirements.
-![Plant Details](client\src\assets\screenshots\PlantDetails-notLoggedIn.png)
+![Plant Details](client/src/assets/screenshots/PlantDetails-notLoggedIn.png)
 
 ### After signing in:
 Note: Authentication is through Google using the Auth0 provider.
 
 Hovering over a plant card allows you to access the quick add button.
 
-![Discover - Quick add](client\src\assets\screenshots\Discover-loggedIn.png)
+![Discover - Quick add](client/src/assets/screenshots/Discover-loggedIn.png)
 
 The Plant Details page allows you to enter additional details before adding the plant to your home
 
-![Discover - Quick add form](client\src\assets\screenshots\PlantDetails-quickAddForm.png)
+![Discover - Quick add form](client/src/assets/screenshots/PlantDetails-quickAddForm.png)
 
 Existing plants of that type in your home are also listed and editable
 
-![Discover - Quick add form](client\src\assets\screenshots\PlantDetails-homePlants.png)
+![Discover-Quick add form](client/src/assets/screenshots/PlantDetails-homePlants.png)
 
 ---
 
