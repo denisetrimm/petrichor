@@ -10,7 +10,7 @@ Users can log in with their Google account and add plants to their home space, m
 
 Things to note:
 
-* This project was created with the MERN stack.
+* This project was created with the **MERN** stack (*MongoDB*, *Express*, *React*, and *Node.js*).
 * I created the plant database from scratch. There are currently 16 available houseplants to choose from. 
 * I plan on adding functionality to allow users to create new plants and upload photos of their own houseplants.
  ---
